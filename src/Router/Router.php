@@ -28,14 +28,22 @@ class Router
         $route = $this->findRoute($uri, $method);
         if (!$route) {
             $this->notFound();
+            return; // добавляем return, чтобы прекратить выполнение метода, если маршрут не найден
         }
 
-        $route->getAction()();
+        $action = $route->getAction(); // сохраняем действие маршрута
+
+        if ($action && is_callable($action)) { // добавляем проверку на существование и вызываемость действия
+            $action();
+        } else {
+            $this->notFound();
+        }
     }
+
 
     private function notFound()
     {
-        echo "404 Not Found";
+        require_once __DIR__ . "/../../public/views/pages/404.php";
     }
 
     private function findRoute(string $uri, string $method): Route|false
@@ -48,6 +56,6 @@ class Router
 
     private function getRoutes(): array
     {
-        return require_once APP_PATH . '/src/config/routes.php';
+        return require __DIR__ . '/../config/routes.php';
     }
 }
