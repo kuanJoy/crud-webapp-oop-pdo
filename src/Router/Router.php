@@ -4,58 +4,47 @@ namespace App\Router;
 
 class Router
 {
-    public function __construct()
+    private array $routes = [];
+
+    public function addRoute(string $method, string $path, mixed $callback): void
     {
-        $this->initRoutes();
-    }
-
-    public array $routes = [
-        'GET' => [],
-        'POST' => [],
-    ];
-
-    private function initRoutes()
-    {
-        $routes = $this->getRoutes();
-
-        foreach ($routes as $route) {
-            $this->routes[$route->getMethod()][$route->getUri()] = $route;
-        }
+        $this->routes[$method][$path] = $callback;
     }
 
     public function dispatch(string $uri, string $method): void
     {
-        $route = $this->findRoute($uri, $method);
-        if (!$route) {
+        $callback = $this->findRoute($uri, $method);
+
+        if ($callback === false) {
             $this->notFound();
-            return; // добавляем return, чтобы прекратить выполнение метода, если маршрут не найден
+            return;
         }
 
-        $action = $route->getAction(); // сохраняем действие маршрута
-
-        if ($action && is_callable($action)) { // добавляем проверку на существование и вызываемость действия
-            $action();
-        } else {
-            $this->notFound();
+        if (is_string($callback)) {
+            include_once __DIR__ . '/../../public/' . $callback;
+            return;
         }
+
+        $callback();
     }
 
-
-    private function notFound()
+    private function findRoute(string $uri, string $method): mixed
     {
-        require_once __DIR__ . "/../../public/views/pages/404.php";
-    }
-
-    private function findRoute(string $uri, string $method): Route|false
-    {
-        if (!isset($this->routes[$method][$uri])) {
+        if (!isset($this->routes[$method])) {
             return false;
         }
-        return $this->routes[$method][$uri];
+
+        foreach ($this->routes[$method] as $route => $callback) {
+            if ($uri === $route) {
+                return $callback;
+            }
+        }
+
+        return false;
     }
 
-    private function getRoutes(): array
+    private function notFound(): void
     {
-        return require __DIR__ . '/../config/routes.php';
+        include_once __DIR__ . '/../../public/views/404.php';
     }
 }

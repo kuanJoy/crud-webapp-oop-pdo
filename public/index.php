@@ -1,26 +1,18 @@
 <?php
 
-require __DIR__ . "/../vendor/autoload.php";
+require_once __DIR__ . '/../vendor/autoload.php';
 
-use App\App;
+use App\Router\Router;
 
-$app = new App();
+$router = new Router();
 
-$app->run();
-
-
-
-
-
-
+$router->addRoute('GET', '/', 'views/home.php');
+$router->addRoute('GET', '/login', 'views/login.php');
+$router->addRoute('POST', '/login', 'views/login.php');
+$router->addRoute('GET', '/register', 'views/register.php');
+$router->addRoute('POST', '/register', 'views/register.php');
 
 
 
 
-
-
-
-
-
-
-// "App\\": "src/" указывает, что классы с префиксом App\ должны быть загружены из каталога src/. 
+$router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
