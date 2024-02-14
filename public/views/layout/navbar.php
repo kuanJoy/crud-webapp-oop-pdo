@@ -10,12 +10,11 @@
                     <a class="nav-link" href="#">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Прически</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">Парикмахеры</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Работы</a>
+                </li>
             </ul>
             <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
                 <!-- <li class="nav-item dropdown">
@@ -23,16 +22,19 @@
                         Добавить
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Парикмахеры</a></li>
-                        <li><a class="dropdown-item" href="#">Прически</a></li>
+                        <li><a class="dropdown-item" href="#">Работу</a></li>
+                        <li><a class="dropdown-item" href="#">Публикацию</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Профиль</a>
+                    </li>
                 </li> -->
                 <form class="d-flex" role="search">
-                    <button class="btn btn-primary" type="submit">Войти</button>
+                    <button class="btn btn-dark" type="submit">Войти</button>
                 </form>
             </ul>
         </div>
