@@ -18,6 +18,13 @@
   src: url("../fonts/Aeroport-bold.otf");
   font-weight: 700;
 }
+.icon {
+  padding-top: 1px;
+  min-width: 20px;
+  max-width: 18px;
+  max-height: 18px;
+}
+
 .container {
   max-width: 80rem;
   margin: 0 auto;
@@ -25,6 +32,52 @@
 
 .wrapper {
   font-family: Aeroport, sans-serif;
+}
+
+.logo {
+  user-select: none;
+}
+
+.header-bg {
+  background-color: #f0f2fa;
+  color: #171717;
+}
+
+.header {
+  display: flex;
+  gap: 2rem;
+  padding: 0.25rem;
+  align-items: center;
+  font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.9375rem);
+}
+.header-act {
+  margin-left: auto;
+}
+.header__search {
+  width: 12.5rem;
+  border-radius: 0.5rem;
+  background-color: #e3e5ed;
+  border: 1px solid;
+  border-color: #e3e5ed;
+}
+.header__search:focus-within {
+  border-color: indigo;
+}
+
+.nav {
+  display: flex;
+  gap: 0.5rem;
+}
+.nav__link {
+  padding: 0.3125rem 0.625rem;
+  border-radius: 0.5rem;
+}
+.nav__link:hover {
+  background-color: #e2e5f6;
+}
+
+.search__input {
+  padding: 8px 0px 8px 14px;
 }
 
 /*# sourceMappingURL=style.css.map */
