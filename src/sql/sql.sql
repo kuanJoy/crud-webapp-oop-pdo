@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `post_id` int(255) DEFAULT '0',
   `user_id` int(255) DEFAULT '0',
-  `content` TEXT,
+  `content` text COLLATE utf8mb4_unicode_ci,
   `created_time` timestamp NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_comments_post_id` (`post_id`),
