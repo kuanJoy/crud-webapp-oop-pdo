@@ -19,7 +19,7 @@
                     <input class="search__input" type="text" placeholder="Поиск">
                     <button name="search" type="submit" class="btn-search">
                         <svg class="icon">
-                            <use href="public/assets/images/svg/sprites.svg#home" />
+                            <use href="public/assets/images/svg/sprites.svg#search" />
                         </svg>
                     </button>
                 </form>

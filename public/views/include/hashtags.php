@@ -1,4 +1,4 @@
-<div class="hashtags">
+<!-- <div class="hashtags">
     <a href="#" class="hashtag">#космос</a>
     <a href="#" class="hashtag">#Солнце</a>
     <a href="#" class="hashtag">#шпионы</a>
@@ -14,4 +14,4 @@
     <a href="#" class="hashtag">#19век</a>
     <a href="#" class="hashtag">#животные</a>
     <a href="#" class="hashtag">#капитализм</a>
-</div>
+</div> -->
