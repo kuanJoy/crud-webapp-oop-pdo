@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(70) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
   `content` text,
   `status` enum('активен','скрыт') DEFAULT NULL,
   `category_id` int(255) DEFAULT NULL,
