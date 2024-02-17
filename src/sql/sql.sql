@@ -103,6 +103,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(70) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
+  `role` enum("админ", "модератор", "читатель") DEFAULT 'читатель',
   `remember_token` VARCHAR(100) NULL,
   `password_reset_at` timestamp NULL,
   `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
