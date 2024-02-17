@@ -9,13 +9,15 @@
     gap: 2rem
     padding: .25rem
     align-items: center
-    font-size: $fz16
+    font-size: $fz13
     &-act
         margin-left: auto
     &__search
+        display: flex
+        align-items: center
         width: 12.5rem
         border-radius: .5rem
-        background-color: $input-bg
+        background-color: white
         border: 1px solid
         border-color: $input-bg
         &:focus-within
@@ -30,4 +32,9 @@
             background-color: $hover-grey
 
 .search__input
+    width: 100%
     padding: 8px 0px 8px 14px
+    border-right: 1px solid $input-bg
+
+.btn-search
+    padding: 6px

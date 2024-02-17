@@ -16,15 +16,15 @@
         <div class="header-act">
             <form class="header__search">
                 <input class="search__input" type="text" placeholder="Поиск">
-                <button type="submit" class="">
+                <button name="search" type="submit" class="btn-search">
                     <svg class="icon">
-                        <use href=" ../assets/images/svg/sprites.svg#user" />
+                        <use href="public/assets/images/svg/sprites.svg#home" />
                     </svg>
                 </button>
         </div>
         <a class="header-user">
             <svg class="icon">
-                <use href="../assets/images/svg/sprites.svg#user" />
+                <use href="public/assets/images/svg/sprites.svg#user" />
             </svg>
         </a>
 </div>
