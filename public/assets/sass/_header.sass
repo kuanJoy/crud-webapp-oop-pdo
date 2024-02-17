@@ -6,22 +6,32 @@
     color: $dark
 .header
     display: flex
-    gap: 2rem
+    gap: 1rem
+    justify-content: space-between
     padding: .25rem
     align-items: center
     font-size: $fz13
     &-act
+        display: flex
+        gap: 1rem
+        align-items: center
+        justify-content: space-between
         margin-left: auto
     &__search
         display: flex
         align-items: center
-        width: 12.5rem
+        width: 18rem
         border-radius: .5rem
         background-color: white
         border: 1px solid
         border-color: $input-bg
         &:focus-within
             border-color: indigo
+.hamburger
+    display: flex
+    align-items: center
+    justify-content: space-between
+    width: 100%
 .nav
     display: flex
     gap: 0.5rem

@@ -1,6 +1,6 @@
 <?php
 
-function incComponents($path)
-{
-    return "/edu-portal/public/views$path";
-}
+// function incComponents($path)
+// {
+//     return "/views/$path";
+// }
