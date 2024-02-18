@@ -201,7 +201,21 @@ a {
 .auth {
   margin: 0 auto;
   padding: 2rem 0rem;
-  max-width: 31.25rem;
+  max-width: 25rem;
+}
+.auth__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+.auth__home {
+  font-size: 0.8125rem;
+  transition: 0.2s all;
+}
+.auth__home:hover {
+  color: #4b6ed6;
+  fill: #4b6ed6;
 }
 .auth__content {
   background-color: #f5f7ff;
@@ -212,7 +226,8 @@ a {
   gap: 16px;
 }
 .auth__title {
-  font-size: clamp(1.5rem, 0.3542rem + 0.7778vw, 2rem);
+  font-size: clamp(1.2rem, 0.3542rem + 0.7778vw, 24rem);
+  margin-bottom: 0rem;
 }
 .auth__input-box {
   border-radius: 0.3125rem;

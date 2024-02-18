@@ -1,0 +1,1 @@
+<textarea id="content" name="content" class="form-control"></textarea>

@@ -1,7 +1,18 @@
 .auth
     margin: 0 auto
     padding: 2rem 0rem
-    max-width: 31.25rem
+    max-width: 25rem
+    &__row
+        display: flex
+        justify-content: space-between
+        align-items: center
+        margin-bottom: 0.5rem
+    &__home
+        font-size: .8125rem
+        transition: 0.2s all
+        &:hover
+            color: $blue
+            fill: $blue
     &__content
         background-color: #f5f7ff
         border-radius: .5rem
@@ -10,7 +21,8 @@
         flex-direction: column
         gap: 16px
     &__title
-        font-size: $fz32
+        font-size: $fz24
+        margin-bottom: 0rem
     &__input-box
         border-radius: .3125rem
         padding: .625rem
