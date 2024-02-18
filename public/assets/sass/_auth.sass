@@ -1,0 +1,39 @@
+.auth
+    margin: 0 auto
+    padding: 2rem 0rem
+    max-width: 31.25rem
+    &__content
+        background-color: #f5f7ff
+        border-radius: .5rem
+        padding: 2rem
+        display: flex
+        flex-direction: column
+        gap: 16px
+    &__title
+        font-size: $fz32
+    &__input-box
+        border-radius: .3125rem
+        padding: .625rem
+        border: 2px solid
+        border-color: $input-bg
+        display: flex
+        align-items: center
+        &:focus-within
+            border: 2px solid $blue
+    &__input
+        width: 100%
+    &__icon
+        max-width: 1rem
+        max-height: 1rem
+        margin-right: 0.3rem
+    &__btn
+        background-color: $blue
+        color: $white
+        border-radius: .5rem
+        padding: 3px 0rem
+    &__btns
+        margin-top: 0.5rem
+        display: flex
+        justify-content: space-between
+    &__link
+        color: $blue

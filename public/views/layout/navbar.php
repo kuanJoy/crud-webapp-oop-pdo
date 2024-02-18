@@ -23,7 +23,7 @@
                         </svg>
                     </button>
                 </form>
-                <a href="#" class="nav__link">Войти</a>
+                <a href="/login" class="nav__link">Войти</a>
                 <!-- ДЛОЯ АВТОРИЗОВАННОГО -->
                 <!-- <a class="header-user">
             <svg class="icon">

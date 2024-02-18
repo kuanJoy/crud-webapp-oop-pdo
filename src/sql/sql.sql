@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `post_id` int(255) DEFAULT '0',
   `user_id` int(255) DEFAULT '0',
   `content` text,
-  `created_time` timestamp NULL DEFAULT CURRENT_timestamp,
+  `created_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_comments_post_id` (`post_id`),
   KEY `fk_comments_user_id` (`user_id`),
@@ -103,13 +103,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(50) DEFAULT NULL,
   `email` varchar(70) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
-  `role` enum("админ", "модератор", "читатель") DEFAULT 'читатель',
-  `remember_token` VARCHAR(100) NULL,
-  `password_reset_at` timestamp NULL,
-  `created_at` timestamp DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `role` enum('админ','модератор','читатель') DEFAULT 'читатель',
+  `remember_token` varchar(100) DEFAULT NULL,
+  `password_reset_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE KEY `unique_email` (`email`)
+  UNIQUE KEY `unique_email` (`email`),
+  UNIQUE KEY `unique_username` (`username`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы edu.users: ~0 rows (приблизительно)

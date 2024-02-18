@@ -46,7 +46,7 @@ a {
   width: 100%;
   height: auto;
   overflow: hidden;
-  padding: 0px 1.875rem;
+  padding: 0px 0.875rem;
 }
 
 .swiper-slide {
@@ -97,7 +97,7 @@ a {
   border-color: #e3e5ed;
 }
 .header__search:focus-within {
-  border-color: indigo;
+  border-color: #4b6ed6;
 }
 
 .hamburger {
@@ -131,8 +131,6 @@ a {
 
 .banner {
   margin: 0 auto;
-}
-.banner__row {
   padding: 0.625rem;
 }
 .banner__card {
@@ -198,6 +196,56 @@ a {
   color: white;
   letter-spacing: 0.0625rem;
   align-self: flex-start;
+}
+
+.auth {
+  margin: 0 auto;
+  padding: 2rem 0rem;
+  max-width: 31.25rem;
+}
+.auth__content {
+  background-color: #f5f7ff;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.auth__title {
+  font-size: clamp(1.5rem, 0.3542rem + 0.7778vw, 2rem);
+}
+.auth__input-box {
+  border-radius: 0.3125rem;
+  padding: 0.625rem;
+  border: 2px solid;
+  border-color: #e3e5ed;
+  display: flex;
+  align-items: center;
+}
+.auth__input-box:focus-within {
+  border: 2px solid #4b6ed6;
+}
+.auth__input {
+  width: 100%;
+}
+.auth__icon {
+  max-width: 1rem;
+  max-height: 1rem;
+  margin-right: 0.3rem;
+}
+.auth__btn {
+  background-color: #4b6ed6;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 3px 0rem;
+}
+.auth__btns {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+.auth__link {
+  color: #4b6ed6;
 }
 
 /*# sourceMappingURL=style.css.map */

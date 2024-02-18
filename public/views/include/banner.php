@@ -1,10 +1,4 @@
 <div class="banner">
-    <div class="banner__row">
-
-    </div>
-</div>
-
-<div class="banner">
     <div class="swiper-container">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
