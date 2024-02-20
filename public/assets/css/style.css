@@ -47,11 +47,24 @@ a {
   height: auto;
   overflow: hidden;
   padding: 0px 0.875rem;
+  position: relative;
 }
 
 .swiper-slide {
   width: 33.3333333333;
   max-width: 46.25rem;
+}
+
+.swiper-btn {
+  color: #222222;
+  background-color: white;
+  padding: 0.6rem 1rem;
+  border-radius: 50%;
+  box-shadow: 0px 0px 3px 0px rgba(110, 110, 125, 0.6), 0 2px 2px 0 rgba(110, 110, 125, 0.6), 0 1px 5px 0 rgba(110, 110, 125, 0.6);
+}
+.swiper-btn::after {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .container {
