@@ -1,5 +1,4 @@
-<div class="banner">
-    <div class="swiper-container">
+    <div class="banner">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
                 <div class="banner__card">
@@ -110,4 +109,3 @@
         <div class="swiper-btn swiper-button-next"></div>
         <div class="swiper-btn swiper-button-prev"></div>
     </div>
-</div>

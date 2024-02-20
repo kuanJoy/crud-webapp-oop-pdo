@@ -45,9 +45,6 @@ a {
 .swiper-container {
   width: 100%;
   height: auto;
-  overflow: hidden;
-  padding: 0px 0.875rem;
-  position: relative;
 }
 
 .swiper-slide {
@@ -143,8 +140,11 @@ a {
 }
 
 .banner {
+  overflow: hidden;
+  padding: 0px 0.875rem;
+  position: relative;
   margin: 0 auto;
-  padding: 0.625rem;
+  top: 1.25rem;
 }
 .banner__card {
   position: relative;
@@ -194,21 +194,30 @@ a {
 }
 
 .hashtags {
-  margin-top: 2rem;
+  position: relative;
+  top: 4rem;
   margin-bottom: 4rem;
   display: flex;
   justify-content: center;
+  gap: 0.4rem;
+  overflow: hidden;
+  padding: 0px 0.875rem;
 }
 
 .hashtag {
   font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
-  margin: 0rem 0.5rem;
   padding: 0.3125rem 0.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.4rem;
   background-color: #4b6ed6;
   color: white;
-  letter-spacing: 0.0625rem;
+  letter-spacing: 0.0425rem;
   align-self: flex-start;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 1;
+  white-space: nowrap;
 }
 
 .auth {

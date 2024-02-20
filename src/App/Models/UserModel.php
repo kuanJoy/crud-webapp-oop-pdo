@@ -4,14 +4,23 @@ namespace App\Models;
 
 use App\Config\Database;
 
-class UserModel
+class User
 {
     protected $db;
 
     public function __construct()
     {
-        $this->db = (new Database())->connect();
+        $this->db = (new Database());
     }
+
+    public function getById($id)
+    {
+        $sql = "SELECT * FROM users WHERE id = $id";
+        $result = $this->db->query($sql);
+        return $result->fetch();
+    }
+
+
 
     public function register()
     {

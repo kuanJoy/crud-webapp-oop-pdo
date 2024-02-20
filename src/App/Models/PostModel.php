@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Config\Database;
 
-class PostModel
+class Post
 {
     protected $db;
 
@@ -13,6 +13,9 @@ class PostModel
         $this->db = $db;
     }
 
+    public function getById()
+    {
+    }
 
     public function addPost()
     {

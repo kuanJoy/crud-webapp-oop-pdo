@@ -1,4 +1,5 @@
-const swiper = new Swiper(".swiper-container", {
+// SWIPER BANNER CONFIGURATION
+const swiper = new Swiper(".banner", {
   slidesPerView: 2,
   spaceBetween: 30,
   direction: "horizontal",
@@ -9,10 +10,18 @@ const swiper = new Swiper(".swiper-container", {
   },
 });
 
-// swiper.on("click", function () {
-//   swiper.slideNext();
-// });
+const swHashtags = new Swiper(".hashtags", {
+  slidesPerView: "auto",
+  spaceBetween: 10,
+  direction: "horizontal",
+  loop: true,
+  autoplay: {
+    delay: 1200,
+    disableOnInteraction: false,
+  },
+});
 
+// CKEDITOR
 ClassicEditor.create(document.querySelector("#content"), {
   ckfinder: {
     uploadUrl: "fileupload.php",

@@ -7,7 +7,7 @@ use PDOException;
 
 class Database
 {
-    protected $db;
+    protected $conn;
 
     public function __construct()
     {
@@ -17,14 +17,14 @@ class Database
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
-            $this->db = new PDO('mysql:host=HOSTNAME;dbname=DB_NAME', 'USERNAME', 'PASSWORD', $opt);
+            $this->conn = new PDO('mysql:host=HOSTNAME;dbname=DB_NAME', 'USERNAME', 'PASSWORD', $opt);
         } catch (PDOException $e) {
             echo $e->getmessage();
         }
     }
 
-    public function connect()
+    public function query($sql)
     {
-        return $this->db;
+        return $this->conn->query($sql);
     }
 }
