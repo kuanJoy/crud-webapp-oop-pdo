@@ -3,11 +3,18 @@
         <div class="logo">Big.Идея</div>
         <div class="hamburger">
             <nav class="nav">
-                <a href="#" class="nav__link">
-                    <span class="link__content">
+                <li class="nav-item dropdown">
+                    <a class="nav-link nav__link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <svg class="icon i-category">
+                            <use href="public/assets/images/svg/sprites.svg#category" />
+                        </svg>
                         Каталог
-                    </span>
-                </a>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">История</a></li>
+                        <li><a class="dropdown-item" href="#">География</a></li>
+                    </ul>
+                </li>
                 <a href="#" class="nav__link">
                     <span class="link__content">
                         Популярное

@@ -26,6 +26,9 @@
   max-width: 18px;
   max-height: 18px;
 }
+.icon:hover {
+  fill: #4b6ed6;
+}
 
 .btn {
   position: relative;
@@ -122,11 +125,20 @@ a {
   gap: 0.5rem;
 }
 .nav__link {
+  display: flex;
+  align-items: center;
   padding: 0.3125rem 0.625rem;
   border-radius: 0.5rem;
+  color: #222222;
+  transition: 0.15s;
 }
 .nav__link:hover {
   background-color: #e2e5f6;
+  fill: #4b6ed6;
+}
+.nav__link:focus-within {
+  background-color: #e2e5f6;
+  fill: #4b6ed6;
 }
 
 .search__input {
@@ -137,6 +149,18 @@ a {
 
 .btn-search {
   padding: 6px;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-item {
+  font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
+}
+
+.i-category {
+  margin-top: 0.1875rem;
 }
 
 .banner {

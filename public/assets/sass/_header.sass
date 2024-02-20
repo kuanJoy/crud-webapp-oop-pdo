@@ -36,10 +36,18 @@
     display: flex
     gap: 0.5rem
     &__link
+        display: flex
+        align-items: center
         padding: .3125rem .625rem
         border-radius: .5rem
+        color: $dark
+        transition: .15s
         &:hover
             background-color: $hover-grey
+            fill: $blue
+        &:focus-within
+            background-color: $hover-grey
+            fill: $blue
 
 .search__input
     width: 100%
@@ -48,3 +56,12 @@
 
 .btn-search
     padding: 6px
+
+.dropdown-toggle::after
+    display: none
+
+.dropdown-item
+    font-size: $fz13
+
+.i-category
+    margin-top: .1875rem

@@ -16,7 +16,7 @@ const swHashtags = new Swiper(".hashtags", {
   direction: "horizontal",
   loop: true,
   autoplay: {
-    delay: 1200,
+    delay: 1800,
     disableOnInteraction: false,
   },
 });
