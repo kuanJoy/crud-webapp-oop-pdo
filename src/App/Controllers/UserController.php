@@ -2,24 +2,21 @@
 
 namespace App\UserController;
 
-use App\Models\UserModel;
+use App\Config\Database;
+use App\Models\User;
 
 class UserController
 {
-    protected $user;
+    protected $userModel;
 
     public function __construct()
     {
-        $this->user = new UserModel();
+        $db = new Database();
+        $this->userModel = new User($db);
     }
 
     public function index()
     {
-        $users = $this->user->getAllUsers();
-    }
-
-    public function show($userId)
-    {
-        $user = $this->user->getUserById($userId);
+        $users = $this->userModel->getUsers();
     }
 }

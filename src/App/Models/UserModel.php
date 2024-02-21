@@ -8,19 +8,17 @@ class User
 {
     protected $db;
 
-    public function __construct()
+    public function __construct(Database $db)
     {
-        $this->db = (new Database());
+        $this->db = $db;
     }
 
-    public function getById($id)
+    public function getUsers()
     {
-        $sql = "SELECT * FROM users WHERE id = $id";
-        $result = $this->db->query($sql);
-        return $result->fetch();
+        $sql = "SELECT * FROM users";
+        $stmt = $this->db->getConnection()->query($sql);
+        return $stmt->fetchAll();
     }
-
-
 
     public function register()
     {
@@ -48,11 +46,5 @@ class User
 
     public function deleteUser()
     {
-    }
-
-    public function getAllUsers()
-    {
-        $stmt = $this->db->query("SELECT * FROM users");
-        return $stmt->fetchAll();
     }
 }

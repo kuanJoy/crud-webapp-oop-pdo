@@ -13,6 +13,18 @@ class Post
         $this->db = $db;
     }
 
+    public function getPostbyId($id)
+    {
+        $sql = "SELECT * FROM posts WHERE id = ?";
+        // Чтобы выполнить такой запрос, сначала его надо подготовить с помощью функции prepare(). 
+        $stmt = $this->db->getConnection()->prepare($sql);
+        return $stmt->execute($id);
+    }
+
+    public function getPosts()
+    {
+    }
+
     public function getById()
     {
     }
@@ -21,9 +33,7 @@ class Post
     {
     }
 
-    public function readPosts()
-    {
-    }
+
 
     public function readPost()
     {

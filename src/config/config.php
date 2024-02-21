@@ -23,8 +23,8 @@ class Database
         }
     }
 
-    public function query($sql)
+    public function getConnection()
     {
-        return $this->conn->query($sql);
+        return $this->conn;
     }
 }
