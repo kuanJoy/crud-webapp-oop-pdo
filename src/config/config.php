@@ -17,7 +17,7 @@ class Database
                 PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                 PDO::ATTR_EMULATE_PREPARES   => false,
             ];
-            $this->conn = new PDO('mysql:host=HOSTNAME;dbname=DB_NAME', 'USERNAME', 'PASSWORD', $opt);
+            $this->conn = new PDO('mysql:host=localhost;dbname=edu', 'root', '', $opt);
         } catch (PDOException $e) {
             echo $e->getmessage();
         }

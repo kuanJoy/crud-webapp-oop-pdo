@@ -13,11 +13,20 @@ class Auth
         $this->db = $db;
     }
 
+    public function register()
+    {
+        $sql = "INSERT INTO users('')"
+    }
 
     public function authenticate($emailOrUsername, $password)
     {
-        $sql = "SELECT * FROM users WHERE id = ? OR username = ?";
+        $sql = "SELECT * FROM users WHERE id = :email OR username = :username";
         $stmt = $this->db->getConnection()->prepare($sql);
+
+        $stmt->execute([
+            ":email" => $emailOrUsername,
+            ":username" => $emailOrUsername
+        ]);
 
         $user = $stmt->fetch();
 

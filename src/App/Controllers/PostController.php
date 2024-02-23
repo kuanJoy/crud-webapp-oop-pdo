@@ -17,6 +17,6 @@ class PostController
 
     public function index()
     {
-        $posts = $this->postModel->getPosts();
+        return $this->postModel->getPosts();
     }
 }

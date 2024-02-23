@@ -8,32 +8,28 @@ class Post
 {
     protected $db;
 
-    public function __construct(Database $db)
+    public function __construct(Database $conn)
     {
-        $this->db = $db;
+        $this->db = $conn;
     }
 
     public function getPostbyId($id)
     {
         $sql = "SELECT * FROM posts WHERE id = ?";
         // Чтобы выполнить такой запрос, сначала его надо подготовить с помощью функции prepare(). 
-        $stmt = $this->db->getConnection()->prepare($sql);
-        return $stmt->execute($id);
+        return $this->db->getConnection()->prepare($sql)->execute($id);
     }
 
     public function getPosts()
     {
-    }
-
-    public function getById()
-    {
+        $sql = "SELECT * FROM posts";
+        $stmt = $this->db->getConnection()->query($sql);
+        return $stmt->fetchAll();
     }
 
     public function addPost()
     {
     }
-
-
 
     public function readPost()
     {

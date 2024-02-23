@@ -17,6 +17,6 @@ class UserController
 
     public function index()
     {
-        $users = $this->userModel->getUsers();
+        return $this->userModel->getUsers();
     }
 }
