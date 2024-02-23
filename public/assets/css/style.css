@@ -244,6 +244,11 @@ a {
   white-space: nowrap;
 }
 
+@keyframes slideLeft {
+  100% {
+    transform: translate(50%);
+  }
+}
 .auth {
   margin: 0 auto;
   padding: 2rem 0rem;

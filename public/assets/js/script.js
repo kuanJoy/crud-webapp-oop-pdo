@@ -13,13 +13,14 @@ const swiper = new Swiper(".banner", {
 const swHashtags = new Swiper(".hashtags", {
   slidesPerView: "auto",
   spaceBetween: 10,
-  direction: "horizontal",
   loop: true,
   autoplay: {
-    delay: 1800,
+    delay: 2500,
     disableOnInteraction: false,
   },
+  speed: 2000
 });
+
 
 // CKEDITOR
 ClassicEditor.create(document.querySelector("#content"), {

@@ -1,5 +1,5 @@
 <div class="hashtags">
-    <div class="swiper-wrapper flex-gap">
+    <div class="swiper-wrapper">
         <a href="#" class="swiper-slide hashtag">#космос</a>
         <a href="#" class="swiper-slide hashtag">#Солнце</a>
         <a href="#" class="swiper-slide hashtag">#шпионы</a>
@@ -11,7 +11,6 @@
         <a href="#" class="swiper-slide hashtag">#искусственный интеллект</a>
         <a href="#" class="swiper-slide hashtag">#рабство</a>
         <a href="#" class="swiper-slide hashtag">#феминизм</a>
-        <a href="#" class="swiper-slide hashtag">#капитализм</a>
         <a href="#" class="swiper-slide hashtag">#19век</a>
         <a href="#" class="swiper-slide hashtag">#животные</a>
         <a href="#" class="swiper-slide hashtag">#капитализм</a>
