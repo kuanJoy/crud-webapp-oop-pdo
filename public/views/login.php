@@ -5,7 +5,7 @@ use App\App\Controllers\AuthController;
 use App\App\Controllers\SessionController;
 
 $authController = new AuthController();
-$authController->login();
+$errors = $authController->login();
 
 $sessionController = new SessionController();
 $sessionController->redirect();

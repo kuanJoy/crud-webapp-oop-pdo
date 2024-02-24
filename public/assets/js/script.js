@@ -15,10 +15,10 @@ const swHashtags = new Swiper(".hashtags", {
   spaceBetween: 10,
   loop: true,
   autoplay: {
-    delay: 2500,
+    delay: 1500,
     disableOnInteraction: false,
   },
-  speed: 2000
+  speed: 800
 });
 
 
