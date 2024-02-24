@@ -1,10 +1,9 @@
 <?php
 
-namespace App\AuthController;
+namespace App\Controllers;
 
-use App\Models\Auth;
 use App\Config\Database;
-
+use App\Models\Auth;
 
 class AuthController
 {
@@ -19,5 +18,10 @@ class AuthController
     public function login($emailOrNickname, $password)
     {
         $this->authModel->authenticate($emailOrNickname, $password);
+    }
+
+    public function regUser()
+    {
+        $this->authModel->register();
     }
 }

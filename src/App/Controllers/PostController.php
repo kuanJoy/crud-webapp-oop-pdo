@@ -1,9 +1,9 @@
 <?php
 
-namespace App\PostController;
+namespace App\Controllers;
 
-use App\Models\Post;
 use App\Config\Database;
+use App\Models\Post;
 
 class PostController
 {
