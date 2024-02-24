@@ -2,8 +2,7 @@
 
 namespace App\App\Controllers;
 
-use App\Config\Database;
-use App\App\Models\Auth;
+use App\App\Models\Session;
 
 class SessionController
 {
@@ -11,17 +10,16 @@ class SessionController
 
     public function __construct()
     {
-        $db = new Database();
-        $this->sessionModel = new Auth($db);
+        $this->sessionModel = new Session();
+        var_dump($this->sessionModel);
+        var_dump($_SESSION);
     }
 
-    public function login()
+    public function redirect()
     {
-        return $this->sessionModel->authenticate();
-    }
-
-    public function regUser()
-    {
-        return $this->sessionModel->register();
+        if ($this->sessionModel->getStatus()) {
+            header("Location: /");
+            exit();
+        }
     }
 }

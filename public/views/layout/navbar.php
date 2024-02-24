@@ -30,13 +30,16 @@
                         </svg>
                     </button>
                 </form>
-                <a href="/login" class="nav__link">Войти</a>
-                <!-- ДЛОЯ АВТОРИЗОВАННОГО -->
-                <!-- <a class="header-user">
-            <svg class="icon">
-                <use href="public/assets/images/svg/sprites.svg#user" />
-            </svg>
-        </a> -->
+                <!-- ДЛЯ АВТОРИЗОВАННОГО -->
+                <?php if (isset($_SESSION['id_user'])) : ?>
+                    <a class="header-user">
+                        <svg class="icon">
+                            <use href="public/assets/images/svg/sprites.svg#user" />
+                        </svg>
+                    </a>
+                <?php else : ?>
+                    <a href="/login" class="nav__link">Войти</a>
+                <? endif; ?>
             </div>
         </div>
 </div>

@@ -2,16 +2,21 @@
 
 namespace App\App\Models;
 
-use App\Config\Database;
-use PDOException;
-
-
 class Session
 {
-    protected $db;
+    protected $status;
 
-    public function __construct(Database $db)
+    public function __construct()
     {
-        $this->db = $db;
+        if (isset($_SESSION['id_user'])) {
+            $this->status = true;
+        } else {
+            $this->status = false;
+        }
+    }
+
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

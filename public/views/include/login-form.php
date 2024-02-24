@@ -11,6 +11,14 @@
                 На главную
             </a>
         </div>
+        <!-- =========== ВЫВОД ОШИБОК =========== -->
+        <?php if (!empty($errors)) : ?>
+            <ul class="auth__errors">
+                <?php foreach ($errors as $error) : ?>
+                    <li class="err"> <?= $error ?></li>
+                <?php endforeach ?>
+            </ul>
+        <? endif; ?>
         <div class="auth__input-box">
             <svg class="auth__icon">
                 <use href="public/assets/images/svg/sprites.svg#user" />

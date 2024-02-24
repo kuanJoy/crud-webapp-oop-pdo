@@ -15,16 +15,18 @@ class Auth
         $this->db = $db;
     }
 
+    // ============================= РЕГИСТРАЦИЯ =============================
     public function register()
     {
         session_start();
+        $errors = [];
+
         if (isset($_POST['register'])) {
             try {
                 $username = $_POST['username'];
                 $email = $_POST['email'];
                 $password = $_POST['pass'];
                 $repass = $_POST['repass'];
-                $errors = [];
 
                 if (empty($username)) {
                     $errors['username'] = "Введите имя пользователя";
@@ -86,11 +88,10 @@ class Auth
 
                     if ($result_reg) {
                         $id_user = $this->db->getConnection()->lastInsertId();
-                        $_SESSION['id'] = $id_user;
+                        $_SESSION['id_user'] = $id_user;
                         $_SESSION['username'] = $username;
                         $_SESSION['email'] = $email;
                         $_SESSION['verified'] = $verified;
-                        $_SESSION['message'] = "Вы вошли!";
                         header('location: /login');
                     }
                 }
@@ -101,18 +102,20 @@ class Auth
         return $errors;
     }
 
-    public function authenticate()
+    // ============================= АВТОРИЗАЦИЯ =============================
+    public function login()
     {
+        $errors = [];
         try {
             if (isset($_POST['login'])) {
                 $emailOrUsername = $_POST['loginOrEmail'];
                 $pass = $_POST['pass'];
 
                 if (empty($emailOrUsername)) {
-                    $errors['emailOrUsername'] = "Поле не может быть пустым";
+                    $errors['emailOrUsername'] = "Введите логин или почту";
                 }
 
-                if (empty($password)) {
+                if (empty($pass)) {
                     $errors['pass'] = "Введите пароль";
                 }
 
@@ -125,17 +128,20 @@ class Auth
                 ]);
                 $user = $stmt->fetch();
 
-                if ($user) {
-                    if (password_verify($pass, $user['password'])) {
-                        $_SESSION['id_user'] = $user['id'];
-                        $_SESSION['username'] = $user['username'];
-                        $_SESSION['email'] = $user['email'];
-                        return true;
+                if (empty($errors)) {
+                    if ($user) {
+                        if (password_verify($pass, $user['password'])) {
+                            session_start();
+                            $_SESSION['id_user'] = $user['id'];
+                            $_SESSION['username'] = $user['username'];
+                            $_SESSION['email'] = $user['email'];
+                            $_SESSION['status'] = $user['role'];
+                        } else {
+                            $errors['pass'] = "Неверный пароль";
+                        }
                     } else {
-                        $errors['pass'] = "Неверный пароль";
+                        $errors['username'] = "Пользователь не найден";
                     }
-                } else {
-                    $errors['username'] = "Пользователь не найден";
                 }
             }
         } catch (PDOException $e) {

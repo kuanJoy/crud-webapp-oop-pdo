@@ -17,7 +17,7 @@ class AuthController
 
     public function login()
     {
-        return $this->authModel->authenticate();
+        return $this->authModel->login();
     }
 
     public function regUser()

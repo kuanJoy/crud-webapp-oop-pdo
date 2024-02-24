@@ -1,9 +1,13 @@
 <?php
 
 use App\App\Controllers\AuthController;
+use App\App\Controllers\SessionController;
 
 $authController = new AuthController();
 $errors = $authController->regUser();
+
+$sessionController = new SessionController();
+$sessionController->redirect();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
