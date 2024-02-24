@@ -11,8 +11,6 @@ class SessionController
     public function __construct()
     {
         $this->sessionModel = new Session();
-        var_dump($this->sessionModel);
-        var_dump($_SESSION);
     }
 
     public function redirect()
@@ -21,5 +19,10 @@ class SessionController
             header("Location: /");
             exit();
         }
+    }
+
+    public function logout()
+    {
+        $this->sessionModel->logout();
     }
 }

@@ -1,3 +1,12 @@
+<?php
+
+use App\App\Controllers\SessionController;
+
+if (isset($_POST['logout'])) {
+    $sessionDestroy = new SessionController;
+    $sessionDestroy->logout();
+} ?>
+
 <div class="header-bg">
     <header class="header container">
         <div class="logo">Big.Идея</div>
@@ -32,11 +41,25 @@
                 </form>
                 <!-- ДЛЯ АВТОРИЗОВАННОГО -->
                 <?php if (isset($_SESSION['id_user'])) : ?>
-                    <a class="header-user">
-                        <svg class="icon">
-                            <use href="public/assets/images/svg/sprites.svg#user" />
-                        </svg>
-                    </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link nav__link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg class="icon">
+                                <use href="public/assets/images/svg/sprites.svg#user" />
+                            </svg>
+                            Профиль
+                        </a>
+                        <ul class="dropdown-menu">
+                            <?php if (($_SESSION['role'] !== 3)) : ?>
+                                <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                            <?php endif; ?>
+                            <form method="post" action="">
+                                <button type="submit" name="logout" class="dropdown-item">Выйти</button>
+                            </form>
+                        </ul>
+                    </li>
                 <?php else : ?>
                     <a href="/login" class="nav__link">Войти</a>
                 <? endif; ?>

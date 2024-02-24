@@ -14,5 +14,7 @@
         <a href="#" class="swiper-slide hashtag">#19век</a>
         <a href="#" class="swiper-slide hashtag">#животные</a>
         <a href="#" class="swiper-slide hashtag">#капитализм</a>
+        <a href="#" class="swiper-slide hashtag">#криптовалюта</a>
+        <a href="#" class="swiper-slide hashtag">#киберпанк</a>
     </div>
 </div>

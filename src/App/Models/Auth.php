@@ -131,11 +131,10 @@ class Auth
                 if (empty($errors)) {
                     if ($user) {
                         if (password_verify($pass, $user['password'])) {
-                            session_start();
                             $_SESSION['id_user'] = $user['id'];
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['email'] = $user['email'];
-                            $_SESSION['status'] = $user['role'];
+                            $_SESSION['role'] = $user['role'];
                         } else {
                             $errors['pass'] = "Неверный пароль";
                         }

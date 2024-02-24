@@ -19,4 +19,11 @@ class Session
     {
         return $this->status;
     }
+
+    public function logout()
+    {
+        $this->status = false;
+        session_destroy();
+        header("Location: /");
+    }
 }
