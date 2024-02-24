@@ -5,23 +5,23 @@ namespace App\App\Controllers;
 use App\Config\Database;
 use App\App\Models\Auth;
 
-class AuthController
+class SessionController
 {
-    protected $authModel;
+    protected $sessionModel;
 
     public function __construct()
     {
         $db = new Database();
-        $this->authModel = new Auth($db);
+        $this->sessionModel = new Auth($db);
     }
 
     public function login()
     {
-        return $this->authModel->authenticate();
+        return $this->sessionModel->authenticate();
     }
 
     public function regUser()
     {
-        return $this->authModel->register();
+        return $this->sessionModel->register();
     }
 }

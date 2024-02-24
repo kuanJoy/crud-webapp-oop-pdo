@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Models;
+namespace App\App\Models;
 
 use App\Config\Database;
 use PDOException;
+
 
 class Auth
 {
@@ -17,12 +18,13 @@ class Auth
     public function register()
     {
         session_start();
-        if (isset($_POST['register-btn'])) {
+        if (isset($_POST['register'])) {
             try {
                 $username = $_POST['username'];
                 $email = $_POST['email'];
-                $password = $_POST['password'];
+                $password = $_POST['pass'];
                 $repass = $_POST['repass'];
+                $errors = [];
 
                 if (empty($username)) {
                     $errors['username'] = "Введите имя пользователя";
@@ -51,12 +53,25 @@ class Auth
                 // Проверка на существующий емейл
                 $emailCheck = "SELECT * FROM users WHERE email=?";
                 $stmt = $this->db->getConnection()->prepare($emailCheck);
-                $stmt->bindParam('s', $email);
+                $stmt->bindParam(1, $email);
                 $stmt->execute();
                 $result = $stmt->fetch();
+                $stmt = null;
 
                 if ($result) {
                     $errors['email'] = "Почта уже занята";
+                }
+
+                // Проверка на существующий юзернейм
+                $nameCheck = "SELECT * FROM users WHERE username=?";
+                $stmt = $this->db->getConnection()->prepare($nameCheck);
+                $stmt->bindParam(1, $username);
+                $stmt->execute();
+                $result = $stmt->fetch();
+                $stmt = null;
+
+                if ($result) {
+                    $errors['username'] = "Имя пользователя занято";
                 }
 
                 // Если валидация успешна
@@ -83,33 +98,49 @@ class Auth
                 $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;
             }
         }
+        return $errors;
     }
 
-    public function authenticate($emailOrUsername, $password)
+    public function authenticate()
     {
-        $sql = "SELECT * FROM users WHERE id = :email OR username = :username";
-        $stmt = $this->db->getConnection()->prepare($sql);
+        try {
+            if (isset($_POST['login'])) {
+                $emailOrUsername = $_POST['loginOrEmail'];
+                $pass = $_POST['pass'];
 
-        $stmt->execute([
-            ":email" => $emailOrUsername,
-            ":username" => $emailOrUsername
-        ]);
+                if (empty($emailOrUsername)) {
+                    $errors['emailOrUsername'] = "Поле не может быть пустым";
+                }
 
-        $user = $stmt->fetch();
+                if (empty($password)) {
+                    $errors['pass'] = "Введите пароль";
+                }
 
-        if ($user) {
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['id_user'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['email'] = $user['email'];
-                return true;
-            } else {
-                $_POST['error_login'] = "Неверный пароль";
-                return false;
+                $sql = "SELECT * FROM users WHERE id = :email OR username = :username";
+                $stmt = $this->db->getConnection()->prepare($sql);
+
+                $stmt->execute([
+                    ":email" => $emailOrUsername,
+                    ":username" => $emailOrUsername
+                ]);
+                $user = $stmt->fetch();
+
+                if ($user) {
+                    if (password_verify($pass, $user['password'])) {
+                        $_SESSION['id_user'] = $user['id'];
+                        $_SESSION['username'] = $user['username'];
+                        $_SESSION['email'] = $user['email'];
+                        return true;
+                    } else {
+                        $errors['pass'] = "Неверный пароль";
+                    }
+                } else {
+                    $errors['username'] = "Пользователь не найден";
+                }
             }
-        } else {
-            $_POST['error_login'] = "Пользователь не найден";
-            return false;
+        } catch (PDOException $e) {
+            $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;
         }
+        return $errors;
     }
 }
