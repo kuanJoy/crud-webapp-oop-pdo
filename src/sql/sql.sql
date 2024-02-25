@@ -108,12 +108,16 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password_reset_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `verified` enum('false','true') DEFAULT 'false',
+  `token` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_email` (`email`),
   UNIQUE KEY `unique_username` (`username`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.users: ~0 rows (приблизительно)
+-- Дамп данных таблицы edu.users: ~1 rows (приблизительно)
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `remember_token`, `password_reset_at`, `created_at`, `updated_at`, `verified`, `token`) VALUES
+	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'читатель', NULL, NULL, '2024-02-25 09:09:55', '2024-02-25 12:16:18', 'true', '8929894326d');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
