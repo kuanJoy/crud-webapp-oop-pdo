@@ -49,7 +49,7 @@ if (isset($_POST['logout'])) {
                             Профиль
                         </a>
                         <ul class="dropdown-menu">
-                            <?php if (($_SESSION['role'] !== 3)) : ?>
+                            <?php if (($_SESSION['role'] !== 'читатель')) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
                                 <li>
                                     <hr class="dropdown-divider">

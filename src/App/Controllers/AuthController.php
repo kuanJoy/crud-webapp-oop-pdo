@@ -15,12 +15,14 @@ class AuthController
         $this->authModel = new Auth($db);
     }
 
+    // ЛОГИН
     public function login()
     {
         return $this->authModel->login();
     }
 
-    public function regUser()
+    // РЕГИСТРАЦИЯ
+    public function register()
     {
         return $this->authModel->register();
     }

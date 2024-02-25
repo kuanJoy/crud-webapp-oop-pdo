@@ -13,14 +13,6 @@ class SessionController
         $this->sessionModel = new Session();
     }
 
-    public function redirect()
-    {
-        if ($this->sessionModel->getStatus()) {
-            header("Location: /");
-            exit();
-        }
-    }
-
     public function logout()
     {
         $this->sessionModel->logout();

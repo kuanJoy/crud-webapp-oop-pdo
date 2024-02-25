@@ -78,8 +78,16 @@ class Auth
 
                 // Если валидация успешна
                 if (count($errors) === 0) {
+                    // token generator
+                    function getRandomStringUniqid($length = 12)
+                    {
+                        $string = uniqid(rand());
+                        $randomString = substr($string, 0, $length);
+                        return $randomString;
+                    }
+
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-                    $token = bin2hex(random_bytes(50));
+                    $token = getRandomStringUniqid();
                     $verified = 0;
 
                     $sql = "INSERT INTO users(username, email, verified, token, password) VALUES (?,?,?,?,?)";
@@ -91,8 +99,19 @@ class Auth
                         $_SESSION['id_user'] = $id_user;
                         $_SESSION['username'] = $username;
                         $_SESSION['email'] = $email;
-                        $_SESSION['verified'] = $verified;
-                        header('location: /login');
+                        $_SESSION['role'] = 3;
+                        $_SESSION['verified'] = "false";
+                        $_SESSION['token'] = $token;
+
+                        $title = "Подтверждение регистрации на BigИдея";
+                        $message = "Ваш код для подтверждения регистрации $token";
+                        $header = "From: wowcool2001mail.ru";
+                        if (mail($email, $title, stripslashes($message), $header)) {
+                            header("Location: /verify");
+                            exit;
+                        } else {
+                            $errors['no_email'] = "Такой почты не существует";
+                        }
                     }
                 }
             } catch (PDOException $e) {
@@ -135,6 +154,8 @@ class Auth
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['role'] = $user['role'];
+                            $_SESSION['verified'] = $user['verified'];
+                            $_SESSION['token'] = $user['token'];
                         } else {
                             $errors['pass'] = "Неверный пароль";
                         }

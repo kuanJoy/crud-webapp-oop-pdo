@@ -138,6 +138,7 @@ a {
 .nav__link:hover {
   background-color: #e2e5f6;
   fill: #4b6ed6;
+  color: #4b6ed6;
 }
 .nav__link:focus-within {
   background-color: #e2e5f6;
@@ -320,10 +321,18 @@ li {
 .auth__link {
   color: #4b6ed6;
 }
+.auth__verify {
+  text-align: justify;
+  color: #222222;
+}
 
 .err {
   margin-top: 4.8px;
   color: red;
+}
+
+.mt-1 {
+  margin-top: 0.5px;
 }
 
 /*# sourceMappingURL=style.css.map */

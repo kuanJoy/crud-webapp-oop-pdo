@@ -1,15 +1,15 @@
 <?php
+session_start();
 
 use App\App\Controllers\AuthController;
-use App\App\Controllers\SessionController;
+use App\App\Controllers\VerificationController;
 
 $authController = new AuthController();
-$errors = $authController->regUser();
+$errors = $authController->register();
 
-$sessionController = new SessionController();
-$sessionController->redirect();
+// $verifyEmail = new VerificationController();
+// $verifyEmail->redirectToVerifyEmail();
 
 include __DIR__ . "/layout/header.php";
-include __DIR__ . "/layout/navbar.php";
 include __DIR__ . "/include/register-form.php";
 include __DIR__ . "/layout/footer.php";
