@@ -56,7 +56,6 @@ $sessionDestroy->logout();
                             </a>
                             <?php if (($_SESSION['role'] !== 'читатель')) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
-
                             <?php endif; ?>
                             <li>
                                 <hr class="dropdown-divider">

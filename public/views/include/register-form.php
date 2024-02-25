@@ -2,7 +2,7 @@
     <form method="post" class="auth__content">
         <div class="auth__row">
             <h3 class="auth__title">
-                Войти в аккаунт
+                Регистрация
             </h3>
             <a href="/" class="auth__home">
                 <svg class="auth__icon">
@@ -45,7 +45,7 @@
         </div>
         <button type="submit" name="register" class="auth__btn">Зарегистрироваться</button>
         <div class="auth__btns">
-            <a href="#" class="auth__link">Забыли пароль?</a>
+            <a href="/reset" class="auth__link">Забыли пароль?</a>
             <a href="/login" class="auth__link">Войти в аккаунт</a>
         </div>
     </form>

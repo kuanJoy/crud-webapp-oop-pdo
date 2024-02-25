@@ -14,22 +14,25 @@ class VerificationController
         $this->verification = new Verification();
     }
 
-    // Перенаправление если ЕМЕЙЛ НЕ подтвержден
+    // Перенаправление если Email не подтвержден
     public function redirectToVerifyEmail()
     {
         $this->verification->redirectToVerifyEmail();
     }
 
+    // Перенаправление если Гость
     public function redirectGuest()
     {
         $this->verification->redirectGuest();
     }
 
+    // Перенаправление если Юзер
     public function redirectUser()
     {
         $this->verification->redirectUser();
     }
 
+    // Подтверждение токена в verify.php
     public function verifyEmailToken()
     {
         $db = new Database();

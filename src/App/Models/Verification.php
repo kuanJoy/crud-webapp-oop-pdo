@@ -13,6 +13,7 @@ class Verification
         $this->db = new Database();
     }
 
+    // Перенаправление если Email не подтвержден
     public function redirectToVerifyEmail()
     {
         if (isset($_SESSION['id_user']) && $_SESSION['verified'] == "false") {
@@ -20,6 +21,7 @@ class Verification
         }
     }
 
+    // Перенаправление если Гость
     public function redirectGuest()
     {
         if (empty($_SESSION)) {
@@ -27,6 +29,7 @@ class Verification
         }
     }
 
+    // Перенаправление если Юзер
     public function redirectUser()
     {
         if (isset($_SESSION['id_user']) && $_SESSION['verified'] == "true") {
@@ -34,6 +37,7 @@ class Verification
         }
     }
 
+    // Подтверждение токена в verify.php
     public function verifyEmailToken()
     {
         if (isset($_POST['checkToken'])) {
@@ -50,5 +54,9 @@ class Verification
                 return $error;
             }
         }
+    }
+
+    public function verifyPasswordToken()
+    {
     }
 }

@@ -7,3 +7,5 @@ $router->addRoute('GET', '/register', 'views/register.php');
 $router->addRoute('POST', '/register', 'views/register.php');
 $router->addRoute('GET', '/verify', 'views/verify.php');
 $router->addRoute('POST', '/verify', 'views/verify.php');
+$router->addRoute('GET', '/reset', 'views/reset.php');
+$router->addRoute('POST', '/reset', 'views/reset.php');
