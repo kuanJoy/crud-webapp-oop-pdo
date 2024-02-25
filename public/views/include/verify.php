@@ -4,9 +4,8 @@
             <h3 class="auth__title">
                 Подтверждение почты
             </h3>
-
             <button type="submit" name="logout" class="nav__link">
-                <svg class="auth__icon mt-1">
+                <svg class="auth__icon mt1">
                     <use href="public/assets/images/svg/sprites.svg#back" />
                 </svg>Выйти</button>
         </div>

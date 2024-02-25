@@ -62,7 +62,15 @@
     display: none
 
 .dropdown-item
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: flex-start
     font-size: $fz13
+    transition: 0.15s all
+    &:hover
+        color: $blue
+        fill: $blue
 
 .i-category
     margin-top: .1875rem

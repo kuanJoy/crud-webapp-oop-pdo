@@ -57,8 +57,8 @@ a {
 
 .swiper-btn {
   text-align: center;
-  width: 40px;
-  height: 40px;
+  width: 35px;
+  height: 35px;
   color: #222222;
   background-color: white;
   border-radius: 50%;
@@ -160,7 +160,16 @@ a {
 }
 
 .dropdown-item {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
+  transition: 0.15s all;
+}
+.dropdown-item:hover {
+  color: #4b6ed6;
+  fill: #4b6ed6;
 }
 
 .i-category {
@@ -331,7 +340,7 @@ li {
   color: red;
 }
 
-.mt-1 {
+.mt1 {
   margin-top: 0.5px;
 }
 

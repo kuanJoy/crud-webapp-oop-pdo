@@ -2,10 +2,9 @@
 
 use App\App\Controllers\SessionController;
 
-if (isset($_POST['logout'])) {
-    $sessionDestroy = new SessionController;
-    $sessionDestroy->logout();
-} ?>
+$sessionDestroy = new SessionController;
+$sessionDestroy->logout();
+?>
 
 <div class="header-bg">
     <header class="header container">
@@ -49,14 +48,24 @@ if (isset($_POST['logout'])) {
                             Профиль
                         </a>
                         <ul class="dropdown-menu">
+                            <li class="dropdown-item">
+                                <svg class="icon i-category">
+                                    <use href="public/assets/images/svg/sprites.svg#favourite" />
+                                </svg>
+                                Избранное
+                            </li>
                             <?php if (($_SESSION['role'] !== 'читатель')) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
+
                             <?php endif; ?>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
                             <form method="post" action="">
-                                <button type="submit" name="logout" class="dropdown-item">Выйти</button>
+                                <button type="submit" name="logout" class="dropdown-item">
+                                    <svg class="auth__icon mt1">
+                                        <use href="public/assets/images/svg/sprites.svg#exit" />
+                                    </svg>Выйти</button>
                             </form>
                         </ul>
                     </li>
