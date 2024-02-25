@@ -20,6 +20,16 @@ class VerificationController
         $this->verification->redirectToVerifyEmail();
     }
 
+    public function redirectGuest()
+    {
+        $this->verification->redirectGuest();
+    }
+
+    public function redirectUser()
+    {
+        $this->verification->redirectUser();
+    }
+
     public function verifyEmailToken()
     {
         $db = new Database();

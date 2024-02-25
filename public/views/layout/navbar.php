@@ -48,12 +48,12 @@ $sessionDestroy->logout();
                             Профиль
                         </a>
                         <ul class="dropdown-menu">
-                            <li class="dropdown-item">
+                            <a class="dropdown-item">
                                 <svg class="icon i-category">
                                     <use href="public/assets/images/svg/sprites.svg#favourite" />
                                 </svg>
                                 Избранное
-                            </li>
+                            </a>
                             <?php if (($_SESSION['role'] !== 'читатель')) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
 

@@ -3,8 +3,8 @@ session_start();
 
 use App\App\Controllers\VerificationController;
 
-$verifyEmail = new VerificationController();
-$verifyEmail->redirectToVerifyEmail();
+$verification = new VerificationController();
+$verification->redirectToVerifyEmail();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";

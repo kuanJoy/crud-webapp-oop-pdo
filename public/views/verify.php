@@ -4,8 +4,11 @@ session_start();
 use App\App\Controllers\VerificationController;
 use App\App\Controllers\SessionController;
 
-$sessionTokenUpdate = new VerificationController;
-$error = $sessionTokenUpdate->verifyEmailToken();
+$verification = new VerificationController;
+$verification->redirectGuest();
+$verification->redirectUser();
+$error = $verification->verifyEmailToken();
+
 
 $sessionDestroy = new SessionController;
 $sessionDestroy->logout();

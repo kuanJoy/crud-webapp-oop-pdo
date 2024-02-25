@@ -20,6 +20,19 @@ class Verification
         }
     }
 
+    public function redirectGuest()
+    {
+        if (empty($_SESSION)) {
+            header("Location: /");
+        }
+    }
+
+    public function redirectUser()
+    {
+        if (isset($_SESSION['id_user']) && $_SESSION['verified'] == "true") {
+            header("Location: /");
+        }
+    }
 
     public function verifyEmailToken()
     {

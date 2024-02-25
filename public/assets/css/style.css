@@ -171,6 +171,9 @@ a {
   color: #4b6ed6;
   fill: #4b6ed6;
 }
+.dropdown-item:active {
+  background-color: #f0f2fa;
+}
 
 .i-category {
   margin-top: 0.1875rem;

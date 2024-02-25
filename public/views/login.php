@@ -7,8 +7,9 @@ use App\App\Controllers\VerificationController;
 $authController = new AuthController();
 $errors = $authController->login();
 
-$verifyEmail = new VerificationController();
-$verifyEmail->redirectToVerifyEmail();
+$verification = new VerificationController();
+$verification->redirectToVerifyEmail();
+$verification->redirectUser();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/include/login-form.php";
