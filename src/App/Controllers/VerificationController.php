@@ -17,9 +17,7 @@ class VerificationController
     // Перенаправление если ЕМЕЙЛ НЕ подтвержден
     public function redirectToVerifyEmail()
     {
-        if (isset($_SESSION['id_user']) && $_SESSION['verified'] == "false") {
-            header("Location: /verify");
-        }
+        $this->verification->redirectToVerifyEmail();
     }
 
     public function verifyEmailToken()

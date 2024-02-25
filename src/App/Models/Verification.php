@@ -13,6 +13,14 @@ class Verification
         $this->db = new Database();
     }
 
+    public function redirectToVerifyEmail()
+    {
+        if (isset($_SESSION['id_user']) && $_SESSION['verified'] == "false") {
+            header("Location: /verify");
+        }
+    }
+
+
     public function verifyEmailToken()
     {
         if (isset($_POST['checkToken'])) {
