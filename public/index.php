@@ -8,6 +8,8 @@ use App\Router\Router;
 
 $router = new Router();
 
+var_dump($_SESSION);
+
 require_once __DIR__ . "/../src/router/routes.php";
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);

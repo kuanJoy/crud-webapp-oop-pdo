@@ -11,7 +11,6 @@
                 На главную
             </a>
         </div>
-        <p class="auth__verify">почта</p>
         <?php
         if (!empty($error)) : ?>
             <span class="err"> <?= $error ?></span>
@@ -23,5 +22,9 @@
             <input name="email" class="auth__input" type="text" placeholder="Имя почты">
         </div>
         <button type="submit" name="sendLink" class="auth__btn">Восстановить</button>
+        <div class="auth__btns">
+            <a href="/login" class="auth__link">Войти</a>
+            <a href="/register" class="auth__link">Зарегистрироваться</a>
+        </div>
     </form>
 </div>
