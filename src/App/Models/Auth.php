@@ -88,11 +88,10 @@ class Auth
 
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
                     $token = getRandomStringUniqid();
-                    $verified = 0;
 
-                    $sql = "INSERT INTO users(username, email, verified, token, password) VALUES (?,?,?,?,?)";
+                    $sql = "INSERT INTO users(username, email, token, password) VALUES (?,?,?,?)";
                     $stmt = $this->db->getConnection()->prepare($sql);
-                    $result_reg = $stmt->execute([$username, $email, $verified, $token, $hashedPass]);
+                    $result_reg = $stmt->execute([$username, $email, $token, $hashedPass]);
 
                     if ($result_reg) {
                         $id_user = $this->db->getConnection()->lastInsertId();
@@ -100,13 +99,13 @@ class Auth
                         $_SESSION['username'] = $username;
                         $_SESSION['email'] = $email;
                         $_SESSION['role'] = 3;
-                        $_SESSION['verified'] = "false";
+                        $_SESSION['verified'] = 1;
                         $_SESSION['token'] = $token;
 
                         $title = "Подтверждение регистрации на BigИдея";
                         $message = "Ваш код для подтверждения регистрации $token";
-                        $header = "From: wowcool2001mail.ru";
-                        if (mail($email, $title, stripslashes($message), $header)) {
+                        $header = "From: wowcool2001@mail.ru";
+                        if (mail($email, $title, $message, $header)) {
                             header("Location: /verify");
                             exit;
                         } else {
