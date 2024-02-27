@@ -54,7 +54,7 @@ $sessionDestroy->logout();
                                 </svg>
                                 Избранное
                             </a>
-                            <?php if (($_SESSION['role'] !== 'читатель')) : ?>
+                            <?php if (($_SESSION['role'] != "читатель")) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
                             <?php endif; ?>
                             <li>

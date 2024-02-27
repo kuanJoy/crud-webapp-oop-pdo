@@ -149,12 +149,14 @@ class Auth
                 if (empty($errors)) {
                     if ($user) {
                         if (password_verify($pass, $user['password'])) {
+                            session_start();
                             $_SESSION['id_user'] = $user['id'];
                             $_SESSION['username'] = $user['username'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['role'] = $user['role'];
                             $_SESSION['verified'] = $user['verified'];
                             $_SESSION['token'] = $user['token'];
+                            header("location: /");
                         } else {
                             $errors['pass'] = "Неверный пароль";
                         }
