@@ -4,6 +4,9 @@ namespace App\App\Models;
 
 use App\Config\Database;
 use PDOException;
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 
 class Auth
@@ -79,15 +82,15 @@ class Auth
                 // Если валидация успешна
                 if (count($errors) === 0) {
                     // token generator
-                    function getRandomStringUniqid($length = 12)
-                    {
-                        $string = uniqid(rand());
-                        $randomString = substr($string, 0, $length);
-                        return $randomString;
-                    }
+                    // function getRandomStringUniqid($length = 12)
+                    // {
+                    //     $string = uniqid(rand());
+                    //     $randomString = substr($string, 0, $length);
+                    //     return $randomString;
+                    // }
 
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-                    $token = getRandomStringUniqid();
+                    $token = strval(rand(0, 4));
 
                     $sql = "INSERT INTO users(username, email, token, password) VALUES (?,?,?,?)";
                     $stmt = $this->db->getConnection()->prepare($sql);

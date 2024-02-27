@@ -45,17 +45,23 @@ a {
   color: #222222;
 }
 
-.swiper-container {
-  width: 100%;
-  height: auto;
+.swiper-slide {
+  display: flex;
+  justify-content: center;
 }
 
-.swiper-slide {
-  width: 33.3333333333;
-  max-width: 46.25rem;
+.banner__item {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.swiper {
+  max-width: 59rem;
 }
 
 .swiper-btn {
+  position: absolute;
+  z-index: 999;
   text-align: center;
   width: 35px;
   height: 35px;
@@ -185,17 +191,13 @@ li {
 
 .banner {
   overflow: hidden;
-  padding: 0px 0.875rem;
-  position: relative;
+  padding: 2rem 0.875rem;
   margin: 0 auto;
-  top: 1.25rem;
 }
 .banner__card {
   position: relative;
-  padding: 3rem 0 3rem 2rem;
-  border-radius: 0.5rem;
-  border: 1px solid #e3e5ed;
-  max-width: 43.75rem;
+  padding: 3rem 0 3rem 3.5rem;
+  max-width: 60rem;
 }
 
 .card__img {
@@ -204,7 +206,6 @@ li {
   top: 0;
   left: 30%;
   right: 0;
-  border-radius: 0.5rem;
 }
 .card__fade {
   z-index: 1;
@@ -213,7 +214,6 @@ li {
   top: 0;
   left: 0;
   right: 0;
-  border-radius: 8px;
   transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
   background-image: linear-gradient(to right, #f0f2fa, #f0f2fa 30%, transparent 100%, transparent);
 }

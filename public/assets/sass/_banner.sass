@@ -1,15 +1,11 @@
 .banner
     overflow: hidden
-    padding: 0px 0.875rem
-    position: relative
+    padding: 2rem 0.875rem
     margin: 0 auto
-    top: 1.25rem
     &__card
         position: relative
-        padding: 3rem 0 3rem 2rem
-        border-radius: .5rem
-        border: 1px solid $input-bg
-        max-width: 43.75rem
+        padding: 3rem 0 3rem 3.5rem
+        max-width: 60rem
 .card
     &__img
         position: absolute
@@ -17,7 +13,6 @@
         top: 0
         left: 30%
         right: 0
-        border-radius: .5rem
     &__fade
         z-index: 1
         position: absolute
@@ -25,7 +20,6 @@
         top: 0
         left: 0
         right: 0
-        border-radius: 8px
         transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1)
         background-image: linear-gradient( to right, $grey, $grey 30%, transparent 100%, transparent )
     &__content

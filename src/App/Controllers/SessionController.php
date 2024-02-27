@@ -4,7 +4,7 @@ namespace App\App\Controllers;
 
 use App\App\Models\Session;
 
-class SessionController
+class SessionController extends Session
 {
     protected $sessionModel;
 

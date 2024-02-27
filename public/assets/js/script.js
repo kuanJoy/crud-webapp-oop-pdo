@@ -1,23 +1,19 @@
 // SWIPER BANNER CONFIGURATION
-const swiper = new Swiper(".banner", {
-  slidesPerView: 2,
-  spaceBetween: 30,
-  direction: "horizontal",
-  loop: true,
+
+const swiper = new Swiper(".mySwiper", {
   navigation: {
     nextEl: ".swiper-button-next",
     prevEl: ".swiper-button-prev",
   },
+  loop: true,
+  speed: 800
 });
+
 
 const swHashtags = new Swiper(".hashtags", {
   slidesPerView: "auto",
   spaceBetween: 10,
   loop: true,
-  autoplay: {
-    delay: 1500,
-    disableOnInteraction: false,
-  },
   speed: 800
 });
 
