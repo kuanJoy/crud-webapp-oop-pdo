@@ -53,12 +53,12 @@ class Password
                     try {
                         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
                         $mail->isSMTP();                                            //Send using SMTP
-                        $mail->Host       = 'smtp.mail.ru';                     //Set the SMTP server to send through
-                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                        $mail->Username   = 'hjejssdsdssdsd@mail.ru';                     //SMTP username
-                        $mail->Password   = 'JHwnUkyJ7AXeFizL81xT';                               //SMTP password
+                        $mail->Host = 'smtp.mail.ru';                     //Set the SMTP server to send through
+                        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
+                        $mail->Username = 'hjejssdsdssdsd@mail.ru';                     //SMTP username
+                        $mail->Password = 'JHwnUkyJ7AXeFizL81xT';                               //SMTP password
                         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                        $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                        $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
                         $mail->setFrom('noreply@mail.ru', 'Mailer');
                         $mail->addAddress($email);     //Add a recipient
@@ -70,6 +70,7 @@ class Password
                         $mail->Subject = 'Восстановление доступа';
                         $mail->Body    = <<<END
                         
+                        Восстановить пароль <a href="http
                         
                         END;
 

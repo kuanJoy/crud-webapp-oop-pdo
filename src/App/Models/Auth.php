@@ -90,7 +90,7 @@ class Auth
                     // }
 
                     $hashedPass = password_hash($password, PASSWORD_DEFAULT);
-                    $token = strval(rand(0, 4));
+                    $token = strval(rand(1000, 9999));
 
                     $sql = "INSERT INTO users(username, email, token, password) VALUES (?,?,?,?)";
                     $stmt = $this->db->getConnection()->prepare($sql);
