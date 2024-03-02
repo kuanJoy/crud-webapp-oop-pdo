@@ -8,6 +8,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+// require_once __DIR__ . "/../../config/mailer.php";
+
 
 class Auth
 {
@@ -105,14 +107,41 @@ class Auth
                         $_SESSION['verified'] = 1;
                         $_SESSION['token'] = $token;
 
-                        $title = "Подтверждение регистрации на BigИдея";
-                        $message = "Ваш код для подтверждения регистрации $token";
-                        $header = "From: wowcool2001@mail.ru";
-                        if (mail($email, $title, $message, $header)) {
-                            header("Location: /verify");
-                            exit;
-                        } else {
-                            $errors['no_email'] = "Такой почты не существует";
+                        $mail = new PHPMailer(true);
+
+
+                        $mail->CharSet = "utf-8"; // set charset to utf8
+                        $mail->SMTPAuth = true; // Enable SMTP authentication
+                        $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+
+                        $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                        $mail->Port = 587; // TCP port to connect to
+                        $mail->SMTPOptions = array(
+                            'ssl' => array(
+                                'verify_peer' => false,
+                                'verify_peer_name' => false,
+                                'allow_self_signed' => true
+                            )
+                        );
+                        $mail->isHTML(true); // Set email format to HTML
+                        $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
+                        $mail->Password = 'omgretard228'; // SMTP password
+
+
+                        $mail->setFrom('wowcool2001@mail.ru');
+                        $mail->addAddress($email);
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Регистрация Edu.Портал';
+                        $mail->Body    = <<<END
+                        
+                        <h1>Ваш код подтверждения $token</h1>
+                        
+                        END;
+
+                        try {
+                            var_dump($mail->send());
+                        } catch (Exception $e) {
+                            echo "Сообщение не было отправлено. Ошибка почты: {$mail->ErrorInfo}";
                         }
                     }
                 }

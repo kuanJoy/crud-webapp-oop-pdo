@@ -8,7 +8,7 @@ $sessionDestroy->logout();
 
 <div class="header-bg">
     <header class="header container">
-        <div class="logo">Big.Идея</div>
+        <div class="logo">Edu.Портал</div>
         <div class="hamburger">
             <nav class="nav">
                 <li class="nav-item dropdown">
@@ -54,7 +54,7 @@ $sessionDestroy->logout();
                                 </svg>
                                 Избранное
                             </a>
-                            <?php if (($_SESSION['role'] != "читатель")) : ?>
+                            <?php if (($_SESSION['role'] != 3)) : ?>
                                 <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
                             <?php endif; ?>
                             <li>

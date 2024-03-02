@@ -8,6 +8,8 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+// require_once __DIR__ . "/../../config/mailer.php";
+
 
 class Password
 {
@@ -28,9 +30,9 @@ class Password
             }
 
             try {
-                $sql = "SELECT * FROM users WHERE email = ?";
+                $sql = "SELECT * FROM users WHERE email = :email";
                 $stmt = $this->db->getConnection()->prepare($sql);
-                $stmt->bindParam(1, $email);
+                $stmt->bindParam(':email', $email);
                 $stmt->execute();
                 $result = $stmt->fetch();
 
@@ -43,42 +45,47 @@ class Password
                     $sql = "UPDATE users SET reset_token_hash = :token_hash, reset_token_expires_at = :expire WHERE email = :email";
 
                     $stmt = $this->db->getConnection()->prepare($sql);
-                    $stmt->bindParam(1, $token_hash);
-                    $stmt->bindParam(1, $expire);
-                    $stmt->bindParam(1, $email);
+                    $stmt->bindParam(':token_hash', $token_hash);
+                    $stmt->bindParam(':expire', $expire);
+                    $stmt->bindParam(':email', $email);
                     $stmt->execute();
 
                     $mail = new PHPMailer(true);
 
-                    try {
-                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                        $mail->isSMTP();                                            //Send using SMTP
-                        $mail->Host = 'smtp.mail.ru';                     //Set the SMTP server to send through
-                        $mail->SMTPAuth = true;                                   //Enable SMTP authentication
-                        $mail->Username = 'hjejssdsdssdsd@mail.ru';                     //SMTP username
-                        $mail->Password = 'JHwnUkyJ7AXeFizL81xT';                               //SMTP password
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                        $mail->Port = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                    $mail->CharSet = "utf-8"; // set charset to utf8
+                    $mail->SMTPAuth = true; // Enable SMTP authentication
+                    $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 
-                        $mail->setFrom('noreply@mail.ru', 'Mailer');
-                        $mail->addAddress($email);     //Add a recipient
-                        $mail->addReplyTo('info@example.com', 'Information');
-                        $mail->addCC('cc@example.com');
-                        $mail->addBCC('bcc@example.com');
+                    $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
+                    $mail->Port = 587; // TCP port to connect to
+                    $mail->SMTPOptions = array(
+                        'ssl' => array(
+                            'verify_peer' => false,
+                            'verify_peer_name' => false,
+                            'allow_self_signed' => true
+                        )
+                    );
+                    $mail->isHTML(true); // Set email format to HTML
+                    $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
+                    $mail->Password = 'w3kc1Gsigkau0BdDqzkH'; // SMTP password
 
-                        $mail->isHTML(true);                                  //Set email format to HTML
-                        $mail->Subject = 'Восстановление доступа';
-                        $mail->Body    = <<<END
+                    $mail->setFrom('wowcool2001@mail.ru');
+                    $mail->addAddress($email);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Восстановление доступа';
+                    $mail->Body    = <<<END
                         
-                        Восстановить пароль <a href="http
+                        Нажмить <a href="http://edu-portal/verify?token=$token">здесь</a> чтобы восстановить пароль
                         
                         END;
 
+                    try {
                         $mail->send();
-                        $errors['success'] =  'Ссылка на восстановление была отправлена!';
                     } catch (Exception $e) {
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
+                    $errors['success'] =  'Ссылка на восстановление была отправлена!';
                 }
             } catch (PDOException $e) {
                 $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;

@@ -3,8 +3,18 @@
 namespace App\App\Controllers;
 
 use App\App\Models\Password;
-use App\Config\Database;
 
-class PasswordController
+class PasswordController extends Password
 {
+    protected $password;
+
+    public function __construct()
+    {
+        $this->password = new Password();
+    }
+
+    public function sendLink()
+    {
+        return $this->password->sendLink();
+    }
 }
