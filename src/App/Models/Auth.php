@@ -134,9 +134,10 @@ class Auth
                         $mail->Subject = 'Регистрация Edu.Портал';
                         $mail->Body    = <<<END
                         
-                        <h1>Ваш код подтверждения $token</h1>
-                        
-                        END;
+<h1>Ваш код подтверждения $token</h1>
+
+END;
+
 
                         try {
                             var_dump($mail->send());
@@ -146,7 +147,7 @@ class Auth
                     }
                 }
             } catch (PDOException $e) {
-                $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;
+                $errors['db_error'] = 'Ошибка базы данных: ' . $e->getMessage();
             }
         }
         return $errors;

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 use App\App\Controllers\VerificationController;
 use App\App\Controllers\SessionController;

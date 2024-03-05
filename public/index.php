@@ -8,7 +8,7 @@ use App\Router\Router;
 
 $router = new Router();
 
-require_once __DIR__ . "/../src/router/routes.php";
+require_once __DIR__ . "/../src/Router/routes.php";
 
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 

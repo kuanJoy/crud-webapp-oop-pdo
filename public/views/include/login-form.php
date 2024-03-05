@@ -33,7 +33,7 @@
         </div>
         <button type="submit" name="login" class="auth__btn">Войти</button>
         <div class="auth__btns">
-            <a href="/reset" class="auth__link">Забыли пароль?</a>
+            <a href="/forget" class="auth__link">Забыли пароль?</a>
             <a href="/register" class="auth__link">Зарегистрироваться</a>
         </div>
     </form>

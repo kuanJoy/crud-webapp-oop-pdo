@@ -1,4 +1,11 @@
 <?php
+
+// use App\Router\Router;
+
+// require_once 'Router.php';
+
+// $router = new Router();
+
 $router->addRoute('GET', '/', 'views/home.php');
 $router->addRoute('POST', '/', 'views/home.php');
 $router->addRoute('GET', '/login', 'views/login.php');

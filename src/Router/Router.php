@@ -4,14 +4,15 @@ namespace App\Router;
 
 class Router
 {
-    private array $routes = [];
+    private $routes = [];
 
-    public function addRoute(string $method, string $path, mixed $callback): void
+    public function addRoute($method, $path, $callback)
     {
         $this->routes[$method][$path] = $callback;
     }
 
-    public function dispatch(string $uri, string $method): void
+
+    public function dispatch($uri, $method)
     {
         $callback = $this->findRoute($uri, $method);
 
@@ -28,7 +29,7 @@ class Router
         $callback();
     }
 
-    private function findRoute(string $uri, string $method): mixed
+    private function findRoute($uri, $method)
     {
         if (!isset($this->routes[$method])) {
             return false;
@@ -43,7 +44,7 @@ class Router
         return false;
     }
 
-    private function notFound(): void
+    private function notFound()
     {
         include_once __DIR__ . '/../../public/views/404.php';
     }
