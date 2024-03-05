@@ -114,8 +114,8 @@ class Auth
                         $mail->SMTPAuth = true; // Enable SMTP authentication
                         $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 
-                        $mail->Host = 'smtp.gmail.com'; // Specify main and backup SMTP servers
-                        $mail->Port = 587; // TCP port to connect to
+                        $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
+                        $mail->Port = 465; // TCP port to connect to
                         $mail->SMTPOptions = array(
                             'ssl' => array(
                                 'verify_peer' => false,
@@ -124,11 +124,10 @@ class Auth
                             )
                         );
                         $mail->isHTML(true); // Set email format to HTML
-                        $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
-                        $mail->Password = 'omgretard228'; // SMTP password
+                        $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
+                        $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
 
-
-                        $mail->setFrom('wowcool2001@mail.ru');
+                        $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
                         $mail->addAddress($email);
                         $mail->isHTML(true);
                         $mail->Subject = 'Регистрация Edu.Портал';
