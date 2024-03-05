@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.6.51 - MySQL Community Server (GPL)
+-- Версия сервера:               5.6.51-log - MySQL Community Server (GPL)
 -- Операционная система:         Win64
 -- HeidiSQL Версия:              12.1.0.6537
 -- --------------------------------------------------------
@@ -15,20 +15,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Дамп структуры базы данных edu
-CREATE DATABASE IF NOT EXISTS `edu` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
-USE `edu`;
+-- Дамп структуры базы данных bigidea
+CREATE DATABASE IF NOT EXISTS `bigidea` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+USE `bigidea`;
 
--- Дамп структуры для таблица edu.categories
+-- Дамп структуры для таблица bigidea.categories
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(70) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.categories: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.categories: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.comments
+-- Дамп структуры для таблица bigidea.comments
 CREATE TABLE IF NOT EXISTS `comments` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `post_id` int(255) DEFAULT '0',
@@ -42,18 +42,18 @@ CREATE TABLE IF NOT EXISTS `comments` (
   CONSTRAINT `fk_comments_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.comments: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.comments: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.hashtags
+-- Дамп структуры для таблица bigidea.hashtags
 CREATE TABLE IF NOT EXISTS `hashtags` (
   `id` int(250) NOT NULL AUTO_INCREMENT,
   `name` int(70) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.hashtags: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.posts
+-- Дамп структуры для таблица bigidea.posts
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(70) DEFAULT NULL,
@@ -69,9 +69,9 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.posts: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.posts: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.post_hashtags
+-- Дамп структуры для таблица bigidea.post_hashtags
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
   `post_id` int(255) DEFAULT NULL,
   `hashtag_id` int(255) DEFAULT NULL,
@@ -81,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.post_hashtags: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.post_likes
+-- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `post_id` int(255) DEFAULT '0',
@@ -95,9 +95,9 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.post_likes: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_likes: ~0 rows (приблизительно)
 
--- Дамп структуры для таблица edu.users
+-- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) DEFAULT NULL,
@@ -114,12 +114,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_email` (`email`),
   UNIQUE KEY `unique_username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы edu.users: ~2 rows (приблизительно)
+-- Дамп данных таблицы bigidea.users: ~1 rows (приблизительно)
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `remember_token`, `password_reset_at`, `created_at`, `verified`, `token`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'читатель', NULL, NULL, '2024-02-25 09:09:55', 'true', '8929894326d', NULL, NULL),
-	(9, 'dsaasdasd', 'sdaasdadsadsadsadsdads@mail.ru', '$2y$10$mQBgMl/2P7rZ0fyBjAcLk.GnKS5gxMfHC8L/V4uXkIJO4JePMKGkG', 'читатель', NULL, NULL, '2024-02-26 14:14:25', 'false', '130104013565', NULL, NULL);
+	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'читатель', NULL, NULL, '2024-02-25 09:09:55', 'true', '8929894326d', '0c94cc3f8f5ed8b8a60f3e85707f2c449405be40b8c18112acb874f43e4cf095', '2024-03-05 07:25:15');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
