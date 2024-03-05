@@ -8,7 +8,7 @@ $sessionDestroy->logout();
 
 <div class="header-bg">
     <header class="header container">
-        <div class="logo">Edu.Портал</div>
+        <div class="logo">Big.Idea</div>
         <div class="hamburger">
             <nav class="nav">
                 <li class="nav-item dropdown">

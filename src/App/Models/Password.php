@@ -85,12 +85,18 @@ class Password
                     } catch (Exception $e) {
                         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                     }
-                    $errors['success'] =  'Ссылка на восстановление была отправлена!';
+                    $errors['success'] = "На $email отправлено письмо для восстановления!";
+                } else {
+                    $errors['no-exist'] = "Такая почта не зарегистрирована или не существует";
                 }
             } catch (PDOException $e) {
                 $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;
             }
         }
         return $errors;
+    }
+
+    public function resetPassword()
+    {
     }
 }
