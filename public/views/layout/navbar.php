@@ -12,7 +12,7 @@ $sessionDestroy->logout();
         <div class="hamburger">
             <nav class="nav">
                 <li class="nav-item dropdown">
-                    <a class="nav-link nav__link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link nav__link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <svg class="icon i-category">
                             <use href="public/assets/images/svg/sprites.svg#category" />
                         </svg>
@@ -55,7 +55,10 @@ $sessionDestroy->logout();
                                 Избранное
                             </a>
                             <?php if (($_SESSION['role'] != 3)) : ?>
-                                <li><a class="dropdown-item" href="#">Добавить публикацию</a></li>
+                                <li><a class="dropdown-item" href="#">
+                                        <svg class="icon i-category">
+                                            <use href="public/assets/images/svg/sprites.svg#add" />
+                                        </svg>Добавить</a></li>
                             <?php endif; ?>
                             <li>
                                 <hr class="dropdown-divider">

@@ -77,7 +77,7 @@ a {
 }
 
 .container {
-  max-width: 70rem;
+  max-width: 59rem;
   margin: 0 auto;
 }
 
@@ -191,7 +191,7 @@ li {
 
 .banner {
   overflow: hidden;
-  padding: 2rem 0.875rem;
+  padding: 2rem 0rem;
   margin: 0 auto;
 }
 .banner__card {
@@ -238,14 +238,14 @@ li {
 }
 
 .hashtags {
+  padding-top: 1rem;
   position: relative;
-  top: 4rem;
-  margin-bottom: 4rem;
   display: flex;
   justify-content: center;
-  gap: 0.4rem;
-  overflow: hidden;
-  padding: 0px 0.875rem;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  max-width: 59rem;
+  margin: 0 auto;
 }
 
 .hashtag {
@@ -262,13 +262,10 @@ li {
   justify-content: center;
   flex-shrink: 1;
   white-space: nowrap;
+  flex-grow: 1;
+  min-width: 0;
 }
 
-@keyframes slideLeft {
-  100% {
-    transform: translate(50%);
-  }
-}
 .auth {
   margin: 0 auto;
   padding: 2rem 0rem;

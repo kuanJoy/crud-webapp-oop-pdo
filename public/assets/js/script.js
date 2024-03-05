@@ -9,15 +9,6 @@ const swiper = new Swiper(".mySwiper", {
   speed: 800
 });
 
-
-const swHashtags = new Swiper(".hashtags", {
-  slidesPerView: "auto",
-  spaceBetween: 10,
-  loop: true,
-  speed: 800
-});
-
-
 // CKEDITOR
 ClassicEditor.create(document.querySelector("#content"), {
   ckfinder: {

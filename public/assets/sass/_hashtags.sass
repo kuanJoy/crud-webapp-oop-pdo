@@ -1,12 +1,12 @@
 .hashtags
+    padding-top: 1rem
     position: relative
-    top: 4rem
-    margin-bottom: 4rem
     display: flex
     justify-content: center
-    gap: 0.4rem
-    overflow: hidden
-    padding: 0px 0.875rem
+    flex-wrap: wrap
+    gap: 0.8rem
+    max-width: 59rem
+    margin: 0 auto
 .hashtag
     font-size: $fz13
     padding: .3125rem .5rem
@@ -21,7 +21,5 @@
     justify-content: center
     flex-shrink: 1
     white-space: nowrap
-
-@keyframes slideLeft
-    100%
-        transform: translate(calc(100% / 2))
+    flex-grow: 1
+    min-width: 0
