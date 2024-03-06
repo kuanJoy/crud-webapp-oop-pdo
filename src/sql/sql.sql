@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.6.51-log - MySQL Community Server (GPL)
+-- Версия сервера:               5.6.51 - MySQL Community Server (GPL)
 -- Операционная система:         Win64
 -- HeidiSQL Версия:              12.1.0.6537
 -- --------------------------------------------------------
@@ -116,9 +116,11 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `unique_username` (`username`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.users: ~1 rows (приблизительно)
+-- Дамп данных таблицы bigidea.users: ~3 rows (приблизительно)
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `remember_token`, `password_reset_at`, `created_at`, `verified`, `token`, `reset_token_hash`, `reset_token_expires_at`) VALUES
-	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'читатель', NULL, NULL, '2024-02-25 09:09:55', 'true', '8929894326d', '0c94cc3f8f5ed8b8a60f3e85707f2c449405be40b8c18112acb874f43e4cf095', '2024-03-05 07:25:15');
+	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'читатель', NULL, NULL, '2024-02-25 09:09:55', 'true', '5433', 'bc32c0fe1adbd9c8aa66c2712d4e408903b048b2d8300d08253795289020a0b9', '2024-03-06 17:11:58'),
+	(9, 'dsaasdasd', 'sdaasdadsadsadsadsdads@mail.ru', '$2y$10$mQBgMl/2P7rZ0fyBjAcLk.GnKS5gxMfHC8L/V4uXkIJO4JePMKGkG', 'читатель', NULL, NULL, '2024-02-26 14:14:25', 'false', '5552', NULL, NULL),
+	(10, 'wowcool', 'wowcool2001@mail.ru', '$2y$10$i1mkJXML.IWxuJVJbxDTEOeB6eSPwKuSzQ3afvz5DRtBzQ.KbvWM6', 'читатель', NULL, NULL, '2024-03-06 14:14:10', 'true', '5779', NULL, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

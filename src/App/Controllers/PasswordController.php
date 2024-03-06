@@ -3,6 +3,7 @@
 namespace App\App\Controllers;
 
 use App\App\Models\Password;
+use App\Config\Database;
 
 class PasswordController extends Password
 {
@@ -10,11 +11,22 @@ class PasswordController extends Password
 
     public function __construct()
     {
-        $this->password = new Password();
+        $db = new Database();
+        $this->password = new Password($db);
     }
 
     public function sendLink()
     {
-        return $this->password->sendLink();
+        if (isset($_POST['sendLink'])) { {
+                return $this->password->sendLink();
+            }
+        }
+    }
+
+    public function checkToken()
+    {
+        if (isset($_GET['token'])) {
+            return $this->password->chechToken();
+        }
     }
 }

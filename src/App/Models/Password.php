@@ -8,94 +8,114 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-
-
 class Password
 {
     protected $db;
 
-    public function __construct()
+    public function __construct(Database $db)
     {
-        $this->db = new Database();
+        $this->db = $db;
     }
 
     public function sendLink()
     {
         $errors = [];
-        if (isset($_POST['sendLink'])) {
-            $email = $_POST['email'];
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $errors['email'] = 'Неправильная почта';
-            }
+        $email = $_POST['email'];
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errors['email'] = 'Неправильная почта';
+        }
 
-            try {
-                $sql = "SELECT * FROM users WHERE email = :email";
+        try {
+            $sql = "SELECT * FROM users WHERE email = :email";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':email', $email);
+            $stmt->execute();
+            $result = $stmt->fetch();
+
+            if ($result) {
+                $token = bin2hex(random_bytes(16));
+                $token_hash = hash("sha256", $token);
+
+                $expire = date("Y-m-d H:i:s", strtotime("+12 hours"));
+
+                $sql = "UPDATE users SET reset_token_hash = :token_hash, reset_token_expires_at = :expire WHERE email = :email";
+
                 $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindParam(':token_hash', $token_hash);
+                $stmt->bindParam(':expire', $expire);
                 $stmt->bindParam(':email', $email);
                 $stmt->execute();
-                $result = $stmt->fetch();
 
-                if ($result) {
-                    $token = bin2hex(random_bytes(16));
-                    $token_hash = hash("sha256", $token);
+                $mail = new PHPMailer(true);
 
-                    $expire = date("Y-m-d H:i:s", time() + 60 * 30);
+                $mail->CharSet = "utf-8"; // set charset to utf8
+                $mail->SMTPAuth = true; // Enable SMTP authentication
+                $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
 
-                    $sql = "UPDATE users SET reset_token_hash = :token_hash, reset_token_expires_at = :expire WHERE email = :email";
+                $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
+                $mail->Port = 465; // TCP port to connect to
+                $mail->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true
+                    )
+                );
+                $mail->isHTML(true); // Set email format to HTML
+                $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
+                $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
 
-                    $stmt = $this->db->getConnection()->prepare($sql);
-                    $stmt->bindParam(':token_hash', $token_hash);
-                    $stmt->bindParam(':expire', $expire);
-                    $stmt->bindParam(':email', $email);
-                    $stmt->execute();
+                $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
+                $mail->addAddress($email);
 
-                    $mail = new PHPMailer(true);
+                $mail->isHTML(true);
+                $mail->Subject = 'Восстановление доступа';
+                //                 $mail->Body    = <<<END
 
-                    $mail->CharSet = "utf-8"; // set charset to utf8
-                    $mail->SMTPAuth = true; // Enable SMTP authentication
-                    $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
+                //                         Нажмить <a href="http://bigidea.edu.kg/reset?token=$token">здесь</a> чтобы восстановить пароль
 
-                    $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
-                    $mail->Port = 465; // TCP port to connect to
-                    $mail->SMTPOptions = array(
-                        'ssl' => array(
-                            'verify_peer' => false,
-                            'verify_peer_name' => false,
-                            'allow_self_signed' => true
-                        )
-                    );
-                    $mail->isHTML(true); // Set email format to HTML
-                    $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
-                    $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
-
-                    $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
-                    $mail->addAddress($email);
-
-                    $mail->isHTML(true);
-                    $mail->Subject = 'Восстановление доступа';
-                    $mail->Body    = <<<END
-
-                        Нажмить <a href="http://bigidea.edu.kg/verify?token=$token">здесь</a> чтобы восстановить пароль
-                        
+                // END;
+                $mail->Body    = <<<END
+                        Нажмить <a href="http://big-idea/reset?token=$token">здесь</a> чтобы восстановить пароль
 END;
-
-                    try {
-                        $mail->send();
-                    } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
-                    }
-                    $errors['success'] = "На $email отправлено письмо для восстановления!";
-                } else {
-                    $errors['no-exist'] = "Такая почта не зарегистрирована или не существует";
+                try {
+                    $mail->send();
+                } catch (Exception $e) {
+                    echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
                 }
-            } catch (PDOException $e) {
-                $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();;
+                $errors['success'] = "На $email отправлено письмо для восстановления!";
+            } else {
+                $errors['no-exist'] = "Такая почта не зарегистрирована или не существует";
             }
+        } catch (PDOException $e) {
+            $errors['db_error'] = 'Ошибка базы данных: ' . $e->getMessage();
         }
         return $errors;
     }
 
-    public function resetPassword()
+    // ================== RESET PASSWORD ===============
+    public function chechToken()
     {
+        $errors = [];
+        try {
+            $tokenCheck = "SELECT * FROM users WHERE reset_token_hash = :reset_token_hash";
+            $stmt = $this->db->getConnection()->prepare($tokenCheck);
+            $stmt->bindParam(':reset_token_hash', hash("sha256", $_GET['token']));
+            $stmt->execute();
+            $result = $stmt->fetch();
+
+            if ($result) {
+                if (strtotime($result['reset_token_expires_at']) <= time()) {
+                    $errors['exipred'] = "Ссылка больше недействительна.";
+                } else {
+                    header("Location: /reset-process");
+                }
+            } else {
+                $errors['not-found'] = "Ссылка недействительна.";
+            }
+        } catch (PDOException $e) {
+            $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();
+        }
+        return $errors;
     }
 }

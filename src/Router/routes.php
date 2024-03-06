@@ -16,3 +16,5 @@ $router->addRoute('GET', '/verify', 'views/verify.php');
 $router->addRoute('POST', '/verify', 'views/verify.php');
 $router->addRoute('GET', '/forget', 'views/forget.php');
 $router->addRoute('POST', '/forget', 'views/forget.php');
+$router->addRoute('GET', '/reset', 'views/reset.php');
+$router->addRoute('POST', '/reset', 'views/reset.php');

@@ -12,5 +12,5 @@ $errors = $passwordReset->sendLink();
 
 
 include __DIR__ . "/layout/header.php";
-include __DIR__ . "/include/reset.php";
+include __DIR__ . "/include/forget.php";
 include __DIR__ . "/layout/footer.php";

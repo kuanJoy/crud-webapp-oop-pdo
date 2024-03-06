@@ -18,12 +18,17 @@ class AuthController
     // ЛОГИН
     public function login()
     {
-        return $this->authModel->login();
+        if (isset($_POST['login'])) {
+            return $this->authModel->login();
+        }
     }
 
     // РЕГИСТРАЦИЯ
     public function register()
     {
-        return $this->authModel->register();
+        if (isset($_POST['register'])) { {
+                return $this->authModel->register();
+            }
+        }
     }
 }
