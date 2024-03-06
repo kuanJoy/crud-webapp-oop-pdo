@@ -130,7 +130,7 @@ class Auth
                         $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
                         $mail->addAddress($email);
                         $mail->isHTML(true);
-                        $mail->Subject = 'Регистрация Edu.Портал';
+                        $mail->Subject = 'Регистрация Big.Idea';
                         $mail->Body    = <<<END
                         
 <h1>Ваш код подтверждения $token</h1>
@@ -141,7 +141,7 @@ END;
                         try {
                             var_dump($mail->send());
                         } catch (Exception $e) {
-                            echo "Сообщение не было отправлено. Ошибка почты: {$mail->ErrorInfo}";
+                            echo "Сообщение не было отправлено. Ошибка почты: " . $mail->ErrorInfo;
                         }
                     }
                 }
