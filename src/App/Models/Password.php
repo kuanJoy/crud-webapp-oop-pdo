@@ -8,7 +8,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-// require_once __DIR__ . "/../../config/mailer.php";
 
 
 class Password
@@ -75,15 +74,15 @@ class Password
                     $mail->isHTML(true);
                     $mail->Subject = 'Восстановление доступа';
                     $mail->Body    = <<<END
+
+                        Нажмить <a href="http://bigidea.edu.kg/verify?token=$token">здесь</a> чтобы восстановить пароль
                         
-                        Нажмить <a href="http://edu-portal/verify?token=$token">здесь</a> чтобы восстановить пароль
-                        
-                        END;
+END;
 
                     try {
                         $mail->send();
                     } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
                     }
                     $errors['success'] = "На $email отправлено письмо для восстановления!";
                 } else {
