@@ -17,9 +17,8 @@ class PasswordController
 
     public function sendLink()
     {
-        if (isset($_POST['sendLink'])) { {
-                return $this->password->sendLink();
-            }
+        if (isset($_POST['sendLink'])) {
+            return $this->password->sendLink();
         }
     }
 
@@ -27,6 +26,13 @@ class PasswordController
     {
         if (isset($_GET['token'])) {
             return $this->password->checkToken();
+        }
+    }
+
+    public function resetPassword()
+    {
+        if (isset($_POST['resetPass'])) {
+            return $this->password->resetPassword();
         }
     }
 }

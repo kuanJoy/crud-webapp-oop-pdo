@@ -9,6 +9,7 @@ $verification->redirectIfNoToken();
 $password = new PasswordController;
 $errors = $password->checkToken();
 $errors_sendLink = $password->sendLink();
+$errors_resetPassword = $password->resetPassword();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/include/reset.php";

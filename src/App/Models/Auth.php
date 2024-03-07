@@ -51,6 +51,10 @@ class Auth
                 $errors['pass-match'] = "Пароли не совпадают";
             }
 
+            if (!preg_match('/^(?=.*\d)[0-9a-zA-Z]{6,15}$/', $password)) {
+                $errors["length-pass"] = "Длина пароля должна быть от 6 до 15 символов. Пароль должен содержать как минимум одну цифру.";
+            }
+
             // Проверка на существующий емейл
             $emailCheck = "SELECT * FROM users WHERE email=?";
             $stmt = $this->db->getConnection()->prepare($emailCheck);
@@ -167,7 +171,7 @@ END;
                 $errors['pass'] = "Введите пароль";
             }
 
-            $sql = "SELECT * FROM users WHERE id = :email OR username = :username";
+            $sql = "SELECT * FROM users WHERE email = :email OR username = :username";
             $stmt = $this->db->getConnection()->prepare($sql);
 
             $stmt->execute([

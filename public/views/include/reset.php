@@ -9,28 +9,34 @@
             </a>
         </div>
         <?php
-        if (isset($errors) && empty($errors['success'])) :
+        if (!empty($errors) && !isset($errors['success'])) :
             foreach ($errors as $error) : ?>
+                <span class="err"> <?= $error ?></span>
+        <?php endforeach;
+        endif; ?>
+        <?php
+        if (isset($errors_resetPassword)) :
+            foreach ($errors_resetPassword as $error) : ?>
                 <span class="err"> <?= $error ?></span>
         <?php endforeach;
         endif; ?>
         <?php if (isset($errors['success'])) : ?>
             <input type="hidden" name="token" value="<?php if (isset($_GET['token'])) {
-                                                            htmlspecialchars($_GET['token']);
+                                                            echo htmlspecialchars($_GET['token']);
                                                         } ?>">
             <div class="auth__input-box">
                 <svg class="auth__icon">
                     <use href="public/assets/images/svg/sprites.svg#key" />
                 </svg>
-                <input name="pass" class="auth__input" type="text" placeholder="Пароль">
+                <input name="pass" class="auth__input" type="password" placeholder="Пароль">
             </div>
             <div class="auth__input-box">
                 <svg class="auth__icon">
                     <use href="public/assets/images/svg/sprites.svg#key" />
                 </svg>
-                <input name="repass" class="auth__input" type="text" placeholder="Повторите пароль">
+                <input name="repass" class="auth__input" type="password" placeholder="Повторите пароль">
             </div>
-            <button type="submit" name="changePass" class="auth__btn">Поменять пароль</button>
+            <button type="submit" name="resetPass" class="auth__btn">Поменять пароль</button>
         <?php endif; ?>
         <?php if (!empty($errors_sendLink)) : ?>
             <h3 class="auth__title">

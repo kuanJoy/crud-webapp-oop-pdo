@@ -17,7 +17,7 @@
                 <span class="err"> <?= $error ?></span>
         <?php endforeach;
         endif; ?>
-        <?php if (!empty($errors)) : ?>
+        <?php if (!empty($errors) && isset($errors['success'])) : ?>
             <h3 class="auth__title">
                 <?= $errors['success'] ?>
             </h3>

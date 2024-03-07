@@ -114,7 +114,6 @@ END;
             $stmt->execute();
             $result = $stmt->fetch();
 
-
             if ($result) {
                 if (strtotime($result['reset_token_expires_at']) <= time()) {
                     $errors['expired'] = "Срок ссылки истёк";
@@ -125,6 +124,61 @@ END;
                 }
             } else {
                 $errors['not-found'] = "Ссылка недействительна";
+            }
+        } catch (PDOException $e) {
+            $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();
+        }
+        return $errors;
+    }
+
+    public function resetPassword()
+    {
+        $errors = [];
+        try {
+            $password = $_POST['pass'];
+            $repass = $_POST['repass'];
+            $token = $_POST['token'];
+
+            var_dump($_POST);
+
+            if (empty($password)) {
+                $errors['pass'] = "Введите пароль";
+            }
+
+            if (empty($repass)) {
+                $errors['repass'] = "Повторите пароль";
+            }
+
+            if (!preg_match('/^(?=.*\d)[0-9a-zA-Z]{6,15}$/', $password)) {
+                $errors["length-pass"] = "Длина пароля должна быть от 6 до 15 символов. Пароль должен содержать как минимум одну цифру.";
+            }
+
+            if ($password !== $repass) {
+                $errors['pass-match'] = "Пароли не совпадают";
+            }
+
+            $sql = "SELECT * FROM users WHERE reset_token_hash = :reset_token_hash";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(":reset_token_hash", hash("sha256", $token));
+            $stmt->execute();
+
+            $user = $stmt->fetch();
+            if (isset($user)) {
+                $hashedPass = password_hash($password, PASSWORD_DEFAULT);
+                $sql = "UPDATE users SET password = :hashedPass, 
+                password_reset_at = :password_reset_at, 
+                reset_token_hash = NULL, 
+                reset_token_expires_at = NULL
+                WHERE id = :id";
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindParam(":hashedPass", $hashedPass);
+                $stmt->bindParam(":password_reset_at", date("Y-m-d H:i:s"));
+                $stmt->bindParam(":id", intval($user['id']));
+
+                if ($stmt->execute()) {
+                    $_SESSION['success-reset'] = "Пароль успешно обновлён";
+                    header("Location: /login");
+                }
             }
         } catch (PDOException $e) {
             $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();

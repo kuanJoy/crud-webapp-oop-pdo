@@ -19,6 +19,11 @@
                 <?php endforeach ?>
             </ul>
         <? endif; ?>
+        <?php if (isset($_SESSION['success-reset'])) : ?>
+            <h3 class="auth__title">
+                <?= $_SESSION['success-reset'] ?>
+            </h3>
+        <?php endif; ?>
         <div class="auth__input-box">
             <svg class="auth__icon">
                 <use href="public/assets/images/svg/sprites.svg#user" />
