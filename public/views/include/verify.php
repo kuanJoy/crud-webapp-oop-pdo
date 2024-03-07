@@ -14,6 +14,11 @@
         if (!empty($error)) : ?>
             <span class="err"> <?= $error ?></span>
         <?php endif; ?>
+        <?php if (isset($error_sendToken['success'])) : ?>
+            <h3 class="auth__title">
+                <?= $error_sendToken['success'] ?>
+            </h3>
+        <? endif; ?>
         <div class="auth__input-box">
             <svg class="auth__icon">
                 <use href="public/assets/images/svg/sprites.svg#key" />
@@ -21,5 +26,6 @@
             <input name="token" class="auth__input" type="text" placeholder="код подтверждения">
         </div>
         <button type="submit" name="checkToken" class="auth__btn">Проверить код</button>
+        <button type="submit" name="sendToken" class="auth__btn">Отправить код еще раз</button>
     </form>
 </div>

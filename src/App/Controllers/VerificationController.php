@@ -5,6 +5,7 @@ namespace App\App\Controllers;
 use App\App\Models\Verification;
 use App\Config\Database;
 
+
 class VerificationController
 {
     protected $verification;
@@ -46,5 +47,12 @@ class VerificationController
     {
         $db = new Database();
         return $this->verification->verifyEmailToken($db);
+    }
+
+    public function sendToken()
+    {
+        if (isset($_POST['sendToken'])) {
+            return $this->verification->sendToken();
+        }
     }
 }

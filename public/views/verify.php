@@ -7,6 +7,7 @@ $verification = new VerificationController;
 $verification->redirectGuest();
 $verification->redirectUser();
 $error = $verification->verifyEmailToken();
+$error_sendToken = $verification->sendToken();
 
 
 $sessionDestroy = new SessionController;

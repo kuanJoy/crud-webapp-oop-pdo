@@ -90,6 +90,7 @@ END;
                 try {
                     $mail->send();
                     $_SESSION['email_temp'] = $email;
+                    $_SESSION['next_available_reset'] = time();
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
                 }
