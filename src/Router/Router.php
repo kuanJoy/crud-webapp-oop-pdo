@@ -31,6 +31,11 @@ class Router
 
     private function findRoute($uri, $method)
     {
+        $queryString = strpos($uri, '?');
+        if ($queryString !== false) {
+            $uri = substr($uri, 0, $queryString);
+        }
+
         if (!isset($this->routes[$method])) {
             return false;
         }
@@ -43,6 +48,7 @@ class Router
 
         return false;
     }
+
 
     private function notFound()
     {

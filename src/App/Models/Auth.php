@@ -98,11 +98,10 @@ class Auth
                     $_SESSION['username'] = $username;
                     $_SESSION['email'] = $email;
                     $_SESSION['role'] = 3;
-                    $_SESSION['verified'] = 1;
+                    $_SESSION['verified'] = 'false';
                     $_SESSION['token'] = $token;
 
                     $mail = new PHPMailer(true);
-
 
                     $mail->CharSet = "utf-8"; // set charset to utf8
                     $mail->SMTPAuth = true; // Enable SMTP authentication
@@ -110,6 +109,16 @@ class Auth
 
                     $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
                     $mail->Port = 465; // TCP port to connect to
+                    $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
+                    $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
+                    $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
+
+                    // $mail->Host = 'smtp.mail.ru'; // Specify main and backup SMTP servers
+                    // $mail->Port = 587; // TCP port to connect to
+                    // $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
+                    // $mail->Password = 'w3kc1Gsigkau0BdDqzkH'; // SMTP password
+                    // $mail->setFrom('wowcool2001@mail.ru');
+
                     $mail->SMTPOptions = array(
                         'ssl' => array(
                             'verify_peer' => false,
@@ -118,10 +127,7 @@ class Auth
                         )
                     );
                     $mail->isHTML(true); // Set email format to HTML
-                    $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
-                    $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
 
-                    $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
                     $mail->addAddress($email);
                     $mail->isHTML(true);
                     $mail->Subject = 'Регистрация Big.Idea';

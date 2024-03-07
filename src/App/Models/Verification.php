@@ -16,7 +16,7 @@ class Verification
     // Перенаправление если Email не подтвержден
     public function redirectToVerifyEmail()
     {
-        if (isset($_SESSION['id_user']) && $_SESSION['verified'] === 1) {
+        if (isset($_SESSION['id_user']) && $_SESSION['verified'] === 'false') {
             header("Location: /verify");
         }
     }
@@ -32,7 +32,7 @@ class Verification
     // Перенаправление если Юзер
     public function redirectUser()
     {
-        if (isset($_SESSION['id_user']) && $_SESSION['verified'] === 2) {
+        if (isset($_SESSION['id_user']) && $_SESSION['verified'] === 'true') {
             header("Location: /");
         }
     }

@@ -2,10 +2,10 @@
 
 namespace App\App\Controllers;
 
-use App\App\Models\Password;
 use App\Config\Database;
+use App\App\Models\Password;
 
-class PasswordController extends Password
+class PasswordController
 {
     protected $password;
 
@@ -26,7 +26,7 @@ class PasswordController extends Password
     public function checkToken()
     {
         if (isset($_GET['token'])) {
-            return $this->password->chechToken();
+            return $this->password->checkToken();
         }
     }
 }

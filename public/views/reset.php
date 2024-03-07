@@ -4,11 +4,11 @@ use App\App\Controllers\VerificationController;
 use App\App\Controllers\PasswordController;
 
 $verification = new VerificationController();
-$verification->redirectToVerifyEmail();
-$verification->redirectUser();
+$verification->redirectIfNoToken();
 
 $password = new PasswordController;
-$errors = $password->chechToken();
+$errors = $password->checkToken();
+$errors_sendLink = $password->sendLink();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/include/reset.php";

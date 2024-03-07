@@ -32,6 +32,15 @@ class VerificationController
         $this->verification->redirectUser();
     }
 
+    public function redirectIfNoToken()
+    {
+        if (empty($_GET['token'])) {
+            $this->verification->redirectToVerifyEmail();
+            $this->verification->redirectGuest();
+            $this->verification->redirectUser();
+        }
+    }
+
     // Подтверждение токена в verify.php
     public function verifyEmailToken()
     {

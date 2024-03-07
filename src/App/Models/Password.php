@@ -54,6 +54,17 @@ class Password
 
                 $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
                 $mail->Port = 465; // TCP port to connect to
+                $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
+                $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
+                $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
+
+
+                // $mail->Host = 'smtp.mail.ru'; // Specify main and backup SMTP servers
+                // $mail->Port = 587; // TCP port to connect to
+                // $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
+                // $mail->Password = 'w3kc1Gsigkau0BdDqzkH'; // SMTP password
+                // $mail->setFrom('wowcool2001@mail.ru');
+
                 $mail->SMTPOptions = array(
                     'ssl' => array(
                         'verify_peer' => false,
@@ -62,14 +73,12 @@ class Password
                     )
                 );
                 $mail->isHTML(true); // Set email format to HTML
-                $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
-                $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
 
-                $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
                 $mail->addAddress($email);
 
                 $mail->isHTML(true);
                 $mail->Subject = 'Восстановление доступа';
+
                 //                 $mail->Body    = <<<END
 
                 //                         Нажмить <a href="http://bigidea.edu.kg/reset?token=$token">здесь</a> чтобы восстановить пароль
@@ -80,6 +89,7 @@ class Password
 END;
                 try {
                     $mail->send();
+                    $_SESSION['email_temp'] = $email;
                 } catch (Exception $e) {
                     echo "Message could not be sent. Mailer Error: " . $mail->ErrorInfo;
                 }
@@ -94,7 +104,7 @@ END;
     }
 
     // ================== RESET PASSWORD ===============
-    public function chechToken()
+    public function checkToken()
     {
         $errors = [];
         try {
@@ -104,14 +114,17 @@ END;
             $stmt->execute();
             $result = $stmt->fetch();
 
+
             if ($result) {
                 if (strtotime($result['reset_token_expires_at']) <= time()) {
-                    $errors['exipred'] = "Ссылка больше недействительна.";
+                    $errors['expired'] = "Срок ссылки истёк";
+                    // закинем еще раз для переотправки нового токена. если срок истек, на случай если зашел в другого устройства
+                    $_SESSION['email_temp'] = $result['email'];
                 } else {
-                    header("Location: /reset-process");
+                    $errors['success'] = true;
                 }
             } else {
-                $errors['not-found'] = "Ссылка недействительна.";
+                $errors['not-found'] = "Ссылка недействительна";
             }
         } catch (PDOException $e) {
             $errors['db_error'] = "Ошибка базы данных:" . $e->getMessage();
