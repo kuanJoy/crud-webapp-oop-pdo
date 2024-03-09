@@ -5,6 +5,7 @@
 // require_once 'Router.php';
 
 // $router = new Router();
+$id = '{id}';
 
 $router->addRoute('GET', '/', 'views/home.php');
 $router->addRoute('POST', '/', 'views/home.php');
@@ -20,5 +21,8 @@ $router->addRoute('GET', '/reset', 'views/reset.php');
 $router->addRoute('POST', '/reset', 'views/reset.php');
 $router->addRoute('GET', '/create-post', 'views/post-create.php');
 $router->addRoute('POST', '/create-post', 'views/post-create.php');
+$router->addRoute('GET', "/post/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/post.php";
+});
 $router->addRoute('GET', '/edit-post', 'views/posts-edit.php');
 $router->addRoute('POST', '/edit-post', 'views/posts-edit.php');

@@ -144,6 +144,7 @@ END;
 
                     try {
                         $mail->send();
+                        header("Location: /verify");
                     } catch (Exception $e) {
                         echo "Сообщение не было отправлено. Ошибка почты: " . $mail->ErrorInfo;
                     }

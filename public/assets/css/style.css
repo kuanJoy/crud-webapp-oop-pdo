@@ -205,6 +205,9 @@ li {
   max-width: 60rem;
   width: 100%;
   min-width: 15rem;
+  flex-shrink: 1;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .card__img {
@@ -231,10 +234,16 @@ li {
   align-items: flex-start;
   width: 50%;
   z-index: 9;
+  min-height: 12.5rem;
 }
 .card__content-title {
   font-weight: 700;
   font-size: clamp(1.5rem, 0.3542rem + 0.7778vw, 2rem);
+  min-height: 3.125rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .card__content-desc {
   display: -webkit-box;

@@ -15,6 +15,12 @@ class PostController
         $this->postModel = new Post($db);
     }
 
+    public function getPostById()
+    {
+        $postId = basename($_SERVER['REQUEST_URI']);
+        return $this->postModel->getPostById($postId);
+    }
+
     public function getPosts()
     {
         return $this->postModel->getPosts();
@@ -64,8 +70,8 @@ class PostController
 
             if (empty($description)) {
                 $errors["description"] = "Описание не может быть пустым";
-            } elseif ((!preg_match('/^.{3,100}$/u', $description))) {
-                $errors["description"] = "Длина описания от 3 до 100 символов";
+            } elseif ((!preg_match('/^.{3,255}$/u', $description))) {
+                $errors["description"] = "Длина описания от 3 до 255 символов";
             } else {
                 $description = trim($description);
             }

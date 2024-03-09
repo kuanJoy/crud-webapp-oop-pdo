@@ -14,6 +14,16 @@ class Post
         $this->db = $db;
     }
 
+    public function getPostById($id)
+    {
+        $sql = "SELECT * FROM posts WHERE id = :id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
     public function getPosts()
     {
         $sql = "SELECT * FROM posts";
@@ -40,13 +50,14 @@ class Post
                 LEFT JOIN posts ON post_hashtags.post_id = posts.id
                 LEFT JOIN post_likes ON posts.id = post_likes.post_id
                 GROUP BY hashtags.id
-                ORDER BY likes_count DESC";
+                ORDER BY likes_count DESC
+                LIMIT 20";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM categories ORDER BY categories.name asc";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 

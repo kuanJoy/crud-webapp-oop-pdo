@@ -11,22 +11,33 @@ class Router
         $this->routes[$method][$path] = $callback;
     }
 
+    private function handleRouteWithId($callback, $id)
+    {
+        $callback($id);
+    }
 
     public function dispatch($uri, $method)
     {
-        $callback = $this->findRoute($uri, $method);
+        $route = $this->findRoute($uri, $method);
 
-        if ($callback === false) {
+        if ($route === false) {
             $this->notFound();
             return;
         }
 
-        if (is_string($callback)) {
-            include_once __DIR__ . '/../../public/' . $callback;
+        if (is_array($route)) {
+            $callback = $route[0];
+            $id = $route[1];
+            $this->handleRouteWithId($callback, $id);
             return;
         }
 
-        $callback();
+        if (is_string($route)) {
+            include_once __DIR__ . '/../../public/' . $route;
+            return;
+        }
+
+        $route();
     }
 
     private function findRoute($uri, $method)
@@ -41,7 +52,13 @@ class Router
         }
 
         foreach ($this->routes[$method] as $route => $callback) {
-            if ($uri === $route) {
+            if (strpos($route, '{id}') !== false) {
+                $pattern = str_replace('{id}', '(\d+)', $route);
+                if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
+                    $id = $matches[1];
+                    return [$callback, $id];
+                }
+            } elseif ($uri === $route) {
                 return $callback;
             }
         }

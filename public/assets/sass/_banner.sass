@@ -9,6 +9,9 @@
         max-width: 60rem
         width: 100%
         min-width: 15rem
+        flex-shrink: 1
+        flex-grow: 1
+        min-width: 0
 .card
     &__img
         position: absolute
@@ -32,9 +35,15 @@
         align-items: flex-start
         width: 50%
         z-index: 9
+        min-height: 12.5rem
         &-title
             font-weight: 700
             font-size: $fz32
+            min-height: 3.125rem
+            display: -webkit-box
+            -webkit-line-clamp: 3
+            -webkit-box-orient: vertical
+            overflow: hidden
         &-desc
             display: -webkit-box
             -webkit-line-clamp: 4

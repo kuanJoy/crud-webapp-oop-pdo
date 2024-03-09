@@ -24,14 +24,17 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(70) NOT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.categories: ~4 rows (приблизительно)
+-- Дамп данных таблицы bigidea.categories: ~7 rows (приблизительно)
 INSERT INTO `categories` (`id`, `name`) VALUES
 	(1, 'История'),
 	(2, 'География'),
 	(3, 'Биология'),
-	(4, 'Экономика');
+	(4, 'Экономика'),
+	(5, 'Математика'),
+	(6, 'Психология'),
+	(7, 'Искусство');
 
 -- Дамп структуры для таблица bigidea.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -52,24 +55,26 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- Дамп структуры для таблица bigidea.hashtags
 CREATE TABLE IF NOT EXISTS `hashtags` (
   `id` int(250) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.hashtags: ~6 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~4 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
-	(1, 'воины'),
-	(2, 'микробы'),
-	(3, 'реки'),
-	(4, 'мореплавание'),
-	(5, 'путешественники'),
-	(6, 'деньги');
+	(27, 'Египет'),
+	(28, 'Древний Мир'),
+	(29, 'сражения'),
+	(30, 'войны'),
+	(31, 'земля'),
+	(32, 'экосистемы'),
+	(33, 'Чудеса света'),
+	(34, 'Постройки');
 
 -- Дамп структуры для таблица bigidea.posts
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(70) DEFAULT NULL,
-  `description` varchar(100) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `content` text,
   `status` enum('активен','скрыт') DEFAULT NULL,
   `category_id` int(255) DEFAULT NULL,
@@ -80,13 +85,14 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `fk_posts_user_id` (`user_id`),
   CONSTRAINT `fk_posts_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.posts: ~3 rows (приблизительно)
+-- Дамп данных таблицы bigidea.posts: ~2 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`) VALUES
-	(1, 'СТАТЬЯ 1', 'ОПИСАНИЕ КРАТКОЕ', 'СОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕ', 'активен', 1, 8, 'public/assets/images/upload/default_pic.jpg'),
-	(2, 'СТАТЬЯ 2', 'Описание 2 2 2 2 2', 'СОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕ', 'активен', 2, 8, 'public/assets/images/upload/default_pic.jpg'),
-	(3, 'СТАТЬЯ 3', 'ОПИСАНИЕ 33333333333', 'СОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕСОДЕРЖИМОЕ', 'активен', NULL, NULL, 'public/assets/images/upload/default_pic.jpg');
+	(21, 'Великая история древнего Египта', 'Погружаемся в древнюю историю великой цивилизации Египта, изучаем его культуру, архитектуру и фараон', '<p>Египет - одна из старейших цивилизаций мира, известная своими пирамидами, сфинксами и фараонами. В этой статье мы рассмотрим основные моменты истории древнего Египта, начиная с периода Древнего царства и заканчивая периодом Позднего периода</p>', 'активен', 1, 8, './assets/images/upload/65ec940258bd8.jpg'),
+	(22, 'Великие битвы мировой истории', 'Изучаем ключевые битвы, которые сыграли решающую роль в истории человечества и оказали огромное влия', '<p>Мировая история богата великими сражениями, которые определяли судьбы наций и целых континентов. От битвы при Марафоне до битвы за Сталинград - мы рассмотрим ключевые моменты и последствия некоторых из наиболее знаменитых битв в истории</p>', 'активен', 1, 8, './assets/images/upload/65ec9474d68ac.jpg'),
+	(23, 'Исследуем диверситет природы: наши мировые биомы', 'Путешествуем по различным биомам нашей планеты и изучаем их уникальные особенности и экосистемы', '<p>Земля обладает удивительным разнообразием биомов, включая леса, тундру, пустыни, травянистые равнины и морские экосистемы. В этой статье мы рассмотрим каждый биом, его особенности и животный и растительный мир</p>', 'активен', 2, 8, './assets/images/upload/default_pic.jpg'),
+	(24, 'Географические чудеса света', '"Изучаем удивительные географические объекты и природные чудеса, которые поражают воображение своей красотой и величием', '<p>Мир полон потрясающих географических чудес, включая горы, водопады, каньоны, озера и пустыни. Мы рассмотрим некоторые из наиболее известных географических</p>', 'активен', 2, 8, './assets/images/upload/65ec97bac4fde.jpg');
 
 -- Дамп структуры для таблица bigidea.post_hashtags
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
@@ -98,13 +104,16 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~5 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~4 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
-	(1, 6),
-	(1, 2),
-	(1, 3),
-	(2, 1),
-	(2, 5);
+	(21, 27),
+	(21, 28),
+	(22, 29),
+	(22, 30),
+	(23, 31),
+	(23, 32),
+	(24, 33),
+	(24, 34);
 
 -- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (
@@ -116,16 +125,7 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_likes: ~8 rows (приблизительно)
-INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
-	(1, 8),
-	(1, 11),
-	(1, 12),
-	(1, 13),
-	(2, 14),
-	(2, 8),
-	(2, 13),
-	(2, 11);
+-- Дамп данных таблицы bigidea.post_likes: ~0 rows (приблизительно)
 
 -- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -144,15 +144,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_email` (`email`),
   UNIQUE KEY `unique_username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.users: ~6 rows (приблизительно)
+-- Дамп данных таблицы bigidea.users: ~3 rows (приблизительно)
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `remember_token`, `password_reset_at`, `created_at`, `verified`, `token`, `reset_token_hash`, `reset_token_expires_at`) VALUES
 	(8, 'kuanJoy', 'kuanishmykyev@mail.ru', '$2y$10$JgH52ukM9JNVRQe7tg/Bzei9ze6Mo0DqYn6rM9DhyusfPhR/YbqKm', 'админ', NULL, NULL, '2024-02-25 09:09:55', 'true', '5433', 'bc32c0fe1adbd9c8aa66c2712d4e408903b048b2d8300d08253795289020a0b9', '2024-03-06 17:11:58'),
 	(11, 'dsada', 'wowcool2001@mail.ru', '$2y$10$v7sASMZ0aSlHEdhlOv/GA.cF.am7/eJqjt0Xz7GE.hxr5yodQ.DGC', 'читатель', NULL, '2024-03-07 16:31:14', '2024-03-06 15:13:03', 'true', '2115', NULL, NULL),
-	(12, 'test1', NULL, '123', 'читатель', NULL, NULL, '2024-03-09 06:28:05', 'false', NULL, NULL, NULL),
-	(13, 'test2', NULL, '123', 'читатель', NULL, NULL, '2024-03-09 06:28:10', 'false', NULL, NULL, NULL),
-	(14, 'test3', NULL, '123', 'читатель', NULL, NULL, '2024-03-09 06:28:22', 'false', NULL, NULL, NULL),
 	(15, 'ывфвфвф', 'wowcool2000@mail.ru', '$2y$10$iB/9X9p6e3UJS9mUqPUG4.odRgolnDTQ0YxT9kSPceXu74THbkedC', 'читатель', NULL, NULL, '2024-03-09 09:07:07', 'true', '89494', NULL, NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
