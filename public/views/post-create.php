@@ -5,13 +5,12 @@ use App\App\Controllers\PostController;
 
 $verification = new VerificationController();
 $verification->redirectToVerifyEmail();
+$verification->redirectGuest();
 
-$posts = new PostController();
-$bannerPosts = $posts->getPostsForBanner();
-$hashtags = $posts->getHashtagsForMain();
+$post = new PostController();
+$errors = $post->createPost();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
-include __DIR__ . "/include/banner.php";
-include __DIR__ . "/include/hashtags.php";
+include __DIR__ . "/include/post-create.php";
 include __DIR__ . "/layout/footer.php";

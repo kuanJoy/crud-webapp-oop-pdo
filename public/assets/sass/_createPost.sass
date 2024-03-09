@@ -1,0 +1,76 @@
+.create-post
+    padding-top: 2rem
+    display: flex
+    flex-direction: column
+    margin: 0 auto
+    max-width: 59rem
+    gap: 1rem
+.input-box
+    border-radius: .3125rem
+    padding: .625rem
+    border: 2px solid
+    border-color: $input-bg
+    display: flex
+    align-items: center
+    &:focus-within
+        border: 2px solid $blue
+    &__span
+        margin-right: .3125rem
+
+.form__select
+    width: 100%
+
+.hashtags-inputs
+    display: flex
+    gap: 0.5rem
+    flex-wrap: wrap
+
+.input-wrapper
+    position: relative
+    flex-shrink: 1
+    white-space: nowrap
+    flex-grow: 1
+    min-width: 0
+    &::before
+        content: "#"
+        position: absolute
+        left: 10px
+        top: 50%
+        transform: translateY(-50%)
+        color: black
+
+.input-box-hashtag
+    border-radius: .3125rem
+    padding: 10px 10px 10px 19px
+    border: 2px solid $input-bg
+    width: 100%
+    &:focus-within
+        border-color: $blue
+
+.hashtags__buttons
+    display: flex
+    align-items: center
+    justify-content: center
+    gap: 0.5rem
+
+.btn_h
+    color: $white
+    border-radius: .4375rem
+    padding: .625rem
+
+.delete_h
+    background-color: $blue
+    font-size: $fz13
+
+.add_h
+    background-color: #4CAF50
+    font-size: $fz13
+
+.camera
+    margin-right: 1rem
+    fill: $blue
+
+.box__input
+    width: 100%
+.feedback__file
+    display: none

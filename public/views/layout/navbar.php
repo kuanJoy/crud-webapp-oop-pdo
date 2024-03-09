@@ -1,9 +1,13 @@
 <?php
 
 use App\App\Controllers\SessionController;
+use App\App\Controllers\PostController;
 
 $sessionDestroy = new SessionController;
 $sessionDestroy->logout();
+
+$post = new PostController();
+$categories = $post->getCategoriesForNavbar();
 ?>
 
 <div class="header-bg">
@@ -19,11 +23,12 @@ $sessionDestroy->logout();
                         Каталог
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">История</a></li>
-                        <li><a class="dropdown-item" href="#">География</a></li>
+                        <?php foreach ($categories as $category) : ?>
+                            <li><a class="dropdown-item" href="/category/<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
-                <a href="#" class="nav__link">
+                <a href="/popular" class="nav__link">
                     <span class="link__content">
                         Популярное
                     </span>
@@ -54,12 +59,10 @@ $sessionDestroy->logout();
                                 </svg>
                                 Избранное
                             </a>
-                            <?php if (($_SESSION['role'] != 3)) : ?>
-                                <li><a class="dropdown-item" href="#">
-                                        <svg class="icon i-category">
-                                            <use href="public/assets/images/svg/sprites.svg#add" />
-                                        </svg>Добавить</a></li>
-                            <?php endif; ?>
+                            <li><a class="dropdown-item" href="/create-post">
+                                    <svg class="icon i-category">
+                                        <use href="public/assets/images/svg/sprites.svg#add" />
+                                    </svg>Добавить</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

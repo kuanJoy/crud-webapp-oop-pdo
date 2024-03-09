@@ -18,3 +18,7 @@ $router->addRoute('GET', '/forget', 'views/forget.php');
 $router->addRoute('POST', '/forget', 'views/forget.php');
 $router->addRoute('GET', '/reset', 'views/reset.php');
 $router->addRoute('POST', '/reset', 'views/reset.php');
+$router->addRoute('GET', '/create-post', 'views/post-create.php');
+$router->addRoute('POST', '/create-post', 'views/post-create.php');
+$router->addRoute('GET', '/edit-post', 'views/posts-edit.php');
+$router->addRoute('POST', '/edit-post', 'views/posts-edit.php');
