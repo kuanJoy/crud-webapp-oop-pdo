@@ -59,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.hashtags: ~4 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~8 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
 	(27, 'Египет'),
 	(28, 'Древний Мир'),
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.posts: ~2 rows (приблизительно)
+-- Дамп данных таблицы bigidea.posts: ~4 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`) VALUES
 	(21, 'Великая история древнего Египта', 'Погружаемся в древнюю историю великой цивилизации Египта, изучаем его культуру, архитектуру и фараон', '<p>Египет - одна из старейших цивилизаций мира, известная своими пирамидами, сфинксами и фараонами. В этой статье мы рассмотрим основные моменты истории древнего Египта, начиная с периода Древнего царства и заканчивая периодом Позднего периода</p>', 'активен', 1, 8, './assets/images/upload/65ec940258bd8.jpg'),
 	(22, 'Великие битвы мировой истории', 'Изучаем ключевые битвы, которые сыграли решающую роль в истории человечества и оказали огромное влия', '<p>Мировая история богата великими сражениями, которые определяли судьбы наций и целых континентов. От битвы при Марафоне до битвы за Сталинград - мы рассмотрим ключевые моменты и последствия некоторых из наиболее знаменитых битв в истории</p>', 'активен', 1, 8, './assets/images/upload/65ec9474d68ac.jpg'),
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~4 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~8 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(21, 27),
 	(21, 28),
@@ -125,7 +125,10 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_likes: ~0 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_likes: ~2 rows (приблизительно)
+INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
+	(24, 8),
+	(24, 11);
 
 -- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (

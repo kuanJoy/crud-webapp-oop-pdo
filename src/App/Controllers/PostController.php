@@ -18,7 +18,14 @@ class PostController
     public function getPostById()
     {
         $postId = basename($_SERVER['REQUEST_URI']);
-        return $this->postModel->getPostById($postId);
+        $post =  $this->postModel->getPostById($postId);
+        $hashtags = $this->postModel->getPostHashtags($postId);
+        $likes = $this->postModel->getPostLikesCount($postId);
+        return [
+            'post' => $post,
+            'hashtags' => $hashtags,
+            'likes' => $likes
+        ];
     }
 
     public function getPosts()

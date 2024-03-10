@@ -24,5 +24,9 @@ $router->addRoute('POST', '/create-post', 'views/post-create.php');
 $router->addRoute('GET', "/post/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/post.php";
 });
+$router->addRoute('POST', "/post/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/post.php";
+});
+$router->addRoute('GET', "/post", 'views/post.php');
 $router->addRoute('GET', '/edit-post', 'views/posts-edit.php');
 $router->addRoute('POST', '/edit-post', 'views/posts-edit.php');

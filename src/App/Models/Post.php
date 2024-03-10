@@ -16,9 +16,41 @@ class Post
 
     public function getPostById($id)
     {
-        $sql = "SELECT * FROM posts WHERE id = :id";
+        $sql = "SELECT posts.*, categories.name AS category_name 
+            FROM posts 
+            LEFT JOIN categories ON posts.category_id = categories.id 
+            WHERE posts.id = :id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function getPostHashtags($id)
+    {
+        $sql = "SELECT hashtags.name 
+            FROM hashtags 
+            INNER JOIN post_hashtags ON hashtags.id = post_hashtags.hashtag_id 
+            WHERE post_hashtags.post_id = :post_id";
+
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':post_id', $id);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    public function getPostLikesCount($id)
+    {
+        $sql = "SELECT posts.id, COUNT(post_likes.post_id) AS likes_count
+                FROM posts
+                LEFT JOIN post_likes ON posts.id = post_likes.post_id
+                WHERE posts.id = :post_id
+                GROUP BY posts.id;
+                ";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':post_id', $id);
         $stmt->execute();
 
         return $stmt->fetch();
