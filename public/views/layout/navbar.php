@@ -12,7 +12,7 @@ $categories = $post->getCategoriesForNavbar();
 
 <div class="header-bg">
     <header class="header container">
-        <div class="logo">Big.Idea</div>
+        <a href="/" class="logo">Big.Idea</a>
         <div class="hamburger">
             <nav class="nav">
                 <li class="nav-item dropdown">
@@ -20,7 +20,7 @@ $categories = $post->getCategoriesForNavbar();
                         <svg class="icon i-category">
                             <use href="/public/assets/images/svg/sprites.svg#category" />
                         </svg>
-                        Каталог
+                        Категории
                     </a>
                     <ul class="dropdown-menu">
                         <?php foreach ($categories as $category) : ?>
@@ -35,14 +35,14 @@ $categories = $post->getCategoriesForNavbar();
                 </a>
             </nav>
             <div class="header-act">
-                <form class="header__search">
+                <!-- <form class="header__search">
                     <input class="search__input" type="text" placeholder="Поиск">
                     <button name="search" type="submit" class="btn-search">
                         <svg class="icon">
                             <use href="/public/assets/images/svg/sprites.svg#search" />
                         </svg>
                     </button>
-                </form>
+                </form> -->
                 <!-- ДЛЯ АВТОРИЗОВАННОГО -->
                 <?php if (isset($_SESSION['id_user'])) : ?>
                     <li class="nav-item dropdown">

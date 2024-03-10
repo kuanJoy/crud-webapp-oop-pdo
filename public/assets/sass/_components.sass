@@ -5,6 +5,7 @@
     min-width: 20px
     max-width: 18px
     max-height: 18px
+    transition: color 0.3s ease
     &:hover
         fill: $blue
 
@@ -36,19 +37,27 @@ a
     max-width: 59rem
 
 .swiper-btn
+    transition: 0.2s all
     position: absolute
     z-index: 999
     text-align: center
-    width: 35px
-    height: 35px
+    top: 7%
+    width: 1.8rem
+    height: 100%
     color: $dark
-    background-color: $white
-    border-radius: 50%
-    box-shadow: 0px 0px 3px 0px rgba(110, 110, 125, 0.6), 0 2px 2px 0 rgba(110, 110, 125, 0.6), 0 1px 5px 0 rgba(110, 110, 125, 0.6)
+    background-color: $grey
+    box-shadow: 0px 0px 3px 0px rgba(110, 110, 125, 0.1), 0 2px 2px 0 rgba(110, 110, 125, 0.1), 0 1px 5px 0 rgba(110, 110, 125, 0.1)
     &::after
         font-size: 16px
         font-weight: 700
         line-height: 0
+    &:hover
+        color: $blue
+
+.swiper-button-prev
+    left: 0
+.swiper-button-next
+    right: 0
 
 .not__found
     display: flex

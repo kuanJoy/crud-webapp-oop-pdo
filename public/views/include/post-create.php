@@ -43,7 +43,7 @@
         </label>
     </div>
     <label for="">
-        <textarea id="content" name="content" class="form-control"></textarea>
+        <textarea id="mytextarea" name="content" class="form-control"></textarea>
     </label>
     <button type="submit" name="createPost" class="auth__btn">Создать публикацию</button>
 </form>

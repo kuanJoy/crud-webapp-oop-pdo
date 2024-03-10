@@ -21,6 +21,7 @@
         gap: 0.8rem
         width: 75%
         margin: 0 auto
+        padding-bottom: 1.1rem
     &__attribute
         text-transform: lowercase
         font-size: $fz13
@@ -40,17 +41,22 @@
     &__container
         margin: 0 auto
         width: 75%
-        padding: 0.5rem 0rem
+        padding: 0.8rem 0rem
         border-radius: .5rem
         border: 1px solid #e3e5ed
     &__title
         font-size: $title
-        padding: 0rem 0.5rem 0.5rem 0.5rem
-        border-bottom: 1px solid #e3e5ed
+        padding: 0rem 0.8rem 0.8rem 0.8rem
+        border-bottom: 1px dashed #e3e5ed
     &__content
         line-height: 1.6rem
-        padding: 0.5rem
+        padding: 0.8rem
         text-align: justify
+    &__btns
+        border-top: 1px solid #e3e5ed
+        padding: 0.8rem 0.8rem 0rem 0.8rem
+        display: flex
+        gap: 1rem
 
 .category-hashtags
     display: flex
@@ -72,3 +78,12 @@
     align-items: center
     justify-content: center
     gap: 0.2rem
+
+.btn-post
+    display: flex
+    align-items: center
+    justify-content: center
+    transition: 0.3s all
+    &:hover
+        fill: $blue
+        color: $blue

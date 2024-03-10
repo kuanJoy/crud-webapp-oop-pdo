@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.categories: ~7 rows (приблизительно)
+-- Дамп данных таблицы bigidea.categories: ~6 rows (приблизительно)
 INSERT INTO `categories` (`id`, `name`) VALUES
 	(1, 'История'),
 	(2, 'География'),
@@ -57,9 +57,9 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `id` int(250) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.hashtags: ~8 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~13 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
 	(27, 'Египет'),
 	(28, 'Древний Мир'),
@@ -68,14 +68,19 @@ INSERT INTO `hashtags` (`id`, `name`) VALUES
 	(31, 'земля'),
 	(32, 'экосистемы'),
 	(33, 'Чудеса света'),
-	(34, 'Постройки');
+	(34, 'Постройки'),
+	(35, 'озера'),
+	(36, 'пустыни'),
+	(37, 'реки'),
+	(38, 'династии'),
+	(39, 'политика');
 
 -- Дамп структуры для таблица bigidea.posts
 CREATE TABLE IF NOT EXISTS `posts` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `title` varchar(70) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `content` text,
+  `content` mediumtext,
   `status` enum('активен','скрыт') DEFAULT NULL,
   `category_id` int(255) DEFAULT NULL,
   `user_id` int(255) DEFAULT NULL,
@@ -85,14 +90,16 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `fk_posts_user_id` (`user_id`),
   CONSTRAINT `fk_posts_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.posts: ~4 rows (приблизительно)
+-- Дамп данных таблицы bigidea.posts: ~6 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`) VALUES
 	(21, 'Великая история древнего Египта', 'Погружаемся в древнюю историю великой цивилизации Египта, изучаем его культуру, архитектуру и фараон', '<p>Египет - одна из старейших цивилизаций мира, известная своими пирамидами, сфинксами и фараонами. В этой статье мы рассмотрим основные моменты истории древнего Египта, начиная с периода Древнего царства и заканчивая периодом Позднего периода</p>', 'активен', 1, 8, './assets/images/upload/65ec940258bd8.jpg'),
 	(22, 'Великие битвы мировой истории', 'Изучаем ключевые битвы, которые сыграли решающую роль в истории человечества и оказали огромное влия', '<p>Мировая история богата великими сражениями, которые определяли судьбы наций и целых континентов. От битвы при Марафоне до битвы за Сталинград - мы рассмотрим ключевые моменты и последствия некоторых из наиболее знаменитых битв в истории</p>', 'активен', 1, 8, './assets/images/upload/65ec9474d68ac.jpg'),
 	(23, 'Исследуем диверситет природы: наши мировые биомы', 'Путешествуем по различным биомам нашей планеты и изучаем их уникальные особенности и экосистемы', '<p>Земля обладает удивительным разнообразием биомов, включая леса, тундру, пустыни, травянистые равнины и морские экосистемы. В этой статье мы рассмотрим каждый биом, его особенности и животный и растительный мир</p>', 'активен', 2, 8, './assets/images/upload/default_pic.jpg'),
-	(24, 'Географические чудеса света', '"Изучаем удивительные географические объекты и природные чудеса, которые поражают воображение своей красотой и величием', '<p>Мир полон потрясающих географических чудес, включая горы, водопады, каньоны, озера и пустыни. Мы рассмотрим некоторые из наиболее известных географических</p>', 'активен', 2, 8, './assets/images/upload/65ec97bac4fde.jpg');
+	(24, 'Географические чудеса света', '"Изучаем удивительные географические объекты и природные чудеса, которые поражают воображение своей красотой и величием', '<p>Мир полон потрясающих географических чудес, включая горы, водопады, каньоны, озера и пустыни. Мы рассмотрим некоторые из наиболее известных географических</p>', 'активен', 2, 8, './assets/images/upload/65ec97bac4fde.jpg'),
+	(25, 'Озера мира: великие водные просторы', 'Озера являются одними из самых красивых и удивительных природных явлений на Земле.', '<p>Озера являются одними из самых красивых и удивительных природных явлений на Земле. В этой статье мы рассмотрим некоторые из наиболее впечатляющих озер мира и узнаем о их уникальных особенностях. От глубоких кристально чистых озер до соленых пустынных водоемов, озера мира прекрасны и разнообразны.</p>', 'активен', 2, 8, './assets/images/upload/65ed6d990946f.jpg'),
+	(26, 'Великие политические династии мира', 'История человечества богата событиями, связанными с политическими династиями и правителями.', '<p>История человечества богата событиями, связанными с политическими династиями и правителями. В этой статье мы рассмотрим некоторые из наиболее влиятельных и важных политических династий мира и их вклад в историю. От древних монархий до современных республик, эти династии оставили свой след в политической истории человечества.</p>', 'активен', 1, 8, './assets/images/upload/65ed7047e69fb.jpg');
 
 -- Дамп структуры для таблица bigidea.post_hashtags
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
@@ -104,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~8 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~13 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(21, 27),
 	(21, 28),
@@ -113,12 +120,19 @@ INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(23, 31),
 	(23, 32),
 	(24, 33),
-	(24, 34);
+	(24, 34),
+	(25, 35),
+	(25, 36),
+	(25, 37),
+	(26, 38),
+	(26, 39),
+	(27, 39);
 
 -- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (
   `post_id` int(255) DEFAULT '0',
   `user_id` int(255) DEFAULT '0',
+  UNIQUE KEY `unique_post_user_like` (`post_id`,`user_id`),
   KEY `fk_post_likes_post_id` (`post_id`),
   KEY `fk_post_likes_user_id` (`user_id`),
   CONSTRAINT `fk_post_likes_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,

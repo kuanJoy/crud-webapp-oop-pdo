@@ -1,16 +1,21 @@
 <?php
 
-use App\App\Controllers\VerificationController;
 use App\App\Controllers\PostController;
+use App\App\Controllers\VerificationController;
 
 $verification = new VerificationController();
 $verification->redirectToVerifyEmail();
 
 $post = new PostController();
-$categoriesCount = $post->getCategoriesCount();
+$posts = $post->getPostByCategory();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
-include __DIR__ . "/include/popular.php";
-include __DIR__ . "/include/random.php";
+
+if (!$onePost['post'] == false) {
+    include __DIR__ . "/include/post-show.php";
+} else {
+    include __DIR__ .
+        "/include/post-not-found.php";
+}
 include __DIR__ . "/layout/footer.php";

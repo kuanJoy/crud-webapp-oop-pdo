@@ -28,9 +28,19 @@ class PostController
         ];
     }
 
+    public function getRandomPosts()
+    {
+        return $this->postModel->getRandomPosts();
+    }
+
     public function getPosts()
     {
         return $this->postModel->getPosts();
+    }
+
+    public function getCategoriesCount()
+    {
+        return $this->postModel->getCategoriesCount();
     }
 
     public function getPostsForBanner()
@@ -52,7 +62,6 @@ class PostController
     {
         $errors = [];
         if (isset($_POST['createPost'])) {
-            var_dump($_POST);
             if ($_SESSION['role'] !== 'админ') {
                 $status = '2';
             } else {
@@ -85,41 +94,38 @@ class PostController
 
             if (empty($content)) {
                 $errors["content"] = "Содержание не может быть пустым";
-            } elseif ((!preg_match('/^.{3,65000}$/u', $content))) {
-                $errors["content"] = "Длина содержания от 3 до 65000 символов";
             } else {
                 $content = trim($content);
             }
 
-            if ($_FILES['pic']['error'] === 4) {
-                $img_upload_path = "./assets/images/upload/default_pic.jpg";
-            } elseif (isset($_FILES['pic']['name'])) {
-                $img_name = $_FILES['pic']['name'];
-                $tmp_name = $_FILES['pic']['tmp_name'];
-                $img_size = $_FILES['pic']['size']; // Получаем размер файла в байтах
-
-                if ($_FILES['pic']['error'] === 0) {
-                    if ($img_size > 2000000) {
-                        $errors['pic_size'] = "Размер файла не должен превышать 2 МБ";
-                    } else {
-                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                        $img_ex_to_lc = strtolower($img_ex);
-                        $allowed_ex = ['jpg', 'jpeg', 'png'];
-
-                        if (in_array($img_ex_to_lc, $allowed_ex)) {
-                            $new_img_name = uniqid() . "." . "$img_ex_to_lc";
-                            $img_upload_path = './assets/images/upload/' . $new_img_name;
-                            move_uploaded_file($tmp_name, $img_upload_path);
-                        } else {
-                            $errors['pic_ex'] = "Поддерживаются только jpg, jpeg и png";
-                        }
-                    }
-                } else {
-                    $errors['pic_name'] = 'Неправильное имя фотографии';
-                }
-            }
-
             if (empty($errors)) {
+                if ($_FILES['pic']['error'] === 4) {
+                    $img_upload_path = "./assets/images/upload/default_pic.jpg";
+                } elseif (isset($_FILES['pic']['name'])) {
+                    $img_name = $_FILES['pic']['name'];
+                    $tmp_name = $_FILES['pic']['tmp_name'];
+                    $img_size = $_FILES['pic']['size']; // Получаем размер файла в байтах
+
+                    if ($_FILES['pic']['error'] === 0) {
+                        if ($img_size > 2000000) {
+                            $errors['pic_size'] = "Размер файла не должен превышать 2 МБ";
+                        } else {
+                            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                            $img_ex_to_lc = strtolower($img_ex);
+                            $allowed_ex = ['jpg', 'jpeg', 'png'];
+
+                            if (in_array($img_ex_to_lc, $allowed_ex)) {
+                                $new_img_name = uniqid() . "." . "$img_ex_to_lc";
+                                $img_upload_path = './assets/images/upload/' . $new_img_name;
+                                move_uploaded_file($tmp_name, $img_upload_path);
+                            } else {
+                                $errors['pic_ex'] = "Поддерживаются только jpg, jpeg и png";
+                            }
+                        }
+                    } else {
+                        $errors['pic_name'] = 'Неправильное имя фотографии';
+                    }
+                }
                 if ($this->postModel->createPost($title, $description, $content, $status, $category_id, $user_id, $img_upload_path, $hashtags)) {
                     header("Location: /");
                     exit();

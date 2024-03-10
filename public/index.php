@@ -13,7 +13,7 @@ require_once __DIR__ . "/../src/Router/routes.php";
 $router->dispatch($_SERVER['REQUEST_URI'], $_SERVER['REQUEST_METHOD']);
 
 echo "<pre>";
-// var_dump($_SESSION);
+var_dump($_SESSION);
 // echo "<br>";
 // var_dump($_GET);
 // echo "<br>";

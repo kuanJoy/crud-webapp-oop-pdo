@@ -27,6 +27,12 @@ class Post
         return $stmt->fetch();
     }
 
+    public function getRandomPosts()
+    {
+        $sql = "SELECT * FROM `posts` ORDER BY RAND() LIMIT 3;";
+        return $this->db->getConnection()->query($sql)->fetchAll();
+    }
+
     public function getPostHashtags($id)
     {
         $sql = "SELECT hashtags.name 
@@ -61,6 +67,35 @@ class Post
         $sql = "SELECT * FROM posts";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
+
+    public function getCategoriesCount()
+    {
+        $sql = "SELECT categories.id AS category_id,
+                    categories.name AS category_name,
+                    COUNT(posts.id) AS post_count
+                FROM categories
+                LEFT JOIN posts ON categories.id = posts.category_id
+                WHERE posts.status = 'активен'
+                GROUP BY categories.id, categories.name;";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
+    public function getPostsByCategory($id)
+    {
+        $sql = "SELECT posts.*, categories.name AS category_name 
+            FROM posts 
+            LEFT JOIN categories ON posts.category_id = categories.id 
+            WHERE posts.category_id  = :id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
 
     public function getPostsForBanner()
     {
