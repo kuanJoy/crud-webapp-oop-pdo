@@ -15,7 +15,8 @@ include __DIR__ . "/layout/navbar.php";
 if (!$onePost['post'] == false) {
     include __DIR__ . "/include/post-show.php";
 } else {
+    $title = "Публикации";
     include __DIR__ .
-        "/include/post-not-found.php";
+        "/include/not-found.php";
 }
 include __DIR__ . "/layout/footer.php";

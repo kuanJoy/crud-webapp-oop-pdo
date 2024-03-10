@@ -38,8 +38,8 @@ $router->addRoute('POST', "/post/{$id}", function ($id) {
 $router->addRoute('GET', "/post", 'views/post.php');
 
 // POST/EDIT/ID
-$router->addRoute('GET', '/edit-post', 'views/posts-edit.php');
-$router->addRoute('POST', '/edit-post', 'views/posts-edit.php');
+$router->addRoute('GET', '/post-edit', 'views/posts-edit.php');
+$router->addRoute('POST', '/post-edit', 'views/posts-edit.php');
 
 // CATEGORY/ID
 $router->addRoute('GET', "/category/{$id}", function ($id) {

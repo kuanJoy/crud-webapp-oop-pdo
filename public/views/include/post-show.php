@@ -1,4 +1,19 @@
 <div class="post">
+    <?php if (isset($_SESSION['lastCategory'])) : ?>
+        <form class="post__back" action="<?= $_SESSION['lastCategory'] ?>">
+            <button type="submit">
+                <svg class="auth__icon">
+                    <use href="/public/assets/images/svg/sprites.svg#back"></use>
+                </svg>назад</button>
+        </form>
+    <?php else : ?>
+        <a href="/" class="auth__home">
+            <svg class="auth__icon">
+                <use href="/public/assets/images/svg/sprites.svg#back"></use>
+            </svg>
+            На главную
+        </a>
+    <?php endif ?>
     <img src="/public/<?= $onePost['post']['pic'] ?>" alt="" class="post__banner">
     <div class="post__attributes">
         <div class="category-hashtags">

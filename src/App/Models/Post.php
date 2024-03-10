@@ -85,10 +85,21 @@ class Post
 
     public function getPostsByCategory($id)
     {
-        $sql = "SELECT posts.*, categories.name AS category_name 
-            FROM posts 
-            LEFT JOIN categories ON posts.category_id = categories.id 
-            WHERE posts.category_id  = :id";
+        $sql = "SELECT posts.*, 
+                categories.name AS category_name,
+                GROUP_CONCAT(hashtags.name) AS hashtags
+            FROM 
+                posts 
+            LEFT JOIN 
+                categories ON posts.category_id = categories.id 
+            LEFT JOIN 
+                post_hashtags ON posts.id = post_hashtags.post_id
+            LEFT JOIN 
+                hashtags ON post_hashtags.hashtag_id = hashtags.id
+            WHERE 
+                posts.category_id = :id
+            GROUP BY 
+                posts.id;";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -124,7 +135,11 @@ class Post
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT * FROM categories ORDER BY categories.name asc";
+        $sql = "SELECT c.id, c.name
+                FROM categories c
+                JOIN posts p ON c.id = p.category_id
+                GROUP BY c.id, c.name
+                HAVING COUNT(p.id) > 0;";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 

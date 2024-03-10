@@ -26,7 +26,6 @@
   max-width: 18px;
   max-height: 18px;
   transition: color 0.3s ease;
-  fill: #3a3838;
 }
 .icon:hover {
   fill: #4b6ed6;
@@ -283,7 +282,7 @@ li {
 }
 
 .hashtags {
-  padding-top: 1rem;
+  padding-top: 2.5rem;
   position: relative;
   display: flex;
   justify-content: center;
@@ -297,8 +296,9 @@ li {
   font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
   padding: 0.3125rem 0.5rem;
   border-radius: 0.4rem;
-  background-color: #4b6ed6;
-  color: white;
+  background-color: #F0F2FA;
+  border: thin solid rgba(0, 0, 0, 0.12);
+  color: #222222;
   letter-spacing: 0.0425rem;
   align-self: flex-start;
   cursor: pointer;
@@ -554,6 +554,10 @@ li {
   display: flex;
   gap: 1rem;
 }
+.post__back {
+  max-width: 59rem;
+  margin: auto right;
+}
 
 .category-hashtags {
   display: flex;
@@ -651,7 +655,7 @@ li {
 }
 
 .random__title {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

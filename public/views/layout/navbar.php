@@ -66,7 +66,7 @@ $categories = $post->getCategoriesForNavbar();
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <form method="post" action="">
+                            <form method="post" action="/">
                                 <button type="submit" name="logout" class="dropdown-item">
                                     <svg class="auth__icon mt1">
                                         <use href="/public/assets/images/svg/sprites.svg#exit" />
