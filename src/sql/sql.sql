@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.categories: ~6 rows (приблизительно)
+-- Дамп данных таблицы bigidea.categories: ~7 rows (приблизительно)
 INSERT INTO `categories` (`id`, `name`) VALUES
 	(1, 'История'),
 	(2, 'География'),
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~13 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~14 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(21, 27),
 	(21, 28),
