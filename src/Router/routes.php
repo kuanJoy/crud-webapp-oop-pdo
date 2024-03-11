@@ -1,10 +1,10 @@
 <?php
 
-// use App\Router\Router;
+use App\Router\Router;
 
 // require_once 'Router.php';
 
-// $router = new Router();
+$router = new Router();
 $id = '{id}';
 
 $router->addRoute('GET', '/', 'views/home.php');
@@ -28,14 +28,21 @@ $router->addRoute('POST', '/reset', 'views/reset.php');
 $router->addRoute('GET', '/create-post', 'views/post-create.php');
 $router->addRoute('POST', '/create-post', 'views/post-create.php');
 
-// POST/ID
+// POST SHOW BY ID
 $router->addRoute('GET', "/post/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/post.php";
 });
 $router->addRoute('POST', "/post/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/post.php";
 });
-$router->addRoute('GET', "/post", 'views/post.php');
+
+//  POST EDIT BY ID
+$router->addRoute('GET', "/edit/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/post-edit.php";
+});
+$router->addRoute('POST', "/edit/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/post-edit.php";
+});
 
 // POST/EDIT/ID
 $router->addRoute('GET', '/post-edit', 'views/posts-edit.php');

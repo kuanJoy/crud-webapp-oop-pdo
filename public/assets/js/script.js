@@ -22,6 +22,7 @@ tinymce.init({
   ],
   ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
 });
+
 // ADD INPUTS FOR HASHTAG
 function addHashtagInput() {
   var container = document.querySelector('.hashtags-inputs');

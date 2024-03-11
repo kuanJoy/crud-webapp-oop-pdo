@@ -14,12 +14,67 @@ class Post
         $this->db = $db;
     }
 
+    public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags)
+    {
+        try {
+            $this->db->getConnection()->beginTransaction();
+
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
+            $sql = "UPDATE posts SET title = :title, description = :description, category_id = :category_id, content = :content, status = :status, pic = :pic WHERE id = :post_id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':post_id', $postId);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':category_id', $categoryId);
+            $stmt->bindParam(':content', $content);
+            $stmt->bindParam(':status', $status);
+            $stmt->bindParam(':pic', $pic);
+            $stmt->execute();
+
+            $sql = "DELETE FROM post_hashtags WHERE post_id = :post_id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':post_id', $postId);
+            $stmt->execute();
+
+            // Добавление новых хештегов для этого поста
+            foreach ($hashtags as $hashtagName) {
+                // Проверяем существует ли хештег с таким именем
+                $sql = "SELECT id FROM hashtags WHERE name = :hashtag_name";
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindParam(':hashtag_name', $hashtagName);
+                $stmt->execute();
+                $hashtagId = $stmt->fetchColumn();
+
+                // Если хештег существует, вставляем его id в таблицу post_hashtags
+                if ($hashtagId) {
+                    $sql = "INSERT INTO post_hashtags (post_id, hashtag_id) VALUES (:post_id, :hashtag_id)";
+                    $stmt = $this->db->getConnection()->prepare($sql);
+                    $stmt->bindParam(':post_id', $postId);
+                    $stmt->bindParam(':hashtag_id', $hashtagId);
+                    $stmt->execute();
+                }
+            }
+
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+
+            $this->db->getConnection()->commit();
+
+            return true;
+        } catch (PDOException $e) {
+            $this->db->getConnection()->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+
     public function getPostById($id)
     {
         $sql = "SELECT posts.*, categories.name AS category_name 
-            FROM posts 
-            LEFT JOIN categories ON posts.category_id = categories.id 
-            WHERE posts.id = :id";
+        FROM posts 
+        LEFT JOIN categories ON posts.category_id = categories.id 
+        WHERE posts.id = :id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -160,7 +215,6 @@ class Post
 
             $postId = $this->db->getConnection()->lastInsertId();
 
-            // Проверяем существующие хештеги и добавляем новые при необходимости
             $hashtagsIds = [];
             foreach ($hashtags as $hashtagName) {
                 $sql = "SELECT id FROM hashtags WHERE name = :name";
@@ -182,7 +236,6 @@ class Post
                 $hashtagsIds[] = $hashtagId;
             }
 
-            // Вставляем хештеги для поста в таблицу post_hashtags
             foreach ($hashtagsIds as $hashtagId) {
                 $sql = "INSERT INTO post_hashtags (post_id, hashtag_id) VALUES (:post_id, :hashtag_id)";
                 $stmt = $this->db->getConnection()->prepare($sql);

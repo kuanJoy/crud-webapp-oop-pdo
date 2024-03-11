@@ -20,6 +20,4 @@ if (!$onePost['post'] == false) {
         "/include/not-found.php";
 }
 
-// if ()
-
 include __DIR__ . "/layout/footer.php";
