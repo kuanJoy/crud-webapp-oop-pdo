@@ -19,4 +19,7 @@ if (!$onePost['post'] == false) {
     include __DIR__ .
         "/include/not-found.php";
 }
+
+// if ()
+
 include __DIR__ . "/layout/footer.php";

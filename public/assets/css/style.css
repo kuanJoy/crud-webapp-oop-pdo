@@ -556,7 +556,8 @@ li {
 }
 .post__back {
   max-width: 59rem;
-  margin: auto right;
+  width: 75%;
+  margin: 0 auto;
 }
 
 .category-hashtags {
@@ -715,6 +716,7 @@ li {
   overflow: hidden;
   text-align: justify;
   margin-bottom: 0.7rem;
+  min-height: 2.5rem;
 }
 
 .read-more {
