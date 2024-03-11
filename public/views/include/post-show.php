@@ -58,14 +58,13 @@
             </div>
         <?php elseif ($_SESSION['id_user'] == $onePost['post']['user_id']) : ?>
             <div class="post__btns">
-                <form class="attribute__likes" action="/post/edit/<?= $onePost['post']['id']; ?>" method="post">
-                    <input type="hidden" name="post_id" value="<?= $onePost['post']['id'] ?>">
-                    <button type="submit" name="editPost" class="btn-post">
+                <form class="attribute__likes" method="get">
+                    <a href="/post?<?= $onePost['post']['id'] ?>" class="btn-post">
                         <svg class="icon i-like">
                             <use href="/public/assets/images/svg/sprites.svg#edit" />
                         </svg>
                         Изменить
-                    </button>
+                    </a>
                 </form>
                 <form class="attribute__likes" method="post">
                     <input type="hidden" name="post_id" value="<?= $onePost['post']['id'] ?>">
