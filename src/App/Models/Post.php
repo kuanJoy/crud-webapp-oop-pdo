@@ -14,6 +14,47 @@ class Post
         $this->db = $db;
     }
 
+    public function deletePost($id, $pic)
+    {
+        $id = intval($id);
+        try {
+            $this->db->getConnection()->beginTransaction();
+
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
+            $sql = "DELETE FROM posts WHERE posts.id = :id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
+
+            $tables = ['post_hashtags', 'post_likes'];
+
+            foreach ($tables as $table) {
+                $sql = "DELETE FROM $table WHERE post_id = :id";
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
+            }
+
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+
+            $this->db->getConnection()->commit();
+
+            if (file_exists($pic)) {
+                if ($pic !== './
+                            assets/images/upload/default_pic.jpg') {
+                    unlink($pic);
+                }
+            }
+
+            return true;
+        } catch (PDOException $e) {
+            $this->db->getConnection()->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
     public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags)
     {
         try {
@@ -71,9 +112,10 @@ class Post
 
     public function getPostById($id)
     {
-        $sql = "SELECT posts.*, categories.name AS category_name 
+        $sql = "SELECT posts.*, categories.name AS category_name, users.username, users.id
         FROM posts 
         LEFT JOIN categories ON posts.category_id = categories.id 
+        LEFT JOIN users ON posts.user_id = users.id
         WHERE posts.id = :id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);

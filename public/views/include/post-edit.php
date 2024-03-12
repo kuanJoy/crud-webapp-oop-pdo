@@ -1,5 +1,5 @@
 <form method="post" class="create-post" enctype="multipart/form-data">
-    <a class="post__back" href="http://big-idea/post/<?= $getPostValues['post']['id'] ?>" style="width: 100%">
+    <a class="post__back" href="http://big-idea/post/<?= basename($_SERVER['REQUEST_URI']) ?>" style="width: 100%">
         <svg class="auth__icon">
             <use href="/public/assets/images/svg/sprites.svg#back"></use>
         </svg>назад
