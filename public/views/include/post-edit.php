@@ -1,4 +1,9 @@
 <form method="post" class="create-post" enctype="multipart/form-data">
+    <a class="post__back" href="http://big-idea/post/<?= $getPostValues['post']['id'] ?>" style="width: 100%">
+        <svg class="auth__icon">
+            <use href="/public/assets/images/svg/sprites.svg#back"></use>
+        </svg>назад
+    </a>
     <?php if (!empty($errors)) : ?>
         <ul class="auth__errors">
             <?php foreach ($errors as $error) : ?>
@@ -7,10 +12,10 @@
         </ul>
     <?php endif; ?>
     <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор') : ?>
-        <div class="input-box">
+        <div class="input-box" style="font-size: 13px;">
             <span class="input-box__span">Статус: </span>
             <input type="radio" name="status" value="активен" <?= $getPostValues['post']['status'] == 'активен' ? 'checked' : '' ?>> Активен
-            <input type="radio" name="status" value="скрыт" <?= $getPostValues['post']['status'] == 'скрыт' ? 'checked' : '' ?>> Скрыт
+            <input style="margin-left: 0.5rem;" type="radio" name="status" value="скрыт" <?= $getPostValues['post']['status'] == 'скрыт' ? 'checked' : '' ?>> Скрыт
         </div>
     <?php endif; ?>
     <div class="input-box">

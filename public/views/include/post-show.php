@@ -52,7 +52,7 @@
                             <svg class="icon i-like">
                                 <use href="/public/assets/images/svg/sprites.svg#delete" />
                             </svg>
-                            Удалить
+                            удалить
                         </button>
                     </form>
                 </div>

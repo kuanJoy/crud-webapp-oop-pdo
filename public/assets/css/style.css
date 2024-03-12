@@ -571,7 +571,6 @@ li {
 .attribute__likes {
   text-transform: lowercase;
   font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
-  font-weight: 700;
   padding: 0.3125rem 0.5rem;
   border-radius: 0.4rem;
   background-color: #f0f2fa;
