@@ -48,12 +48,12 @@
                     </div>
                     <form class="attribute__likes" method="post">
                         <input type="hidden" name="post_id" value="<?= $onePost['post']['id'] ?>">
-                        <button type="submit" name="deletePost" class="btn-post">
+                        <a href="/post/<?= $onePost['post']['id'] ?>?delete=<?= $onePost['post']['id'] ?>" onclick="return showConfirmation()" type="submit" name="deletePost" class="btn-post">
                             <svg class="icon i-like">
                                 <use href="/public/assets/images/svg/sprites.svg#delete" />
                             </svg>
                             удалить
-                        </button>
+                        </a>
                     </form>
                 </div>
             <?php endif; ?>
