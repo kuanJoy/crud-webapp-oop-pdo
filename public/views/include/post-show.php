@@ -38,14 +38,14 @@
         <?php if (isset($_SESSION['role']) || isset($_SESSION['id_user'])) : ?>
             <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор' || $_SESSION['id_user'] == $onePost['post']['user_id']) : ?>
                 <div class="post__btns">
-                    <form class="attribute__likes" method="get">
+                    <div class="attribute__likes" method="get">
                         <a href="/edit/<?= $onePost['post']['id'] ?>" class="btn-post">
                             <svg class="icon i-like">
                                 <use href="/public/assets/images/svg/sprites.svg#edit" />
                             </svg>
                             Изменить
                         </a>
-                    </form>
+                    </div>
                     <form class="attribute__likes" method="post">
                         <input type="hidden" name="post_id" value="<?= $onePost['post']['id'] ?>">
                         <button type="submit" name="deletePost" class="btn-post">
