@@ -1,3 +1,4 @@
+<?php var_dump($onePost) ?>
 <div class="post">
     <?php if (isset($_SESSION['lastCategory'])) : ?>
         <form class="post__back" action="<?= $_SESSION['lastCategory'] ?>">

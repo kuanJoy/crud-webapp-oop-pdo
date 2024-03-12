@@ -15,6 +15,16 @@ class PostController
         $this->postModel = new Post($db);
     }
 
+    public function sendLike()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendLike'])) {
+            $postId = basename($_SERVER['REQUEST_URI']);
+            $userId = $_SESSION['id_user'];
+
+            return $this->postModel->sendLike($postId, $userId);
+        }
+    }
+
     public function deletePost()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deletePost'])) {
@@ -120,13 +130,22 @@ class PostController
     public function getPostById()
     {
         $postId = basename($_SERVER['REQUEST_URI']);
+        $likeOnPost = null;
+
+        if (isset($_SESSION['user_id'])) {
+            $userId = $_SESSION['user_id'];
+            $likeOnPost = $this->postModel->getUserLikeOnPost($postId, $userId);
+        }
+
         $post =  $this->postModel->getPostById($postId);
         $hashtags = $this->postModel->getPostHashtags($postId);
         $likes = $this->postModel->getPostLikesCount($postId);
+
         return [
             'post' => $post,
             'hashtags' => $hashtags,
-            'likes' => $likes
+            'likes' => $likes,
+            'like_on_post' => $likeOnPost,
         ];
     }
 

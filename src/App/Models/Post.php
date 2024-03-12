@@ -14,6 +14,16 @@ class Post
         $this->db = $db;
     }
 
+    public function sendLike($postId, $userId)
+    {
+        $sql = "INSERT INTO post_likes (post_id, user_id) VALUES (:post_id, :user_id)";
+
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':post_id', $postId);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->execute();
+    }
+
     public function deletePost($id, $pic)
     {
         $id = intval($id);
@@ -156,6 +166,16 @@ class Post
         $stmt->bindParam(':post_id', $id);
         $stmt->execute();
 
+        return $stmt->fetch();
+    }
+
+    public function getUserLikeOnPost($userId, $postId)
+    {
+        $sql = "SELECT * FROM post_likes WHERE user_id = :user_id AND post_id = :post_id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':user_id', $userId);
+        $stmt->bindParam(':post_id', $postId);
+        $stmt->execute();
         return $stmt->fetch();
     }
 
