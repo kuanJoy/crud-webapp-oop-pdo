@@ -50,13 +50,22 @@ class PostController
             }
 
             if (empty($errors)) {
+                $pic = $_POST['pic'];
                 if ($_FILES['newPic']['error'] === 0) {
                     $newBannerPath = $this->handleBannerUpload($_FILES['newPic']);
                     $currentBannerPath = $_POST['pic'];
 
                     if ($newBannerPath !== false) {
                         if (file_exists($currentBannerPath)) {
-                            unlink($currentBannerPath);
+                            if ($currentBannerPath !== './
+                            assets/images/upload/default_pic.jpg') {
+                                unlink($currentBannerPath);
+                                $pic = $newBannerPath;
+                            } else {
+                                $pic = $_POST['pic'];
+                            }
+                        } else {
+                            $pic = $_POST['pic'];
                         }
                     }
                 } else {
