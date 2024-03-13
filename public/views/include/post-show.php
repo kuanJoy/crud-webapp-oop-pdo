@@ -51,7 +51,7 @@
                         </a>
                     </div>
                     <form action="/" class="attribute__likes" method="post">
-                        <input type="hidden" name="postId" value="<?= $onePost['post']['id'] ?>">
+                        <input type="hidden" name="postId" value="<?= $onePost['likes']['id'] ?>">
                         <input type="hidden" name="pic" value="<?= $onePost['post']['pic'] ?>">
                         <input type="hidden" name="postAuthor" value="<?= $onePost['post']['user_id'] ?>">
                         <button type="submit" onclick="return showConfirmation()" name="deletePost" class="btn-post">

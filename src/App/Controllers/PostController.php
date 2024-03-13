@@ -29,7 +29,7 @@ class PostController
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deletePost'])) {
             if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор' || $_SESSION['id_user'] == $_POST['postAuthor']) {
-                return $this->postModel->deletePost(basename($_SERVER['REQUEST_URI']), $_POST['pic']);
+                return $this->postModel->deletePost($_POST['postId'], $_POST['pic']);
             }
         }
     }
