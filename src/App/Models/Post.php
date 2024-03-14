@@ -57,7 +57,7 @@ class Post
                 }
             }
 
-            return true;
+            exit();
         } catch (PDOException $e) {
             $this->db->getConnection()->rollBack();
             echo "Error: " . $e->getMessage();
