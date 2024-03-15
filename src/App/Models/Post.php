@@ -166,6 +166,19 @@ class Post
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
+    public function getFavouritePosts($id)
+    {
+        $sql = "SELECT ps.post_id, ps.user_id, p.id, p.title, p.description
+                FROM post_likes AS ps 
+                INNER JOIN posts AS p ON ps.post_id = p.id 
+                WHERE ps.user_id = :user_id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(":user_id", $id);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     public function getPostHashtags($id)
     {
         $sql = "SELECT hashtags.name 

@@ -56,6 +56,14 @@ $router->addRoute('GET', "/category/{$id}", function ($id) {
 // POPULAR
 $router->addRoute('GET', '/popular', 'views/popular.php');
 
+// FAVOURITE
+$router->addRoute('GET', "/favourite/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/favourite.php";
+});
+$router->addRoute('POST', "/favourite/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/favourite.php";
+});
+
 // SHOW POSTS BY HASHTAG
 $router->addRoute('GET', "/hashtag/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/hashtag.php";

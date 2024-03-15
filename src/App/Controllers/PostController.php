@@ -141,7 +141,21 @@ class PostController
         ];
     }
 
+    public function getFavouritePosts()
+    {
+        $userId = intval(basename($_SERVER['REQUEST_URI']));
+        $sessionId = $_SESSION['id_user'];
 
+        if ($userId === $sessionId) {
+            if (isset($_SESSION['id_user'])) {
+                $userId = $_SESSION['id_user'];
+                return $this->postModel->getFavouritePosts($userId);
+            } else {
+                return 'Нет избранных публикаций';
+            }
+        } elseif ()
+        // дописать права что админ может видеть избранное всех юзеров
+    }
 
     public function getRandomPosts()
     {
