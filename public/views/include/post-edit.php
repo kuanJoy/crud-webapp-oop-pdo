@@ -64,6 +64,6 @@
     <label for="">
         <textarea id="mytextarea" name="content" class="form-control"><?= $getPostValues['post']['content'] ?></textarea>
     </label>
-    <input type="hidden" name="postId" value="<?= $getPostValues['post']['id'] ?>">
+    <input type="hidden" name="postId" value="<?= basename($_SERVER['REQUEST_URI']) ?>">
     <button type="submit" name="editPost" class="auth__btn">Редактировать</button>
 </form>

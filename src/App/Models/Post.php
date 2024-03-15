@@ -68,14 +68,14 @@ class Post
     }
 
 
-    public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags)
+    public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags, $createdTime)
     {
         try {
             $this->db->getConnection()->beginTransaction();
 
             $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
-            $sql = "UPDATE posts SET title = :title, description = :description, category_id = :category_id, content = :content, status = :status, pic = :pic WHERE id = :post_id";
+            $sql = "UPDATE posts SET title = :title, description = :description, category_id = :category_id, content = :content, status = :status, pic = :pic, updated_at = :updated_at WHERE id = :post_id";
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->bindParam(':post_id', $postId);
             $stmt->bindParam(':title', $title);
@@ -84,6 +84,8 @@ class Post
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':status', $status);
             $stmt->bindParam(':pic', $pic);
+            $updated_at = date('Y-m-d H:i:s');
+            $stmt->bindParam(':updated_at', $updated_at);
             $stmt->execute();
 
             $sql = "DELETE FROM post_hashtags WHERE post_id = :post_id";
@@ -91,16 +93,16 @@ class Post
             $stmt->bindParam(':post_id', $postId);
             $stmt->execute();
 
-            // Добавление новых хештегов для этого поста
+            // Adding new hashtags for this post
             foreach ($hashtags as $hashtagName) {
-                // Проверяем существует ли хештег с таким именем
+                // Check if a hashtag with this name exists
                 $sql = "SELECT id FROM hashtags WHERE name = :hashtag_name";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindParam(':hashtag_name', $hashtagName);
                 $stmt->execute();
                 $hashtagId = $stmt->fetchColumn();
 
-                // Если хештег существует, вставляем его id в таблицу post_hashtags
+                // If the hashtag exists, insert its id into the post_hashtags table
                 if ($hashtagId) {
                     $sql = "INSERT INTO post_hashtags (post_id, hashtag_id) VALUES (:post_id, :hashtag_id)";
                     $stmt = $this->db->getConnection()->prepare($sql);
@@ -121,7 +123,6 @@ class Post
             return false;
         }
     }
-
 
     public function getPostById($id)
     {
