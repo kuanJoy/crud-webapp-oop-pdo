@@ -9,7 +9,7 @@
                 <div class="r_card__content">
                     <h3 class="r_card__title"><?= $post['title'] ?></h3>
                     <p class="r_card__desc"><?= $post['description'] ?></p>
-                    <a href="post/<?= $post['id'] ?>" class="btn read-more">Читать</a>
+                    <a href="/../post/<?= $post['id'] ?>" class="btn read-more">Читать</a>
                 </div>
             </div>
         <?php endforeach; ?>
