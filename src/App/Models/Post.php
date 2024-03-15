@@ -39,11 +39,13 @@ class Post
 
             $tables = ['post_hashtags', 'post_likes'];
 
-            foreach ($tables as $table) {
-                $sql = "DELETE FROM $table WHERE post_id = :id";
-                $stmt = $this->db->getConnection()->prepare($sql);
-                $stmt->bindParam(':id', $id);
-                $stmt->execute();
+            if (!empty($tables)) {
+                foreach ($tables as $table) {
+                    $sql = "DELETE FROM $table WHERE post_id = :id";
+                    $stmt = $this->db->getConnection()->prepare($sql);
+                    $stmt->bindParam(':id', $id);
+                    $stmt->execute();
+                }
             }
 
             $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
@@ -252,19 +254,17 @@ class Post
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT c.id, c.name
+        $sql = "SELECT c.id, c.name, c.status
                 FROM categories c
-                JOIN posts p ON c.id = p.category_id
-                GROUP BY c.id, c.name
-                HAVING COUNT(p.id) > 0;";
+                WHERE c.status = 'активен';";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
     public function createPost($title, $description, $content, $status, $category_id, $user_id, $pic, array $hashtags)
     {
         try {
-            $sql = "INSERT INTO posts (title, description, content, status, category_id, user_id, pic) 
-                VALUES (:title, :description, :content, :status, :category_id, :user_id, :pic)";
+            $sql = "INSERT INTO posts (title, description, content, status, category_id, user_id, pic, created_at, updated_at) 
+            VALUES (:title, :description, :content, :status, :category_id, :user_id, :pic, NOW(), NOW())";
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':description', $description);

@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.6.51 - MySQL Community Server (GPL)
+-- Версия сервера:               5.6.51-log - MySQL Community Server (GPL)
 -- Операционная система:         Win64
 -- HeidiSQL Версия:              12.1.0.6537
 -- --------------------------------------------------------
@@ -23,18 +23,19 @@ USE `bigidea`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(70) NOT NULL,
+  `status` enum('активен','скрыт') DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы bigidea.categories: ~7 rows (приблизительно)
-INSERT INTO `categories` (`id`, `name`) VALUES
-	(1, 'История'),
-	(2, 'География'),
-	(3, 'Биология'),
-	(4, 'Экономика'),
-	(5, 'Математика'),
-	(6, 'Психология'),
-	(7, 'Искусство');
+INSERT INTO `categories` (`id`, `name`, `status`) VALUES
+	(1, 'История', 'активен'),
+	(2, 'География', 'активен'),
+	(3, 'Биология', 'скрыт'),
+	(4, 'Экономика', 'скрыт'),
+	(5, 'Математика', 'скрыт'),
+	(6, 'Психология', 'скрыт'),
+	(7, 'Искусство', 'скрыт');
 
 -- Дамп структуры для таблица bigidea.comments
 CREATE TABLE IF NOT EXISTS `comments` (
@@ -58,23 +59,21 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.hashtags: ~13 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~11 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
-	(30, 'войны'),
-	(38, 'династии'),
-	(28, 'Древний Мир'),
-	(27, 'Египет'),
-	(31, 'земля'),
-	(35, 'озера'),
-	(39, 'политика'),
-	(34, 'Постройки'),
-	(36, 'пустыни'),
-	(37, 'реки'),
-	(29, 'сражения'),
-	(33, 'Чудеса света'),
-	(32, 'экосистемы');
+	(50, 'test 3 geo'),
+	(43, 'test1'),
+	(42, 'test2'),
+	(48, 'test2 geo'),
+	(44, 'test3'),
+	(46, 'testgeo1'),
+	(40, 'тест1'),
+	(41, 'тест2'),
+	(47, 'тест2 гео'),
+	(49, 'тест3 гео'),
+	(45, 'тестгео1');
 
 -- Дамп структуры для таблица bigidea.posts
 CREATE TABLE IF NOT EXISTS `posts` (
@@ -86,22 +85,23 @@ CREATE TABLE IF NOT EXISTS `posts` (
   `category_id` int(255) DEFAULT NULL,
   `user_id` int(255) DEFAULT NULL,
   `pic` varchar(255) DEFAULT NULL,
-  `created_time` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `fk_posts_category_id` (`category_id`),
   KEY `fk_posts_user_id` (`user_id`),
   CONSTRAINT `fk_posts_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы bigidea.posts: ~6 rows (приблизительно)
-INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`, `created_time`) VALUES
-	(21, 'Великая история древнего Египта', 'Погружаемся в древнюю историю великой цивилизации Египта, изучаем его культуру, архитектуру и фараон', '<p>Египет - одна из старейших цивилизаций мира, известная своими пирамидами, сфинксами и фараонами. В этой статье мы рассмотрим основные моменты истории древнего Египта, начиная с периода Древнего царства и заканчивая периодом Позднего периода</p>', 'активен', 1, 8, './assets/images/upload/egypt.jpg', '2024-03-10 17:12:06'),
-	(22, 'Великие битвы мировой истории', 'Изучаем ключевые битвы, которые сыграли решающую роль в истории человечества и оказали огромное влия', '<p>Мировая история богата великими сражениями, которые определяли судьбы наций и целых континентов. От битвы при Марафоне до битвы за Сталинград - мы рассмотрим ключевые моменты и последствия некоторых из наиболее знаменитых битв в истории</p>', 'активен', 1, 8, './assets/images/upload/war.jpg', '2024-03-11 17:12:07'),
-	(23, 'Исследуем диверситет природы: наши мировые биомы', 'Путешествуем по различным биомам нашей планеты и изучаем их уникальные особенности и экосистемы', '<p>Земля обладает удивительным разнообразием биомов, включая леса, тундру, пустыни, травянистые равнины и морские экосистемы. В этой статье мы рассмотрим каждый биом, его особенности и животный и растительный мир</p>', 'активен', 2, 8, './assets/images/upload/minecraft.jpg', '2024-03-09 17:12:08'),
-	(24, 'выфвфывыф', 'Изучаем удивительные географические объекты и природные чудеса, которые поражают воображение своей красотой и величием', '<p>Мир полон потрясающих географических чудес, включая горы, водопады, каньоны, озера и пустыни. Мы рассмотрим некоторые из наиболее известных географических</p>', 'активен', 2, 8, './assets/images/upload/65f04f6d695c0.jpg', '2024-03-08 17:12:09'),
-	(25, 'Озера мира: великие водные просторы', 'Озера являются одними из самых красивых и удивительных природных явлений на Земле.', '<p>Озера являются одними из самых красивых и удивительных природных явлений на Земле. В этой статье мы рассмотрим некоторые из наиболее впечатляющих озер мира и узнаем о их уникальных особенностях. От глубоких кристально чистых озер до соленых пустынных водоемов, озера мира прекрасны и разнообразны.</p>', 'активен', 2, 8, './assets/images/upload/ozera.jpg', '2024-03-09 17:12:09'),
-	(26, 'Великие политические династии мира', 'История человечества богата событиями, связанными с политическими династиями и правителями.', '<p>История человечества богата событиями, связанными с политическими династиями и правителями. В этой статье мы рассмотрим некоторые из наиболее влиятельных и важных политических династий мира и их вклад в историю. От древних монархий до современных республик, эти династии оставили свой след в политической истории человечества.</p>', 'активен', 1, 8, './assets/images/upload/dynasty.jpg', '2024-03-11 17:12:10');
+INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`, `created_at`, `updated_at`) VALUES
+	(27, 'test1', 'test', '<p>dsadsadaa dsadsadaa dsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaa</p>', 'активен', 1, 8, './assets/images/upload/65f3b425d3422.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(28, 'test2', 'test2', '<p>sadsadadaadsadadaasadsadadaasadsadadaasadsadadaasadsadadaaa</p>', 'активен', 1, 8, './assets/images/upload/65f3b46cf13d9.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(29, 'test3', 'test3', '<p>sadadadaaddadadasdasdadawdawdadasdadasdada</p>', 'активен', 1, 8, './assets/images/upload/65f3b47ebfaad.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(30, 'тест 1 география', 'тест 1 география', '<p>asdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ab8e8e8.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(31, 'тест 2 география', 'тест 2 география', '<p>ывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфв</p>', 'активен', 2, 8, './assets/images/upload/65f3b4d3c155d.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(32, 'тест 3 география', 'тест 3 география', '<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ee2fed7.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59');
 
 -- Дамп структуры для таблица bigidea.post_hashtags
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
@@ -113,24 +113,20 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~16 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~12 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
-	(21, 27),
-	(21, 28),
-	(23, 31),
-	(23, 32),
-	(25, 35),
-	(25, 36),
-	(25, 37),
-	(26, 38),
-	(26, 39),
-	(27, 39),
-	(28, 40),
-	(28, 35),
-	(22, 29),
-	(22, 30),
-	(24, 33),
-	(24, 34);
+	(27, 40),
+	(27, 41),
+	(28, 42),
+	(28, 43),
+	(29, 44),
+	(29, 42),
+	(30, 45),
+	(30, 46),
+	(31, 47),
+	(31, 48),
+	(32, 49),
+	(32, 50);
 
 -- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (
@@ -143,10 +139,9 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_likes: ~2 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_likes: ~1 rows (приблизительно)
 INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
-	(24, 8),
-	(24, 11);
+	(28, 8);
 
 -- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (

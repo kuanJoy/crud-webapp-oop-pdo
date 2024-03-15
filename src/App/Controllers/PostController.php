@@ -37,9 +37,8 @@ class PostController
     public function updatePost()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['editPost'])) {
-            // Проверяем наличие всех обязательных полей и их значения
             $errors = [];
-            // Получаем данные из формы
+
             $title = $_POST['title'];
             $description = $_POST['description'];
             $categoryId = $_POST['categoryId'];
@@ -48,7 +47,7 @@ class PostController
 
             if (empty($title)) {
                 $errors["title"] = "Заголовок не может быть пустым";
-            } elseif ((!preg_match('/^.{3,70}$/u', $title))) {
+            } elseif (!preg_match('/^.{3,70}$/u', $title)) {
                 $errors["title"] = "Длина заголовка от 3 до 70 символов";
             } else {
                 $title = trim($title);
@@ -56,7 +55,7 @@ class PostController
 
             if (empty($description)) {
                 $errors["description"] = "Описание не может быть пустым";
-            } elseif ((!preg_match('/^.{3,255}$/u', $description))) {
+            } elseif (!preg_match('/^.{3,255}$/u', $description)) {
                 $errors["description"] = "Длина описания от 3 до 255 символов";
             } else {
                 $description = trim($description);
@@ -70,30 +69,11 @@ class PostController
 
             if (empty($errors)) {
                 $pic = $_POST['pic'];
-                if ($_FILES['newPic']['error'] === 0) {
-                    $newBannerPath = $this->handleBannerUpload($_FILES['newPic']);
-                    $currentBannerPath = $_POST['pic'];
-
-                    if ($newBannerPath !== false) {
-                        if (file_exists($currentBannerPath)) {
-                            if ($currentBannerPath !== './
-                            assets/images/upload/default_pic.jpg') {
-                                unlink($currentBannerPath);
-                                $pic = $newBannerPath;
-                            } else {
-                                $pic = $_POST['pic'];
-                            }
-                        } else {
-                            $pic = $_POST['pic'];
-                        }
-                    }
-                } else {
-                    $pic = $_POST['pic'];
-                }
+                $createdTime = date('Y-m-d H:i:s');
 
                 $postId = $_POST['postId'];
                 $hashtags = $_POST['hashtags'];
-                $result = $this->postModel->updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags);
+                $result = $this->postModel->updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags, $createdTime);
 
                 if ($result) {
                     header("Location: /post/$postId");
@@ -105,6 +85,7 @@ class PostController
             }
         }
     }
+
 
     public function getPostForEdit()
     {
