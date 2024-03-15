@@ -63,11 +63,23 @@
                     </form>
                     <form action="/post/<?= $onePost['likes']['id'] ?>" class="attribute__likes" method="post">
                         <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
-                        <button type="submit" name="sendLike" class="btn-post">
+                        <?php if ($onePost['like_on_post'] == 'not-liked') : ?>
+                            <button type="submit" name="sendLike" class="btn-post">
+                                <svg class="icon i-like">
+                                    <use href="/public/assets/images/svg/sprites.svg#heart" />
+                                </svg>
+                            </button>
+                        <?php elseif ($onePost['like_on_post'] == 'liked') : ?>
+                            <button type="submit" name="deleteLike" class="btn-post">
+                                <svg class="icon i-like">
+                                    <use href="/public/assets/images/svg/sprites.svg#heart-full" />
+                                </svg>
+                            </button>
+                        <?php else : ?>
                             <svg class="icon i-like">
-                                <use href="/public/assets/images/svg/sprites.svg#heart" />
+                                <use href="/public/assets/images/svg/sprites.svg#heart-full" />
                             </svg>
-                        </button>
+                        <?php endif; ?>
                         <span><?= $onePost['likes']['likes_count'] ?></span>
                     </form>
                     <a href="/user/<?= $onePost['post']['user_id'] ?>" class="attribute__likes">

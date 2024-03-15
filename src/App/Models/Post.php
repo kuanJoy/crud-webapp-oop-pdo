@@ -16,12 +16,35 @@ class Post
 
     public function sendLike($postId, $userId)
     {
-        $sql = "INSERT INTO post_likes (post_id, user_id) VALUES (:post_id, :user_id)";
-
+        $sql = "SELECT COUNT(*) FROM post_likes WHERE post_id = :post_id AND user_id = :user_id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':post_id', $postId);
         $stmt->bindParam(':user_id', $userId);
         $stmt->execute();
+        $count = $stmt->fetchColumn();
+
+        if ($count == 0) {
+            $sql = "INSERT INTO post_likes (post_id, user_id) VALUES (:post_id, :user_id)";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':post_id', $postId);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+        }
+    }
+
+    public function deleteLike($postId, $userId)
+    {
+        try {
+            $sql = "DELETE FROM post_likes WHERE post_id = :post_id AND user_id = :user_id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':post_id', $postId);
+            $stmt->bindParam(':user_id', $userId);
+            $stmt->execute();
+            return true;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 
     public function deletePost($id, $pic)
@@ -180,7 +203,12 @@ class Post
         $stmt->bindParam(':user_id', $userId);
         $stmt->bindParam(':post_id', $postId);
         $stmt->execute();
-        return $stmt->fetch();
+
+        if ($stmt->fetch()) {
+            return "liked";
+        } else {
+            return "not-liked";
+        }
     }
 
     public function getPosts()

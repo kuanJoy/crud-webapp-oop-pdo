@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
 
 -- Дамп данных таблицы bigidea.posts: ~6 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`, `created_at`, `updated_at`) VALUES
-	(27, 'test1', 'test', '<p>dsadsadaa dsadsadaa dsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaadsadsadaa dsadsadaa</p>', 'активен', 1, 8, './assets/images/upload/65f3b425d3422.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(27, 'test1', 'test', '<p>testtttttttttttttttttttt</p>', 'активен', 1, 8, './assets/images/upload/65f3b425d3422.jpg', '2024-03-15 02:49:59', '2024-03-15 03:13:24'),
 	(28, 'test2', 'test2', '<p>sadsadadaadsadadaasadsadadaasadsadadaasadsadadaasadsadadaaa</p>', 'активен', 1, 8, './assets/images/upload/65f3b46cf13d9.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
 	(29, 'test3', 'test3', '<p>sadadadaaddadadasdasdadawdawdadasdadasdada</p>', 'активен', 1, 8, './assets/images/upload/65f3b47ebfaad.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
 	(30, 'тест 1 география', 'тест 1 география', '<p>asdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ab8e8e8.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
@@ -113,10 +113,8 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~12 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~14 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
-	(27, 40),
-	(27, 41),
 	(28, 42),
 	(28, 43),
 	(29, 44),
@@ -126,7 +124,11 @@ INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(31, 47),
 	(31, 48),
 	(32, 49),
-	(32, 50);
+	(32, 50),
+	(8, 40),
+	(8, 41),
+	(27, 40),
+	(27, 41);
 
 -- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (

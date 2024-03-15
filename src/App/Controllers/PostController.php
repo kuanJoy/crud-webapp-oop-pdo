@@ -25,6 +25,16 @@ class PostController
         }
     }
 
+    public function deleteLike()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deleteLike'])) {
+            $postId = basename($_SERVER['REQUEST_URI']);
+            $userId = $_SESSION['id_user'];
+
+            return $this->postModel->deleteLike($postId, $userId);
+        }
+    }
+
     public function deletePost()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['deletePost'])) {
@@ -111,11 +121,12 @@ class PostController
     public function getPostById()
     {
         $postId = basename($_SERVER['REQUEST_URI']);
-        $likeOnPost = null;
 
-        if (isset($_SESSION['user_id'])) {
-            $userId = $_SESSION['user_id'];
-            $likeOnPost = $this->postModel->getUserLikeOnPost($postId, $userId);
+        if (isset($_SESSION['id_user'])) {
+            $userId = $_SESSION['id_user'];
+            $likeOnPost = $this->postModel->getUserLikeOnPost($userId, $postId);
+        } else {
+            return 'guest';
         }
 
         $post =  $this->postModel->getPostById($postId);
@@ -126,9 +137,11 @@ class PostController
             'post' => $post,
             'hashtags' => $hashtags,
             'likes' => $likes,
-            'like_on_post' => $likeOnPost,
+            'like_on_post' => $likeOnPost
         ];
     }
+
+
 
     public function getRandomPosts()
     {
