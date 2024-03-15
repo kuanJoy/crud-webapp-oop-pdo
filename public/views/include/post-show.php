@@ -43,14 +43,14 @@
             <?php if (isset($_SESSION['role']) || isset($_SESSION['id_user'])) : ?>
                 <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор' || $_SESSION['id_user'] == $onePost['post']['user_id']) : ?>
                     <div class="attribute__likes" method="get">
-                        <a href="/edit/<?= basename($_SERVER['REQUEST_URI']) ?>" class="btn-post">
+                        <a href="/edit/<?= $onePost['likes']['id'] ?>" class="btn-post">
                             <svg class="icon i-like">
                                 <use href="/public/assets/images/svg/sprites.svg#edit" />
                             </svg>
                             Изменить
                         </a>
                     </div>
-                    <form action="/" class="attribute__likes" method="post">
+                    <form class="attribute__likes" method="post">
                         <input type="hidden" name="postId" value="<?= $onePost['likes']['id'] ?>">
                         <input type="hidden" name="pic" value="<?= $onePost['post']['pic'] ?>">
                         <input type="hidden" name="postAuthor" value="<?= $onePost['post']['user_id'] ?>">
@@ -61,8 +61,8 @@
                             удалить
                         </button>
                     </form>
-                    <form action="/post/<?= basename($_SERVER['REQUEST_URI']) ?>" class="attribute__likes" method="post">
-                        <input type="hidden" name="postId" value="<?= basename($_SERVER['REQUEST_URI'])  ?>">
+                    <form action="/post/<?= $onePost['likes']['id'] ?>" class="attribute__likes" method="post">
+                        <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
                         <button type="submit" name="sendLike" class="btn-post">
                             <svg class="icon i-like">
                                 <use href="/public/assets/images/svg/sprites.svg#heart" />

@@ -27,45 +27,46 @@ class Post
     public function deletePost($id, $pic)
     {
         $id = intval($id);
+        if ($id <= 0) {
+            return false;
+        }
+
+        var_dump($id);
+
         try {
             $this->db->getConnection()->beginTransaction();
 
             $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
 
-            $sql = "DELETE FROM posts WHERE posts.id = :id";
+            $sql = "DELETE FROM posts WHERE id = :id";
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
             $tables = ['post_hashtags', 'post_likes'];
-
-            if (!empty($tables)) {
-                foreach ($tables as $table) {
-                    $sql = "DELETE FROM $table WHERE post_id = :id";
-                    $stmt = $this->db->getConnection()->prepare($sql);
-                    $stmt->bindParam(':id', $id);
-                    $stmt->execute();
-                }
+            foreach ($tables as $table) {
+                $sql = "DELETE FROM $table WHERE post_id = :id";
+                $stmt = $this->db->getConnection()->prepare($sql);
+                $stmt->bindParam(':id', $id);
+                $stmt->execute();
             }
 
             $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
 
             $this->db->getConnection()->commit();
 
-            if (file_exists($pic)) {
-                if ($pic !== './
-                            assets/images/upload/default_pic.jpg') {
-                    unlink($pic);
-                }
+            if (file_exists($pic) && $pic !== './assets/images/upload/default_pic.jpg') {
+                unlink($pic);
             }
 
-            exit();
+            return true;
         } catch (PDOException $e) {
             $this->db->getConnection()->rollBack();
-            echo "Error: " . $e->getMessage();
+            error_log("Error deleting post: " . $e->getMessage());
             return false;
         }
     }
+
 
     public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags)
     {
