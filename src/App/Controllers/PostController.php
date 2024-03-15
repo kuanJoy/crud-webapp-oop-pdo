@@ -126,7 +126,7 @@ class PostController
             $userId = $_SESSION['id_user'];
             $likeOnPost = $this->postModel->getUserLikeOnPost($userId, $postId);
         } else {
-            return 'guest';
+            $likeOnPost = 'guest';
         }
 
         $post =  $this->postModel->getPostById($postId);

@@ -1,4 +1,3 @@
-<?php var_dump($onePost) ?>
 <div class="post">
     <?php if (isset($_SESSION['lastCategory'])) : ?>
         <form class="post__back" action="<?= $_SESSION['lastCategory'] ?>">
@@ -9,7 +8,7 @@
         </form>
     <?php else : ?>
         <div style="display: flex;justify-content: space-between;max-width: 59rem;width: 75%;margin: 0 auto;">
-            <a href="/" class="post__back">
+            <a href="/" class="post__back" style="margin: 0;">
                 <svg class="auth__icon">
                     <use href="/public/assets/images/svg/sprites.svg#home"></use>
                 </svg>
@@ -89,6 +88,23 @@
                         <span><?= $onePost['post']['username'] ?></span>
                     </a>
                 <?php endif; ?>
+            <?php endif; ?>
+            <?php if ($onePost['like_on_post'] == 'guest') : ?>
+                <div class="attribute__likes">
+                    <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
+                    <a href="/login" class="btn-post">
+                        <svg class="icon i-like">
+                            <use href="/public/assets/images/svg/sprites.svg#heart" />
+                        </svg>
+                    </a>
+                    <span><?= $onePost['likes']['likes_count'] ?></span>
+                </div>
+                <a href="/user/<?= $onePost['post']['user_id'] ?>" class="attribute__likes">
+                    <svg class="icon">
+                        <use href="/public/assets/images/svg/sprites.svg#user" />
+                    </svg>
+                    <span><?= $onePost['post']['username'] ?></span>
+                </a>
             <?php endif; ?>
         </div>
     </div>
