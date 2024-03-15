@@ -53,7 +53,7 @@ class Router
 
         foreach ($this->routes[$method] as $route => $callback) {
             if (strpos($route, '{id}') !== false) {
-                $pattern = str_replace('{id}', '(\d+)', $route);
+                $pattern = str_replace('{id}', '(.+)', $route); // Changed to match any characters
                 if (preg_match('#^' . $pattern . '$#', $uri, $matches)) {
                     $id = $matches[1];
                     return [$callback, $id];

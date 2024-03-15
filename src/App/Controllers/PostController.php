@@ -164,6 +164,7 @@ class PostController
         return $this->postModel->getPostsByCategory($categoryId);
     }
 
+
     public function getPostsForBanner()
     {
         return $this->postModel->getPostsForBanner();
@@ -172,6 +173,12 @@ class PostController
     public function getHashtagsForMain()
     {
         return $this->postModel->getHashtagsForMain();
+    }
+
+    public function getPostsByHashtag()
+    {
+        $hashtagName = basename($_SERVER['REQUEST_URI']);
+        return $this->postModel->getPostsByHashtag($hashtagName);
     }
 
     public function getCategoriesForNavbar()

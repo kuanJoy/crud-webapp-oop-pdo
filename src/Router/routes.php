@@ -55,3 +55,8 @@ $router->addRoute('GET', "/category/{$id}", function ($id) {
 
 // POPULAR
 $router->addRoute('GET', '/popular', 'views/popular.php');
+
+// SHOW POSTS BY HASHTAG
+$router->addRoute('GET', "/hashtag/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/hashtag.php";
+});

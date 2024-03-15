@@ -61,8 +61,9 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   UNIQUE KEY `unique_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.hashtags: ~11 rows (приблизительно)
+-- Дамп данных таблицы bigidea.hashtags: ~12 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
+	(51, ''),
 	(50, 'test 3 geo'),
 	(43, 'test1'),
 	(42, 'test2'),
@@ -94,14 +95,17 @@ CREATE TABLE IF NOT EXISTS `posts` (
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.posts: ~6 rows (приблизительно)
+-- Дамп данных таблицы bigidea.posts: ~9 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`, `created_at`, `updated_at`) VALUES
-	(27, 'test1', 'test', '<p>testtttttttttttttttttttt</p>', 'активен', 1, 8, './assets/images/upload/65f3b425d3422.jpg', '2024-03-15 02:49:59', '2024-03-15 03:13:24'),
+	(27, 'test1111111', 'tesssstt 1', '<p>dsadadasdas</p>', 'активен', 1, 8, './assets/images/upload/65f3b425d3422.jpg', '2024-03-15 02:49:59', '2024-03-15 04:15:11'),
 	(28, 'test2', 'test2', '<p>sadsadadaadsadadaasadsadadaasadsadadaasadsadadaasadsadadaaa</p>', 'активен', 1, 8, './assets/images/upload/65f3b46cf13d9.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
 	(29, 'test3', 'test3', '<p>sadadadaaddadadasdasdadawdawdadasdadasdada</p>', 'активен', 1, 8, './assets/images/upload/65f3b47ebfaad.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
 	(30, 'тест 1 география', 'тест 1 география', '<p>asdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadadaasdadasdadadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ab8e8e8.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
 	(31, 'тест 2 география', 'тест 2 география', '<p>ывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфвывфвфвфвфв</p>', 'активен', 2, 8, './assets/images/upload/65f3b4d3c155d.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
-	(32, 'тест 3 география', 'тест 3 география', '<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ee2fed7.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59');
+	(32, 'тест 3 география', 'тест 3 география', '<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>\r\n<p>adsadada</p>', 'активен', 2, 8, './assets/images/upload/65f3b4ee2fed7.jpg', '2024-03-15 02:49:59', '2024-03-15 02:49:59'),
+	(35, 'test4', 'test4', '<p>test4</p>', 'активен', 1, 8, './assets/images/upload/default_pic.jpg', '2024-03-15 04:22:58', '2024-03-15 04:22:58'),
+	(36, 'test5', 'test5', '<p>test5</p>', 'активен', 1, 8, './assets/images/upload/default_pic.jpg', '2024-03-15 04:23:12', '2024-03-15 04:23:12'),
+	(37, 'test6', 'test6', '<p>test6</p>', 'активен', 1, 8, './assets/images/upload/default_pic.jpg', '2024-03-15 04:23:24', '2024-03-15 04:23:24');
 
 -- Дамп структуры для таблица bigidea.post_hashtags
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
@@ -113,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `post_hashtags` (
   CONSTRAINT `fk_post_hashtags_post_id` FOREIGN KEY (`post_id`) REFERENCES `posts` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_hashtags: ~14 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_hashtags: ~17 rows (приблизительно)
 INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(28, 42),
 	(28, 43),
@@ -128,7 +132,10 @@ INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 	(8, 40),
 	(8, 41),
 	(27, 40),
-	(27, 41);
+	(27, 41),
+	(35, 51),
+	(36, 51),
+	(37, 51);
 
 -- Дамп структуры для таблица bigidea.post_likes
 CREATE TABLE IF NOT EXISTS `post_likes` (

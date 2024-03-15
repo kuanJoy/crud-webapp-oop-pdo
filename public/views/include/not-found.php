@@ -1,8 +1,8 @@
-<div class="not__found">
-    <p><?= $title ?> не существует</p>
+<div class="not__found" style="max-width: 59rem; margin: 0 auto; padding-top: 2rem">
+    <p style="width: 100%;"><?= $title ?> не существует</p>
     <?php if (isset($_SESSION['lastCategory'])) : ?>
         <form class="post__back" action="<?= $_SESSION['lastCategory'] ?>">
-            <button type="submit">
+            <button type="submit" style="color: black">
                 <svg class="auth__icon">
                     <use href="/public/assets/images/svg/sprites.svg#back"></use>
                 </svg>назад</button>

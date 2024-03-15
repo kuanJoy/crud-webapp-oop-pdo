@@ -54,19 +54,22 @@ class Post
             return false;
         }
 
-        var_dump($id);
-
         try {
             $this->db->getConnection()->beginTransaction();
 
             $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
+            $sql = "DELETE FROM post_likes WHERE post_id = :id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->execute();
 
             $sql = "DELETE FROM posts WHERE id = :id";
             $stmt = $this->db->getConnection()->prepare($sql);
             $stmt->bindParam(':id', $id);
             $stmt->execute();
 
-            $tables = ['post_hashtags', 'post_likes'];
+            $tables = ['post_hashtags'];
             foreach ($tables as $table) {
                 $sql = "DELETE FROM $table WHERE post_id = :id";
                 $stmt = $this->db->getConnection()->prepare($sql);
@@ -89,7 +92,6 @@ class Post
             return false;
         }
     }
-
 
     public function updatePost($postId, $title, $description, $categoryId, $content, $status, $pic, $hashtags, $createdTime)
     {
@@ -116,16 +118,13 @@ class Post
             $stmt->bindParam(':post_id', $postId);
             $stmt->execute();
 
-            // Adding new hashtags for this post
             foreach ($hashtags as $hashtagName) {
-                // Check if a hashtag with this name exists
                 $sql = "SELECT id FROM hashtags WHERE name = :hashtag_name";
                 $stmt = $this->db->getConnection()->prepare($sql);
                 $stmt->bindParam(':hashtag_name', $hashtagName);
                 $stmt->execute();
                 $hashtagId = $stmt->fetchColumn();
 
-                // If the hashtag exists, insert its id into the post_hashtags table
                 if ($hashtagId) {
                     $sql = "INSERT INTO post_hashtags (post_id, hashtag_id) VALUES (:post_id, :hashtag_id)";
                     $stmt = $this->db->getConnection()->prepare($sql);
@@ -276,10 +275,24 @@ class Post
                 LEFT JOIN post_hashtags ON hashtags.id = post_hashtags.hashtag_id
                 LEFT JOIN posts ON post_hashtags.post_id = posts.id
                 LEFT JOIN post_likes ON posts.id = post_likes.post_id
+                WHERE hashtags.name IS NOT NULL AND hashtags.name != ''
                 GROUP BY hashtags.id
                 ORDER BY likes_count DESC
                 LIMIT 20";
         return $this->db->getConnection()->query($sql)->fetchAll();
+    }
+
+    public function getPostsByHashtag($hashtagName)
+    {
+        $sql = "SELECT DISTINCT posts.id, posts.title, posts.description, posts.pic, hashtags.name FROM posts 
+                INNER JOIN post_hashtags ON posts.id = post_hashtags.post_id 
+                INNER JOIN hashtags ON post_hashtags.hashtag_id = hashtags.id 
+                WHERE hashtags.name = :hashtag_name";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':hashtag_name', $hashtagName);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
     }
 
     public function getCategoriesForNavbar()
