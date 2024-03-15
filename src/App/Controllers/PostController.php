@@ -177,7 +177,7 @@ class PostController
 
     public function getPostsByHashtag()
     {
-        $hashtagName = basename($_SERVER['REQUEST_URI']);
+        $hashtagName = urldecode(basename($_SERVER['REQUEST_URI']));
         return $this->postModel->getPostsByHashtag($hashtagName);
     }
 
