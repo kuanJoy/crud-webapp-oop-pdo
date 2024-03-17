@@ -53,7 +53,7 @@ $categories = $post->getCategoriesForNavbar();
                             Профиль
                         </a>
                         <ul class="dropdown-menu">
-                            <a href="/favourite" class="dropdown-item">
+                            <a href="/favourite/<?= $_SESSION['id_user'] ?>" class="dropdown-item">
                                 <svg class="icon i-category">
                                     <use href="/public/assets/images/svg/sprites.svg#favourite" />
                                 </svg>

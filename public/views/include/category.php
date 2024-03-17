@@ -1,8 +1,20 @@
 <div class="random-container">
-    <h3 class="random__title"><?= $posts[0]['category_name'] ?><svg class="icon i-category">
-            <use href="/public/assets/images/svg/sprites.svg#folder" />
-        </svg></h3>
-    <div class="random__rows">
+    <div style="display: flex; align-items: center;">
+        <a style="display: flex;" href="/popular">
+            <button type="submit">
+                <svg class="auth__icon">
+                    <use href="/public/assets/images/svg/sprites.svg#back"></use>
+                </svg>назад
+            </button>
+        </a>
+        <h3 class="random__title" style="margin: 0 auto; padding-right: 2rem">
+            <?= $posts[0]['category_name'] ?>
+            <svg class="icon i-category">
+                <use href="/public/assets/images/svg/sprites.svg#folder" />
+            </svg>
+        </h3>
+    </div>
+    <div class="random__rows" style="margin-top: 2rem;">
         <?php foreach ($posts as $post) : ?>
             <div class="random__card">
                 <img src="/public/<?= $post['pic'] ?>" alt="">

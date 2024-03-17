@@ -1,11 +1,11 @@
 <div class="post">
     <?php if (isset($_SESSION['lastCategory'])) : ?>
-        <form class="post__back" action="<?= $_SESSION['lastCategory'] ?>">
+        <a class="post__back" href="<?= $_SESSION['lastCategory'] ?>">
             <button type="submit">
                 <svg class="auth__icon">
                     <use href="/public/assets/images/svg/sprites.svg#back"></use>
                 </svg>назад</button>
-        </form>
+        </a>
     <?php else : ?>
         <div style="display: flex;justify-content: space-between;max-width: 59rem;width: 75%;margin: 0 auto;">
             <a href="/" class="post__back" style="margin: 0;">
@@ -31,7 +31,7 @@
         <div class="category-hashtags">
             <span class="post__attribute"><?= $onePost['post']['category_name'] ?></span>
             <?php foreach ($onePost['hashtags'] as $hashtag) : ?>
-                <span class="post__attribute">#<?= $hashtag['name'] ?></span>
+                <a href="/hashtag/<?= $hashtag['name'] ?>" class="post__attribute">#<?= $hashtag['name'] ?></a>
             <?php endforeach; ?>
         </div>
     </div>
@@ -106,6 +106,13 @@
                     <span><?= $onePost['post']['username'] ?></span>
                 </a>
             <?php endif; ?>
+            <div class="attribute__likes">
+                <b><span><?= substr(strval($onePost['post']['posts_time']), 0, 10) ?></span></b>
+            </div>
         </div>
     </div>
 </div>
+<?php
+echo "<pre>";
+var_dump($onePost);
+echo "</pre>";

@@ -148,7 +148,7 @@ class Post
 
     public function getPostById($id)
     {
-        $sql = "SELECT posts.*, categories.name AS category_name, users.username, users.id
+        $sql = "SELECT posts.*, DATE_FORMAT(posts.created_at, '%d.%m.%y') AS posts_time, categories.name AS category_name, users.username, users.id
         FROM posts 
         LEFT JOIN categories ON posts.category_id = categories.id 
         LEFT JOIN users ON posts.user_id = users.id
@@ -168,9 +168,10 @@ class Post
 
     public function getFavouritePosts($id)
     {
-        $sql = "SELECT ps.post_id, ps.user_id, p.id, p.title, p.description
+        $sql = "SELECT ps.post_id, ps.user_id, p.id, p.title, p.description, p.pic, u.username
                 FROM post_likes AS ps 
                 INNER JOIN posts AS p ON ps.post_id = p.id 
+                INNER JOIN users AS u ON ps.user_id = u.id 
                 WHERE ps.user_id = :user_id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(":user_id", $id);
