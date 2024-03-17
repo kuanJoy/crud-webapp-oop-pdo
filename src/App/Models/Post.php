@@ -180,6 +180,18 @@ class Post
         return $stmt->fetchAll();
     }
 
+    public function getUserPosts($id)
+    {
+        $sql = "SELECT p.id, p.title, p.description, p.pic, u.username FROM posts AS p
+                INNER JOIN users AS u ON p.user_id = u.id
+                WHERE p.user_id = :user_id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(":user_id", $id);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     public function getPostHashtags($id)
     {
         $sql = "SELECT hashtags.name 

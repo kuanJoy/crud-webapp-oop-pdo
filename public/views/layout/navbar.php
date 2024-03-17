@@ -59,6 +59,12 @@ $categories = $post->getCategoriesForNavbar();
                                 </svg>
                                 Избранное
                             </a>
+                            <a href="/user/<?= $_SESSION['id_user'] ?>" class="dropdown-item">
+                                <svg class="icon i-category">
+                                    <use href="/public/assets/images/svg/sprites.svg#posts" />
+                                </svg>
+                                Мои статьи
+                            </a>
                             <li><a class="dropdown-item" href="/create-post">
                                     <svg class="icon i-category">
                                         <use href="/public/assets/images/svg/sprites.svg#add" />

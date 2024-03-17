@@ -104,6 +104,32 @@ a {
   margin-top: 2rem;
 }
 
+.not_found {
+  max-width: 59rem;
+  margin: 0 auto;
+  margin-top: 3rem;
+  background-color: #f0f2fa;
+  padding: 1.25rem;
+  border-radius: 0.9rem;
+}
+.not_found_row {
+  display: flex;
+  align-items: center;
+}
+.not_found_title {
+  font-size: clamp(1.5rem, 0.3542rem + 0.7778vw, 2rem);
+  text-align: center;
+  margin: 0 auto;
+  padding-right: 2rem;
+}
+.not_found_img {
+  padding-top: 1rem;
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 30%;
+}
+
 .container {
   max-width: 59rem;
   margin: 0 auto;

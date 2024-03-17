@@ -60,9 +60,12 @@ $router->addRoute('GET', '/popular', 'views/popular.php');
 $router->addRoute('GET', "/favourite/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/favourite.php";
 });
-$router->addRoute('POST', "/favourite/{$id}", function ($id) {
-    include_once __DIR__ . "/../../public/views/favourite.php";
+
+// USERS POST
+$router->addRoute('GET', "/user/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/user.php";
 });
+
 
 // SHOW POSTS BY HASHTAG
 $router->addRoute('GET', "/hashtag/{$id}", function ($id) {

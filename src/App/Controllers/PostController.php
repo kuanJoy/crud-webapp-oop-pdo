@@ -147,6 +147,12 @@ class PostController
         return $this->postModel->getFavouritePosts($userId);
     }
 
+    public function getUserPosts()
+    {
+        $userId = intval(basename($_SERVER['REQUEST_URI']));
+        return $this->postModel->getUserPosts($userId);
+    }
+
     public function getRandomPosts()
     {
         return $this->postModel->getRandomPosts();

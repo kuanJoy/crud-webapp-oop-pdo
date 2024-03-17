@@ -1,6 +1,6 @@
 <div class="random-container">
     <h3 class="random__title">Избранное <?= $favourites[0]['username'] ?> <svg class="icon i-category">
-            <use href="/public/assets/images/svg/sprites.svg#random" />
+            <use href="/public/assets/images/svg/sprites.svg#heart-full" />
         </svg></h3>
     <div class="random__rows">
         <?php foreach ($favourites as $favourite) : ?>
