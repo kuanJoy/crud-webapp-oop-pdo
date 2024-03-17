@@ -67,24 +67,37 @@ $categories = $post->getCategoriesForNavbar();
                                 </svg>
                                 Мои статьи
                             </a>
-                            <li><a class="dropdown-item" href="/create-post">
+                            <li>
+                                <a class="dropdown-item" href="/create-post">
                                     <svg class="icon i-category">
                                         <use href="/public/assets/images/svg/sprites.svg#add" />
-                                    </svg>Добавить</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
+                                    </svg>Добавить
+                                </a>
                             </li>
-                            <form method="post" action="/">
-                                <button type="submit" name="logout" class="dropdown-item">
-                                    <svg class="auth__icon mt1">
-                                        <use href="/public/assets/images/svg/sprites.svg#exit" />
-                                    </svg>Выйти</button>
-                            </form>
+                            <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == "модератор") : ?>
+                                <li>
+                                    <a class="dropdown-item" href="/admin">
+                                        <svg class="icon i-category">
+                                            <use href="/public/assets/images/svg/sprites.svg#admin" />
+                                        </svg>Админка
+                                    </a>
+                                </li>
+                            <?php endif; ?>
+                            <hr class=" dropdown-divider">
+                            <li>
+                                <form method="post" action="/">
+                                    <button type="submit" name="logout" class="dropdown-item">
+                                        <svg class="auth__icon mt1">
+                                            <use href="/public/assets/images/svg/sprites.svg#exit" />
+                                        </svg>Выйти
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </li>
                 <?php else : ?>
                     <a href="/login" class="nav__link">Войти</a>
-                <? endif; ?>
+                <?php endif; ?>
             </div>
         </div>
 </div>
