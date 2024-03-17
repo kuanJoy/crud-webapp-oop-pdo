@@ -1,10 +1,12 @@
 <div class="create-post" style="padding-top: 2rem">
     <div class="post__box" style="margin-bottom: 1rem;">
         <?php if (isset($errorsCat)) : ?>
-            <span class="err"><?= $errorsCat ?></span>
+            <?php foreach ($errorsCat as $error) : ?>
+                <span class="err"><?= $error ?></span>
+            <?php endforeach; ?>
         <?php endif ?>
         <span class="input-box__span">Добавьте свою категорию: </span>
-        <form method="post" action="/create-post" class="input-box" style="border: none; width: 100%; border-top: 2px solid #e3e5ed; border-radius: 0; padding-right: 5px">
+        <form method="post" class="input-box" style="border: none; width: 100%; border-top: 2px solid #e3e5ed; border-radius: 0; padding-right: 5px">
             <input name="newCategory" type="text" class="input-box" style="border: none; width: 100%; border-radius: 0; padding: 0; font-size: 14px" placeholder="Введите категорию">
             <button class="btn_h add_h" type="submit" name="createCat">Создать</button>
         </form>

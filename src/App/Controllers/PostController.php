@@ -170,25 +170,30 @@ class PostController
             $category = $_POST['newCategory'];
             if (empty($category)) {
                 $errors["category"] = "Категория не может быть пустой";
-            } elseif ((!preg_match('/^.{3,70}$/u', $category))) {
+            } elseif (!preg_match('/^.{3,70}$/u', $category)) {
                 $errors["category"] = "Длина категории от 3 до 70 символов";
             } else {
                 $category = trim($category);
             }
 
-            if ($_SESSION['role'] == 'админ' && $_SESSION['role'] == "модератор") {
+            if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == "модератор") {
                 $status = '2';
             } else {
                 $status = '1';
             }
 
             if (empty($errors)) {
-                return $this->postModel->createCategory($category, $status);
+                $result = $this->postModel->createCategory($category, $status);
+                if ($result === "Категория успешно добавлена") {
+                    header("Location: /create-post");
+                    exit();
+                }
             }
 
             return $errors;
         }
     }
+
 
     public function getCategoriesCount()
     {
