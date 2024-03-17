@@ -200,6 +200,11 @@ class PostController
         return $this->postModel->getCategoriesCount();
     }
 
+    public function getHashtagsCount()
+    {
+        return $this->postModel->getHashtagsCount();
+    }
+
     public function getPostsByCategory()
     {
         $categoryId = basename($_SERVER['REQUEST_URI']);

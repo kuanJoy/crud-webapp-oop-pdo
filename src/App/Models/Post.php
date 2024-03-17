@@ -279,6 +279,21 @@ class Post
         return $stmt->fetchAll();
     }
 
+    public function getHashtagsCount()
+    {
+        $sql = "SELECT h.name AS hashtag, COUNT(ph.post_id) AS count
+                FROM hashtags h
+                LEFT JOIN post_hashtags ph ON h.id = ph.hashtag_id
+                GROUP BY h.id
+                HAVING hashtag != ''
+                ORDER BY count DESC
+                LIMIT 5;";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll();
+    }
+
     public function getPostsByCategory($id)
     {
         $sql = "SELECT posts.*, 

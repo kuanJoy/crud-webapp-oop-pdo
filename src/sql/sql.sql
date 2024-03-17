@@ -151,9 +151,10 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
 
 -- Дамп данных таблицы bigidea.post_likes: ~3 rows (приблизительно)
 INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
+	(27, 8),
+	(27, 11),
 	(28, 8),
-	(30, 8),
-	(31, 8);
+	(30, 8);
 
 -- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (

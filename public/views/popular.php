@@ -8,6 +8,7 @@ $verification->redirectToVerifyEmail();
 
 $post = new PostController();
 $categoriesCount = $post->getCategoriesCount();
+$hashtagsCount = $post->getHashtagsCount();
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
