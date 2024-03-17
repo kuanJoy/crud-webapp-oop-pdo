@@ -62,10 +62,12 @@
         padding: 0.8rem
         text-align: justify
         word-wrap: break-word
+        font-size: $fz13
     &__btns
         border-top: 1px solid #e3e5ed
         padding: 0.8rem 0.8rem 0rem 0.8rem
         display: flex
+        flex-wrap: wrap
         gap: 1rem
     &__back
         max-width: 59rem
@@ -120,3 +122,9 @@
 .current-img
     height: auto
     background-size: cover
+
+@media screen and (max-width: 600px)
+    .post__banner
+        width: 95%
+    .post__container
+        width: 95%

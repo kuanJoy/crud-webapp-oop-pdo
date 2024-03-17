@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_likes: ~3 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_likes: ~4 rows (приблизительно)
 INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
 	(27, 8),
 	(27, 11),

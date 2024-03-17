@@ -587,11 +587,13 @@ li {
   padding: 0.8rem;
   text-align: justify;
   word-wrap: break-word;
+  font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
 }
 .post__btns {
   border-top: 1px solid #e3e5ed;
   padding: 0.8rem 0.8rem 0rem 0.8rem;
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 .post__back {
@@ -658,6 +660,14 @@ li {
   background-size: cover;
 }
 
+@media screen and (max-width: 600px) {
+  .post__banner {
+    width: 95%;
+  }
+  .post__container {
+    width: 95%;
+  }
+}
 .popular {
   padding-top: 2rem;
   display: flex;
@@ -741,6 +751,19 @@ li {
   transition: box-shadow 0.3s ease;
 }
 
+@media screen and (max-width: 900px) {
+  .random__card {
+    width: calc(50% - 20px);
+  }
+}
+@media screen and (max-width: 412px) {
+  .random__rows {
+    justify-content: center;
+  }
+  .random__card {
+    width: 100%;
+  }
+}
 .random__card:hover {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }

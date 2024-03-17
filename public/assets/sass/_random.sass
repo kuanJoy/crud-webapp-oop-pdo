@@ -26,6 +26,16 @@
     box-shadow: 0px 2px 3px #00040112
     transition: box-shadow 0.3s ease
 
+@media screen and (max-width: 900px)
+    .random__card
+        width: calc(50% - 20px)
+
+@media screen and (max-width: 412px)
+    .random__rows
+        justify-content: center
+    .random__card
+        width: 100%
+
 .random__card:hover
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
 

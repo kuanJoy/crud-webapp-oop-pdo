@@ -416,4 +416,9 @@ class Post
             return false;
         }
     }
+
+    public function getTable()
+    {
+        $sql = "";
+    }
 }
