@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Хост:                         127.0.0.1
--- Версия сервера:               5.6.51-log - MySQL Community Server (GPL)
+-- Версия сервера:               5.6.51 - MySQL Community Server (GPL)
 -- Операционная система:         Win64
 -- HeidiSQL Версия:              12.1.0.6537
 -- --------------------------------------------------------
@@ -24,8 +24,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(70) NOT NULL,
   `status` enum('активен','скрыт') DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `unique_name` (`name`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы bigidea.categories: ~7 rows (приблизительно)
 INSERT INTO `categories` (`id`, `name`, `status`) VALUES
@@ -59,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы bigidea.hashtags: ~12 rows (приблизительно)
 INSERT INTO `hashtags` (`id`, `name`) VALUES
@@ -93,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `posts` (
   KEY `fk_posts_user_id` (`user_id`),
   CONSTRAINT `fk_posts_category_id` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_posts_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4;
 
 -- Дамп данных таблицы bigidea.posts: ~9 rows (приблизительно)
 INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `category_id`, `user_id`, `pic`, `created_at`, `updated_at`) VALUES
@@ -148,9 +149,11 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
   CONSTRAINT `fk_post_likes_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Дамп данных таблицы bigidea.post_likes: ~1 rows (приблизительно)
+-- Дамп данных таблицы bigidea.post_likes: ~3 rows (приблизительно)
 INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
-	(28, 8);
+	(28, 8),
+	(30, 8),
+	(31, 8);
 
 -- Дамп структуры для таблица bigidea.users
 CREATE TABLE IF NOT EXISTS `users` (

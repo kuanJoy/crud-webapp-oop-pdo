@@ -242,6 +242,28 @@ class Post
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
+    public function createCategory($name, $status)
+    {
+        $sql = "INSERT INTO categories (name, status) VALUES (:name, :status)";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':status', $status);
+
+        try {
+            if ($stmt->execute()) {
+                return "Категория успешно добавлена";
+            }
+        } catch (\PDOException $e) {
+            if ($e->errorInfo[1] == 1062) {
+                // 1062 это ошибка что ключ имеется
+                return "Категория уже существует";
+            } else {
+                return "Произошла ошибка при выполнении запроса";
+            }
+        }
+    }
+
+
     public function getCategoriesCount()
     {
         $sql = "SELECT categories.id AS category_id,
@@ -323,9 +345,7 @@ class Post
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT c.id, c.name, c.status
-                FROM categories c
-                WHERE c.status = 'активен';";
+        $sql = "SELECT * FROM categories";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 

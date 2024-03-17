@@ -13,15 +13,15 @@
                         <a href="/post/<?= $post['id'] ?>" class="btn read-more">Читать</a>
                     </div>
                 </div>
+            <?php endforeach; ?>
         </div>
-    <?php endforeach; ?>
-<?php else : ?>
-    <div style="display: flex; align-items: center;">
-        <p style="min-width: 150px; color: red;">Список пуст</p>
-        <a class="dropdown-item" href="/create-post" style="margin: 0 auto; padding-right: 2rem">
-            <svg class="icon i-category">
-                <use href="/public/assets/images/svg/sprites.svg#add" />
-            </svg>Добавить статью</a></li>
-    </div>
-<?php endif; ?>
+    <?php else : ?>
+        <div style="display: flex; align-items: center;">
+            <p style="min-width: 150px; color: red;">Список пуст</p>
+            <a class="dropdown-item" href="/create-post" style="margin: 0 auto; padding-right: 2rem">
+                <svg class="icon i-category">
+                    <use href="/public/assets/images/svg/sprites.svg#add" />
+                </svg>Добавить статью</a></li>
+        </div>
+    <?php endif; ?>
 </div>

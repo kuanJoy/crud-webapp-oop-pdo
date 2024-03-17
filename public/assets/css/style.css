@@ -130,6 +130,10 @@ a {
   width: 30%;
 }
 
+.form__select::ms-expand {
+  display: none;
+}
+
 .container {
   max-width: 59rem;
   margin: 0 auto;
@@ -416,7 +420,6 @@ li {
 }
 
 .create-post {
-  padding-top: 2rem;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
@@ -520,6 +523,16 @@ li {
   gap: 1rem;
   margin: 0 auto;
   max-width: 59rem;
+}
+.post__box {
+  display: flex;
+  flex-direction: column;
+  width: 49%;
+  border-radius: 0.3125rem;
+  border: 2px solid;
+  border-color: #e3e5ed;
+  display: flex;
+  align-items: center;
 }
 .post__banner {
   margin: 0 auto;

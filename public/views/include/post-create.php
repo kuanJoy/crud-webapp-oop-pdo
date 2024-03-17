@@ -1,4 +1,29 @@
+<div class="create-post" style="padding-top: 2rem">
+    <div class="post__box" style="margin-bottom: 1rem;">
+        <?php if (isset($errorsCat)) : ?>
+            <span class="err"><?= $errorsCat ?></span>
+        <?php endif ?>
+        <span class="input-box__span">Добавьте свою категорию: </span>
+        <form method="post" action="/create-post" class="input-box" style="border: none; width: 100%; border-top: 2px solid #e3e5ed; border-radius: 0; padding-right: 5px">
+            <input name="newCategory" type="text" class="input-box" style="border: none; width: 100%; border-radius: 0; padding: 0; font-size: 14px" placeholder="Введите категорию">
+            <button class="btn_h add_h" type="submit" name="createCat">Создать</button>
+        </form>
+    </div>
+</div>
 <form method="post" class="create-post" enctype="multipart/form-data">
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center">
+        <div class="post__box">
+            <span class="input-box__span">Категория: </span>
+            <div class="input-box" style="border: none; width: 100%; border-top: 2px solid #e3e5ed; border-radius: 0">
+                <select name="categoryId" class="form__select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option size=6 selected value="0">Выберите категорию: </option>
+                    <?php foreach ($categories as $category) : ?>
+                        <option value="<?= $category['id'] ?>"> <?= $category['name'] ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
     <?php if (!empty($errors)) : ?>
         <ul class="auth__errors">
             <?php foreach ($errors as $error) : ?>
@@ -13,15 +38,6 @@
     <div class="input-box">
         <span class="input-box__span">Описание: </span>
         <input class="box__input" name="description" type="text">
-    </div>
-    <div class="input-box">
-        <span class="input-box__span">Категория: </span>
-        <select name="categoryId" class="form__select">
-            <option selected value="0">Выберите категорию: </option>
-            <?php foreach ($categories as $category) : ?>
-                <option value="<?= $category['id'] ?>"> <?= $category['name'] ?></option>
-            <?php endforeach; ?>
-        </select>
     </div>
     <div class="hashtags-inputs">
         <div class="hashtags__buttons">
