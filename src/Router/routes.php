@@ -28,6 +28,9 @@ $router->addRoute('POST', '/reset', 'views/reset.php');
 $router->addRoute('GET', '/create-post', 'views/post-create.php');
 $router->addRoute('POST', '/create-post', 'views/post-create.php');
 
+$router->addRoute('GET', '/admin', 'views/admin.php');
+$router->addRoute('POST', '/admin', 'views/admin.php');
+
 // POST SHOW BY ID
 $router->addRoute('GET', "/post/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/post.php";

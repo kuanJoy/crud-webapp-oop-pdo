@@ -16,6 +16,13 @@ class Verification
         $this->db = new Database();
     }
 
+    public function redirectIfNotAdmin()
+    {
+        if ($_SESSION['role'] !== "админ" && $_SESSION['role'] !== "модератор") {
+            header("Location: / ");
+        }
+    }
+
     // Перенаправление если Email не подтвержден
     public function redirectToVerifyEmail()
     {

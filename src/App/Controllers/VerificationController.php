@@ -15,6 +15,11 @@ class VerificationController
         $this->verification = new Verification();
     }
 
+    public function redirectIfNotAdmin()
+    {
+        $this->verification->redirectIfNotAdmin();
+    }
+
     // Перенаправление если Email не подтвержден
     public function redirectToVerifyEmail()
     {
