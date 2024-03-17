@@ -17,7 +17,7 @@
         </div>
     <?php else : ?>
         <div style="display: flex; align-items: center;">
-            <p style="min-width: 150px; color: red;">Список избранного пуст</p>
+            <p style="min-width: 150px; color: red;">Избранное пусто</p>
             <a class="dropdown-item" href="/popular" style="margin: 0 auto; padding-right: 2rem">
                 <svg class="icon i-category">
                     <use href="/public/assets/images/svg/sprites.svg#posts" />

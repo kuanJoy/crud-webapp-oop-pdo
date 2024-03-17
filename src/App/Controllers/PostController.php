@@ -297,7 +297,7 @@ class PostController
                     }
                 }
                 if ($this->postModel->createPost($title, $description, $content, $status, $category_id, $user_id, $img_upload_path, $hashtags)) {
-                    header("Location: /");
+                    header("Location: /user/{$_SESSION['id_user']}");
                     exit();
                 }
             } else {
