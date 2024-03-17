@@ -39,7 +39,7 @@
         <h2 class="post__title"><?= $onePost['post']['title'] ?></h2>
         <h2 class="post__content"><?= $onePost['post']['content'] ?></h2>
         <div class="post__btns">
-            <?php if (isset($_SESSION['role']) || isset($_SESSION['id_user'])) : ?>
+            <?php if (isset($_SESSION['id_user'])) : ?>
                 <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор' || $_SESSION['id_user'] == $onePost['post']['user_id']) : ?>
                     <div class="attribute__likes" method="get">
                         <a href="/edit/<?= $onePost['likes']['id'] ?>" class="btn-post">
@@ -89,6 +89,35 @@
                     </a>
                 <?php endif; ?>
             <?php endif; ?>
+            <?php if ($_SESSION['role'] == "читатель") : ?>
+                <form action="/post/<?= $onePost['likes']['id'] ?>" class="attribute__likes" method="post">
+                    <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
+                    <?php if ($onePost['like_on_post'] == 'not-liked') : ?>
+                        <button type="submit" name="sendLike" class="btn-post">
+                            <svg class="icon i-like">
+                                <use href="/public/assets/images/svg/sprites.svg#heart" />
+                            </svg>
+                        </button>
+                    <?php elseif ($onePost['like_on_post'] == 'liked') : ?>
+                        <button type="submit" name="deleteLike" class="btn-post">
+                            <svg class="icon i-like">
+                                <use href="/public/assets/images/svg/sprites.svg#heart-full" />
+                            </svg>
+                        </button>
+                    <?php else : ?>
+                        <svg class="icon i-like">
+                            <use href="/public/assets/images/svg/sprites.svg#heart-full" />
+                        </svg>
+                    <?php endif; ?>
+                    <span><?= $onePost['likes']['likes_count'] ?></span>
+                </form>
+                <a href="/user/<?= $onePost['post']['user_id'] ?>" class="attribute__likes">
+                    <svg class="icon">
+                        <use href="/public/assets/images/svg/sprites.svg#user" />
+                    </svg>
+                    <span><?= $onePost['post']['username'] ?></span>
+                </a>
+            <?php endif; ?>
             <?php if ($onePost['like_on_post'] == 'guest') : ?>
                 <div class="attribute__likes">
                     <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
@@ -112,7 +141,3 @@
         </div>
     </div>
 </div>
-<?php
-echo "<pre>";
-var_dump($onePost);
-echo "</pre>";

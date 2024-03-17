@@ -1,6 +1,6 @@
 <div class="random-container">
     <?php if (!empty($favourites)) : ?>
-        <h3 class="random__title">Избранное <?= $userPosts[0]['username'] ?> <svg class="icon i-category">
+        <h3 class="random__title">Избранное <?= $favourites[0]['username'] ?> <svg class="icon i-category">
                 <use href="/public/assets/images/svg/sprites.svg#posts" />
             </svg></h3>
         <div class="random__rows">
