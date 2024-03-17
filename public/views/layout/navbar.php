@@ -76,7 +76,7 @@ $categories = $post->getCategoriesForNavbar();
                             </li>
                             <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == "модератор") : ?>
                                 <li>
-                                    <a class="dropdown-item" href="/admin">
+                                    <a class="dropdown-item" href="/admin-posts">
                                         <svg class="icon i-category">
                                             <use href="/public/assets/images/svg/sprites.svg#admin" />
                                         </svg>Админка
