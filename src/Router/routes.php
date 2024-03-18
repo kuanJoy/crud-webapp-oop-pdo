@@ -28,14 +28,9 @@ $router->addRoute('POST', '/reset', 'views/reset.php');
 $router->addRoute('GET', '/create-post', 'views/post-create.php');
 $router->addRoute('POST', '/create-post', 'views/post-create.php');
 
-$router->addRoute('GET', '/admin-cat', 'views/admin-cat.php');
-$router->addRoute('POST', '/admin-cat', 'views/admin-cat.php');
+$router->addRoute('GET', '/admin', 'views/admin.php');
+$router->addRoute('POST', '/admin', 'views/admin.php');
 
-$router->addRoute('GET', '/admin-posts', 'views/admin-posts.php');
-$router->addRoute('POST', '/admin-posts', 'views/admin-posts.php');
-
-$router->addRoute('GET', '/admin-users', 'views/admin-users.php');
-$router->addRoute('POST', '/admin-users', 'views/admin-users.php');
 
 // POST SHOW BY ID
 $router->addRoute('GET', "/post/{$id}", function ($id) {
