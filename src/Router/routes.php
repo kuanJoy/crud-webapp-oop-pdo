@@ -75,3 +75,18 @@ $router->addRoute('GET', "/user/{$id}", function ($id) {
 $router->addRoute('GET', "/hashtag/{$id}", function ($id) {
     include_once __DIR__ . "/../../public/views/hashtag.php";
 });
+
+
+$router->addRoute('GET', "/edit-user/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/edit-user.php";
+});
+$router->addRoute('POST', "/edit-user/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/edit-user.php";
+});
+
+$router->addRoute('GET', "/edit-cat/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/edit-cat.php";
+});
+$router->addRoute('POST', "/edit-cat/{$id}", function ($id) {
+    include_once __DIR__ . "/../../public/views/edit-cat.php";
+});

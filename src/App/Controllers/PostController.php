@@ -351,4 +351,81 @@ class PostController
             'category' => $this->postModel->getCatTable(),
         ];
     }
+
+
+    // ================================
+
+    public function getCatForEdit()
+    {
+        if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор') {
+            $id = basename($_SERVER['REQUEST_URI']);
+            return $this->postModel->getCatForEdit($id);
+        } else {
+            return "Ошибка";
+        }
+    }
+
+    public function getUserForEdit()
+    {
+        if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор') {
+            $id = basename($_SERVER['REQUEST_URI']);
+            return $this->postModel->getUserForEdit($id);
+        } else {
+            return "Ошибка базы данных";
+        }
+    }
+
+    public function updateCat()
+    {
+        if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор') {
+            if (isset($_POST['updateCat'])) {
+                $errors = [];
+
+                $id = $_POST['catId'];
+                $name = $_POST['catName'];
+                $status = $_POST['catStatus'];
+
+                if (empty($name)) {
+                    $errors["name"] = "Название не может быть пустым";
+                } elseif (!preg_match('/^.{3,70}$/u', $name)) {
+                    $errors["name"] = "Длина Названия от 3 до 70 символов";
+                } else {
+                    $name = trim($name);
+                }
+
+                if (empty($status)) {
+                    $errors["status"] = "Выберите статус";
+                }
+
+                if (empty($errors)) {
+                    return $this->postModel->updateCat($id, $name, $status);
+                } else {
+                    return $errors;
+                    exit();
+                }
+            }
+        }
+    }
+
+    public function updateUser()
+    {
+        if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор') {
+            if (isset($_POST['updateUser'])) {
+                $errors = [];
+
+                $id = basename($_SERVER['REQUEST_URI']);
+                $role = $_POST['userRole'];
+
+                if (empty($role)) {
+                    $errors["status"] = "Выберите роль";
+                }
+
+                if (empty($errors)) {
+                    return $this->postModel->updateUser($id, $role);
+                } else {
+                    return $errors;
+                }
+            }
+        }
+    }
 }

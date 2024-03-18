@@ -417,6 +417,7 @@ class Post
         }
     }
 
+    // MODELS FOR ADMIN PANEL
     public function getPostsTable()
     {
         $sql = "SELECT posts.*, DATE_FORMAT(posts.created_at, '%d.%m.%y') as create_time, users.username, users.id as user_id FROM posts INNER JOIN users ON posts.user_id = users.id";
@@ -433,5 +434,67 @@ class Post
     {
         $sql = "SELECT * FROM categories";
         return $this->db->getConnection()->query($sql)->fetchAll();
+    }
+
+
+    // ================================
+
+    public function getCatForEdit($id)
+    {
+        $sql = "SELECT * FROM categories WHERE categories.id = :id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function getUserForEdit($id)
+    {
+        $sql = "SELECT * FROM users WHERE users.id = :id";
+        $stmt = $this->db->getConnection()->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
+        return $stmt->fetch();
+    }
+
+    public function updateCat($id, $name, $status)
+    {
+        try {
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+
+            $sql = "UPDATE categories
+                SET name = :name, status = :status
+                WHERE id = :id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':status', $status);
+            $stmt->execute();
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
+        } catch (PDOException $e) {
+            $this->db->getConnection()->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+
+    public function updateUser($id, $role)
+    {
+        try {
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=0');
+            $sql = "UPDATE users
+                    SET role = :role
+                    WHERE id = :id";
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':role', $role);
+            $stmt->execute();
+        } catch (PDOException $e) {
+            $this->db->getConnection()->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
     }
 }

@@ -4,17 +4,17 @@ use App\App\Controllers\VerificationController;
 use App\App\Controllers\PostController;
 
 $verification = new VerificationController();
-$verification->redirectToVerifyEmail();
-$verification->redirectGuest();
+$verification->redirectIfNotAdmin();
 
 $post = new PostController();
-if ($getPostValues = $post->getPostForEdit()) {
-    $errors = $post->updatePost();
+if ($value = $post->getUserForEdit()) {
+    $errors = $post->updateUser();
 }
 
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
-if (!empty($getPostValues)) {
-    include __DIR__ . "/include/post-edit.php";
+if (!empty($value)) {
+    include __DIR__ . "/include/edit-user.php";
+    var_dump($value);
 }
 include __DIR__ . "/layout/footer.php";
