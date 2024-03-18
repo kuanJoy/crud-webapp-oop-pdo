@@ -97,7 +97,9 @@ a
     display: none
 
 .project-tab
-
+    display: block
+    max-height: 600px
+    overflow-y: scroll
     & #tabs
         background: #007b5e
         color: #eee
@@ -134,7 +136,20 @@ a
         font-weight: 600
 
 .table
+    font-size: $fz13
+    font-weight: 400
     background-color: $grey
+    max-height: 37.5rem
+    overflow-y: scroll
+.table td
+    border-top: none
+    padding: 0.2rem 0.2rem
 
 .col-md-12
     padding: 0
+
+.td_1_row
+    display: -webkit-box
+    -webkit-line-clamp: 1
+    -webkit-box-orient: vertical
+    overflow: hidden

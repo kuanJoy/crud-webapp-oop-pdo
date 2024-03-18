@@ -5,7 +5,7 @@
                 <div class="col-md-12">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-posts-tab" data-toggle="tab" href="#nav-posts" role="tab" aria-controls="nav-posts" aria-selected="true" style="color: ">Публикации</a>
+                            <a class="nav-item nav-link active" id="nav-posts-tab" data-toggle="tab" href="#nav-posts" role="tab" aria-controls="nav-posts" aria-selected="true">Публикации</a>
                             <a class="nav-item nav-link" id="nav-users-tab" data-toggle="tab" href="#nav-users" role="tab" aria-controls="nav-users" aria-selected="false">Пользователи</a>
                             <a class="nav-item nav-link" id="nav-category-tab" data-toggle="tab" href="#nav-category" role="tab" aria-controls="nav-category" aria-selected="false">Категории</a>
                         </div>
@@ -16,7 +16,7 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Заголовок</th>
+                                        <th style="width:30%">Заголовок</th>
                                         <th>Статус</th>
                                         <th>Дата</th>
                                         <th>Автор</th>
@@ -24,14 +24,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href="#">1</a></td>
-                                        <td>Кек</td>
-                                        <td>Активен</td>
-                                        <td>15.01.24</td>
-                                        <td>kuanjoy</td>
-                                        <td><a href="">Изменить</a></td>
-                                    </tr>
+                                    <?php if (!empty($allTables['posts'])) : ?>
+                                        <?php foreach ($allTables['posts'] as $post) : ?>
+                                            <tr>
+                                                <td><a href="/post/<?= $post['id'] ?>"><?= $post['id'] ?></a></td>
+                                                <td class="td_1_row"><?= $post['title'] ?></td>
+                                                <td><?= $post['status'] ?></td>
+                                                <td><?= $post['create_time'] ?></td>
+                                                <td><a href="/user/<?= $post['user_id'] ?>"><?= $post['username'] ?></a></td>
+                                                <td><a href="/edit/<?= $post['id'] ?>">Изменить</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -44,32 +48,22 @@
                                         <th>Почта</th>
                                         <th>Дата</th>
                                         <th>Роль</th>
+                                        <th>Действие</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                        <th>2</th>
-                                        <th>Sanya</th>
-                                        <th>sanyok@gmail.com</th>
-                                        <th>15.01.24</th>
-                                        <th>админ</th>
-                                    </tr>
-                                    <div class="collapse" id="collapseExample">
-                                        <tr>
-                                            <th></th>
-                                            <th>ID</th>
-                                            <th>Заголовок</th>
-                                            <th>Дата</th>
-                                            <th>Действие</th>
-                                        </tr>
-                                        <tr>
-                                            <th></th>
-                                            <th>2</th>
-                                            <th>тест тестетс</th>
-                                            <th>15.02.24</th>
-                                            <th>изменить</th>
-                                        </tr>
-                                    </div>
+                                    <?php if (!empty($allTables['users'])) : ?>
+                                        <?php foreach ($allTables['users'] as $user) : ?>
+                                            <tr>
+                                                <th><?= $user['id'] ?></th>
+                                                <th><?= $user['username'] ?></th>
+                                                <th><?= $user['email'] ?></th>
+                                                <th><?= $user['create_time'] ?></th>
+                                                <th><?= $user['role'] ?></th>
+                                                <td><a href="/edit-user/<?= $user['id'] ?>">Изменить</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
@@ -79,15 +73,21 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Название</th>
-                                        <th>Award Position</th>
+                                        <th>Статус</th>
+                                        <th>Действие</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><a href="#">Work 1</a></td>
-                                        <td>Doe</td>
-                                        <td>john@example.com</td>
-                                    </tr>
+                                    <?php if (!empty($allTables['category'])) : ?>
+                                        <?php foreach ($allTables['category'] as $category) : ?>
+                                            <tr>
+                                                <td><a href="/category/<?= $category['id'] ?>"><?= $category['id'] ?></a></td>
+                                                <td><?= $category['name'] ?></td>
+                                                <td><?= $category['status'] ?></td>
+                                                <td><a href="/edit-cat/<?= $category['id'] ?>">Изменить</a></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>

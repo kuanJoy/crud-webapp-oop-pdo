@@ -134,6 +134,11 @@ a {
   display: none;
 }
 
+.project-tab {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+}
 .project-tab #tabs {
   background: #007b5e;
   color: #eee;
@@ -171,11 +176,27 @@ a {
 }
 
 .table {
+  font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
+  font-weight: 400;
   background-color: #f0f2fa;
+  max-height: 37.5rem;
+  overflow-y: scroll;
+}
+
+.table td {
+  border-top: none;
+  padding: 0.2rem 0.2rem;
 }
 
 .col-md-12 {
   padding: 0;
+}
+
+.td_1_row {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .container {

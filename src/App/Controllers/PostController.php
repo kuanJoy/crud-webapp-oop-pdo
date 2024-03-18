@@ -342,4 +342,13 @@ class PostController
             }
         }
     }
+
+    public function getAdminTables()
+    {
+        return [
+            'posts' => $this->postModel->getPostsTable(),
+            'users' => $this->postModel->getUsersTable(),
+            'category' => $this->postModel->getCatTable(),
+        ];
+    }
 }

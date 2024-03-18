@@ -419,23 +419,19 @@ class Post
 
     public function getPostsTable()
     {
-        $sql = "SELECT posts.*, DATE_FORMAT(posts.created_at, '%d.%m.%y'), users.username, users.id FROM posts INNER JOIN users ON posts.user_id = users.id";
+        $sql = "SELECT posts.*, DATE_FORMAT(posts.created_at, '%d.%m.%y') as create_time, users.username, users.id as user_id FROM posts INNER JOIN users ON posts.user_id = users.id";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
     public function getUsersTable()
     {
-        $sql = "SELECT users.id, users.username, users.email, users.role, DATE_FORMAT(users.created_at, '%d.%m.%y'), posts.id, posts.title, posts.created_at
-                FROM users
-                INNER JOIN posts ON posts.user_id = users.id";
+        $sql = "SELECT users.id, users.username, users.email, users.role, DATE_FORMAT(users.created_at, '%d.%m.%y') as create_time FROM users";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
     public function getCatTable()
     {
-        $sql = "SELECT categories.id, categories.name, categories.status, posts.id, posts.title, posts.created_at
-                FROM categories
-                INNER JOIN posts ON categories.id = posts.category_id";
+        $sql = "SELECT * FROM categories";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 }
