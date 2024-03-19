@@ -1,4 +1,30 @@
-</div>
+<footer class="footer">
+    <div class="footer__content container">
+        <a href="/" class="footer__logo">
+            <img src="/public/assets/images/svg/idea.svg" class="footer__logo_pic">
+            </img>
+            Big.Идея
+        </a>
+        <div class="footer__media">
+            <h3 class="footer__text">Связаться</h3>
+            <a target="blank" href="https://t.me/kuanJoy">
+                <svg class="footer__pic">
+                    <use href="/public/assets/images/svg/sprites.svg#telegram" />
+                </svg>
+            </a>
+            <a target="blank" href="https://github.com/kuanJoy">
+                <svg class="footer__pic">
+                    <use href="/public/assets/images/svg/sprites.svg#github" />
+                </svg>
+            </a>
+        </div>
+    </div>
+
+    <div class="footer__line"></div>
+
+
+
+</footer>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="/public/assets/js/script.js"></script>
