@@ -82,12 +82,6 @@ class Verification
         $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
         $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
 
-        // $mail->Host = 'smtp.mail.ru'; // Specify main and backup SMTP servers
-        // $mail->Port = 587; // TCP port to connect to
-        // $mail->Username = 'wowcool2001@mail.ru'; // SMTP username
-        // $mail->Password = 'w3kc1Gsigkau0BdDqzkH'; // SMTP password
-        // $mail->setFrom('wowcool2001@mail.ru');
-
         $mail->SMTPOptions = array(
             'ssl' => array(
                 'verify_peer' => false,

@@ -43,7 +43,6 @@
                             <table class="table" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
                                         <th>Имя</th>
                                         <th>Почта</th>
                                         <th>Дата</th>
@@ -55,8 +54,7 @@
                                     <?php if (!empty($allTables['users'])) : ?>
                                         <?php foreach ($allTables['users'] as $user) : ?>
                                             <tr>
-                                                <th><?= $user['id'] ?></th>
-                                                <th><?= $user['username'] ?></th>
+                                                <th><a href="/user/<?= $user['id'] ?>"><?= $user['username'] ?></a></th>
                                                 <th><?= $user['email'] ?></th>
                                                 <th><?= $user['create_time'] ?></th>
                                                 <th><?= $user['role'] ?></th>

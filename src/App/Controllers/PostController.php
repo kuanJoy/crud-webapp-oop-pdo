@@ -15,6 +15,7 @@ class PostController
         $this->postModel = new Post($db);
     }
 
+    // ================= ЛАЙКИ / LIKES  =================
     public function sendLike()
     {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['sendLike'])) {
@@ -33,6 +34,88 @@ class PostController
 
             return $this->postModel->deleteLike($postId, $userId);
         }
+    }
+
+
+
+    // ================= ПОСТЫ / POSTS  =================
+    public function createPost()
+    {
+        $errors = [];
+        if (isset($_POST['createPost'])) {
+            if ($_SESSION['role'] !== 'админ') {
+                $status = '2';
+            } else {
+                $status = '1';
+            }
+
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $content = $_POST['content'];
+            $category_id = intval($_POST['categoryId']);
+            $user_id = $_SESSION['id_user'];
+            $content = $_POST['content'];
+            $hashtags = $_POST['hashtags'];
+
+            if (empty($title)) {
+                $errors["title"] = "Заголовок не может быть пустым";
+            } elseif ((!preg_match('/^.{3,70}$/u', $title))) {
+                $errors["title"] = "Длина заголовка от 3 до 70 символов";
+            } else {
+                $title = trim($title);
+            }
+
+            if (empty($description)) {
+                $errors["description"] = "Описание не может быть пустым";
+            } elseif ((!preg_match('/^.{3,255}$/u', $description))) {
+                $errors["description"] = "Длина описания от 3 до 255 символов";
+            } else {
+                $description = trim($description);
+            }
+
+            if (empty($content)) {
+                $errors["content"] = "Содержание не может быть пустым";
+            } else {
+                $content = trim($content);
+            }
+
+            if (empty($errors)) {
+                if ($_FILES['pic']['error'] === 4) {
+                    $img_upload_path = "./assets/images/upload/default_pic.jpg";
+                } elseif (isset($_FILES['pic']['name'])) {
+                    $img_name = $_FILES['pic']['name'];
+                    $tmp_name = $_FILES['pic']['tmp_name'];
+                    $img_size = $_FILES['pic']['size']; // Получаем размер файла в байтах
+
+                    if ($_FILES['pic']['error'] === 0) {
+                        if ($img_size > 2000000) {
+                            $errors['pic_size'] = "Размер файла не должен превышать 2 МБ";
+                        } else {
+                            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                            $img_ex_to_lc = strtolower($img_ex);
+                            $allowed_ex = ['jpg', 'jpeg', 'png'];
+
+                            if (in_array($img_ex_to_lc, $allowed_ex)) {
+                                $new_img_name = uniqid() . "." . "$img_ex_to_lc";
+                                $img_upload_path = './assets/images/upload/' . $new_img_name;
+                                move_uploaded_file($tmp_name, $img_upload_path);
+                            } else {
+                                $errors['pic_ex'] = "Поддерживаются только jpg, jpeg и png";
+                            }
+                        }
+                    } else {
+                        $errors['pic_name'] = 'Неправильное имя фотографии';
+                    }
+                }
+                if ($this->postModel->createPost($title, $description, $content, $status, $category_id, $user_id, $img_upload_path, $hashtags)) {
+                    header("Location: /user/{$_SESSION['id_user']}");
+                    exit();
+                }
+            } else {
+                return $errors;
+            }
+        }
+        return $errors;
     }
 
     public function deletePost()
@@ -158,11 +241,52 @@ class PostController
         return $this->postModel->getRandomPosts();
     }
 
-    public function getPosts()
+    public function getPostsByCategory()
     {
-        return $this->postModel->getPosts();
+        $categoryId = basename($_SERVER['REQUEST_URI']);
+        return $this->postModel->getPostsByCategory($categoryId);
     }
 
+    public function getPostsByHashtag()
+    {
+        $hashtagName = urldecode(basename($_SERVER['REQUEST_URI']));
+        return $this->postModel->getPostsByHashtag($hashtagName);
+    }
+
+    public function getCategoriesCount()
+    {
+        return $this->postModel->getCategoriesCount();
+    }
+
+
+    public function getPostsForBanner()
+    {
+        return $this->postModel->getPostsForBanner();
+    }
+
+
+    public function getCategoriesForNavbar()
+    {
+        return $this->postModel->getCategoriesForNavbar();
+    }
+
+
+    // =================== ХЕШТЕГИ / HASHTAGS ===================
+
+    public function getHashtagsForMain()
+    {
+        return $this->postModel->getHashtagsForMain();
+    }
+
+    public function getHashtagsCount()
+    {
+        return $this->postModel->getHashtagsCount();
+    }
+
+
+
+
+    // =================== КАТЕГОРИИ / CATEGORIES ===================
     public function createCategory()
     {
         if (isset($_POST['createCat'])) {
@@ -195,153 +319,8 @@ class PostController
     }
 
 
-    public function getCategoriesCount()
-    {
-        return $this->postModel->getCategoriesCount();
-    }
 
-    public function getHashtagsCount()
-    {
-        return $this->postModel->getHashtagsCount();
-    }
-
-    public function getPostsByCategory()
-    {
-        $categoryId = basename($_SERVER['REQUEST_URI']);
-        return $this->postModel->getPostsByCategory($categoryId);
-    }
-
-
-    public function getPostsForBanner()
-    {
-        return $this->postModel->getPostsForBanner();
-    }
-
-    public function getHashtagsForMain()
-    {
-        return $this->postModel->getHashtagsForMain();
-    }
-
-    public function getPostsByHashtag()
-    {
-        $hashtagName = urldecode(basename($_SERVER['REQUEST_URI']));
-        return $this->postModel->getPostsByHashtag($hashtagName);
-    }
-
-    public function getCategoriesForNavbar()
-    {
-        return $this->postModel->getCategoriesForNavbar();
-    }
-
-    public function createPost()
-    {
-        $errors = [];
-        if (isset($_POST['createPost'])) {
-            if ($_SESSION['role'] !== 'админ') {
-                $status = '2';
-            } else {
-                $status = '1';
-            }
-
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $content = $_POST['content'];
-            $category_id = intval($_POST['categoryId']);
-            $user_id = $_SESSION['id_user'];
-            $content = $_POST['content'];
-            $hashtags = $_POST['hashtags'];
-
-            if (empty($title)) {
-                $errors["title"] = "Заголовок не может быть пустым";
-            } elseif ((!preg_match('/^.{3,70}$/u', $title))) {
-                $errors["title"] = "Длина заголовка от 3 до 70 символов";
-            } else {
-                $title = trim($title);
-            }
-
-            if (empty($description)) {
-                $errors["description"] = "Описание не может быть пустым";
-            } elseif ((!preg_match('/^.{3,255}$/u', $description))) {
-                $errors["description"] = "Длина описания от 3 до 255 символов";
-            } else {
-                $description = trim($description);
-            }
-
-            if (empty($content)) {
-                $errors["content"] = "Содержание не может быть пустым";
-            } else {
-                $content = trim($content);
-            }
-
-            if (empty($errors)) {
-                if ($_FILES['pic']['error'] === 4) {
-                    $img_upload_path = "./assets/images/upload/default_pic.jpg";
-                } elseif (isset($_FILES['pic']['name'])) {
-                    $img_name = $_FILES['pic']['name'];
-                    $tmp_name = $_FILES['pic']['tmp_name'];
-                    $img_size = $_FILES['pic']['size']; // Получаем размер файла в байтах
-
-                    if ($_FILES['pic']['error'] === 0) {
-                        if ($img_size > 2000000) {
-                            $errors['pic_size'] = "Размер файла не должен превышать 2 МБ";
-                        } else {
-                            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                            $img_ex_to_lc = strtolower($img_ex);
-                            $allowed_ex = ['jpg', 'jpeg', 'png'];
-
-                            if (in_array($img_ex_to_lc, $allowed_ex)) {
-                                $new_img_name = uniqid() . "." . "$img_ex_to_lc";
-                                $img_upload_path = './assets/images/upload/' . $new_img_name;
-                                move_uploaded_file($tmp_name, $img_upload_path);
-                            } else {
-                                $errors['pic_ex'] = "Поддерживаются только jpg, jpeg и png";
-                            }
-                        }
-                    } else {
-                        $errors['pic_name'] = 'Неправильное имя фотографии';
-                    }
-                }
-                if ($this->postModel->createPost($title, $description, $content, $status, $category_id, $user_id, $img_upload_path, $hashtags)) {
-                    header("Location: /user/{$_SESSION['id_user']}");
-                    exit();
-                }
-            } else {
-                return $errors;
-            }
-        }
-        return $errors;
-    }
-
-
-    protected function handleBannerUpload($file)
-    {
-        if (!empty($file)) {
-            $img_name = $file['name'];
-            $tmp_name = $file['tmp_name'];
-            $img_size = $file['size'];
-
-            if ($img_size > 2000000) {
-                return false;
-            }
-
-            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-            $img_ex_to_lc = strtolower($img_ex);
-            $allowed_ex = ['jpg', 'jpeg', 'png'];
-
-            if (!in_array($img_ex_to_lc, $allowed_ex)) {
-                return false; // Недопустимое расширение файла
-            }
-
-            $new_img_name = uniqid() . "." . $img_ex_to_lc;
-            $img_upload_path = './assets/images/upload/' . $new_img_name;
-
-            if (move_uploaded_file($tmp_name, $img_upload_path)) {
-                return $img_upload_path;
-            } else {
-                return "Ошибка при перемещении файла";
-            }
-        }
-    }
+    // ================== ФУНКЦИИ ДЛЯ АДМИНКИ ==================
 
     public function getAdminTables()
     {
@@ -351,9 +330,6 @@ class PostController
             'category' => $this->postModel->getCatTable(),
         ];
     }
-
-
-    // ================================
 
     public function getCatForEdit()
     {
@@ -431,3 +407,32 @@ class PostController
         }
     }
 }
+    // protected function handleBannerUpload($file)
+    // {
+    //     if (!empty($file)) {
+    //         $img_name = $file['name'];
+    //         $tmp_name = $file['tmp_name'];
+    //         $img_size = $file['size'];
+
+    //         if ($img_size > 2000000) {
+    //             return false;
+    //         }
+
+    //         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+    //         $img_ex_to_lc = strtolower($img_ex);
+    //         $allowed_ex = ['jpg', 'jpeg', 'png'];
+
+    //         if (!in_array($img_ex_to_lc, $allowed_ex)) {
+    //             return false; // Недопустимое расширение файла
+    //         }
+
+    //         $new_img_name = uniqid() . "." . $img_ex_to_lc;
+    //         $img_upload_path = './assets/images/upload/' . $new_img_name;
+
+    //         if (move_uploaded_file($tmp_name, $img_upload_path)) {
+    //             return $img_upload_path;
+    //         } else {
+    //             return "Ошибка при перемещении файла";
+    //         }
+    //     }
+    // }
