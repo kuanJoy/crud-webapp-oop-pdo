@@ -17,7 +17,7 @@ $categories = $post->getCategoriesForNavbar();
             <nav class="nav">
                 <li class="nav-item dropdown">
                     <a class="nav-link nav__link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <svg class="icon i-category">
+                        <svg class="icon-big">
                             <use href="/public/assets/images/svg/sprites.svg#category" />
                         </svg>
                         Категории
@@ -102,3 +102,4 @@ $categories = $post->getCategoriesForNavbar();
         </div>
 </div>
 </header>
+<main>

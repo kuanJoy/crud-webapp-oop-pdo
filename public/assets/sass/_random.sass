@@ -18,6 +18,19 @@
     display: flex
     gap: 20px
     flex-wrap: wrap
+    max-height: 40rem
+    overflow-y: scroll
+    padding-bottom: 1rem
+    &::-webkit-scrollbar-track
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3)
+        background-color: #F5F5F5
+        border-radius: 10px
+    &::-webkit-scrollbar
+        width: 10px
+        background-color: #F5F5F5
+    &::-webkit-scrollbar-thumb
+        border-radius: 10px
+        background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.3, rgb(122,153,217)), color-stop(0.4, rgb(122,153,217)), color-stop(0.5, rgb(122,153,217)))
 
 .random__card
     width: calc(33.33% - 20px)
@@ -37,7 +50,7 @@
         width: 100%
 
 .random__card:hover
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1)
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3)
 
 .random__card img
     width: 100%
@@ -46,13 +59,25 @@
     object-fit: cover
 
 .r_card__content
-    padding: 20px
+    padding: .625rem
     background-color: #fff
-
+.r_card__row
+    display: flex
+    align-items: center
+    justify-content: space-between
+    margin-bottom: 1rem
+.r_card__auth
+    font-size: $fz13
+    padding: 0.3125rem 0.5rem
+    background-color: #f0f2fa
+    border-radius: .375rem
+.r_card__time
+    font-size: $fz13
+    pointer-events: none
 .r_card__title
     margin-top: 0
     margin-bottom: 10px
-    font-size: $fz24
+    font-size: $fz13
     display: -webkit-box
     -webkit-line-clamp: 1
     -webkit-box-orient: vertical
@@ -81,4 +106,4 @@
     transition: background-color 0.3s
     width: 100%
     &:hover
-        color: $dark
+        color: $white

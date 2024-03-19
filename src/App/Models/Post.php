@@ -219,17 +219,51 @@ class Post
 
     public function getRandomPosts()
     {
-        $sql = "SELECT * FROM `posts` ORDER BY RAND() LIMIT 3;";
+        $sql = "SELECT 
+                    p.id AS post_id,
+                    p.title,
+                    p.user_id,
+                    p.pic,
+                    DATE_FORMAT(p.created_at, '%d.%m.%Y %H:%i:%s') AS created_time,
+                    COUNT(pl.post_id) AS like_count,
+                    u.username AS user_nickname
+                FROM 
+                    posts p
+                LEFT JOIN 
+                    post_likes pl ON p.id = pl.post_id
+                LEFT JOIN 
+                    users u ON p.user_id = u.id
+                GROUP BY 
+                    p.id
+                ORDER BY 
+                    RAND()
+                LIMIT 3";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
     public function getFavouritePosts($id)
     {
-        $sql = "SELECT ps.post_id, ps.user_id, p.id, p.title, p.description, p.pic, u.username
-                FROM post_likes AS ps 
-                INNER JOIN posts AS p ON ps.post_id = p.id 
-                INNER JOIN users AS u ON ps.user_id = u.id 
-                WHERE ps.user_id = :user_id";
+        $sql = "SELECT 
+                    ps.post_id,
+                    ps.user_id,
+                    p.id,
+                    p.title,
+                    p.pic,
+                    u.username,
+                    DATE_FORMAT(p.created_at, '%d.%m.%Y %H:%i:%s') AS created_time,
+                    COUNT(pl.post_id) AS like_count
+                FROM 
+                    post_likes AS ps
+                INNER JOIN 
+                    posts AS p ON ps.post_id = p.id
+                INNER JOIN 
+                    users AS u ON ps.user_id = u.id
+                LEFT JOIN 
+                    post_likes AS pl ON p.id = pl.post_id
+                WHERE 
+                    ps.user_id = :user_id
+                GROUP BY 
+                    ps.post_id, ps.user_id, p.id, p.title, p.pic, u.username, created_time";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(":user_id", $id);
         $stmt->execute();
@@ -239,9 +273,26 @@ class Post
 
     public function getUserPosts($id)
     {
-        $sql = "SELECT p.id, p.title, p.description, p.pic, u.username FROM posts AS p
-                INNER JOIN users AS u ON p.user_id = u.id
-                WHERE p.user_id = :user_id";
+        $sql = "SELECT 
+                p.id AS post_id,
+                p.title,
+                p.user_id,
+                p.pic,
+                c.name,
+                DATE_FORMAT(p.created_at, '%d.%m.%Y %H:%i:%s') AS created_time,
+                COUNT(pl.post_id) AS like_count,
+                u.username AS user_nickname
+            FROM 
+                posts p
+            LEFT JOIN 
+                post_likes pl ON p.id = pl.post_id
+            LEFT JOIN 
+                users u ON p.user_id = u.id
+            LEFT JOIN 
+                categories c ON p.category_id = c.id
+            WHERE p.user_id = :user_id
+            GROUP BY 
+                p.id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(":user_id", $id);
         $stmt->execute();
@@ -301,23 +352,30 @@ class Post
 
     public function getPostsByCategory($id)
     {
-        $sql = "SELECT posts.*, 
-                categories.name AS category_name,
-                GROUP_CONCAT(hashtags.name) AS hashtags
+        $sql = "SELECT 
+                p.id AS post_id,
+                p.title,
+                p.user_id,
+                p.pic,
+                c.name,
+                DATE_FORMAT(p.created_at, '%d.%m.%Y %H:%i:%s') AS created_time,
+                COUNT(pl.post_id) AS like_count,
+                u.username AS user_nickname
             FROM 
-                posts 
+                posts p
             LEFT JOIN 
-                categories ON posts.category_id = categories.id 
+                post_likes pl ON p.id = pl.post_id
             LEFT JOIN 
-                post_hashtags ON posts.id = post_hashtags.post_id
+                users u ON p.user_id = u.id
             LEFT JOIN 
-                hashtags ON post_hashtags.hashtag_id = hashtags.id
+                categories c ON p.category_id = c.id
             WHERE 
-                posts.category_id = :id
+                p.category_id = :category_id
             GROUP BY 
-                posts.id;";
+                p.id;
+";
         $stmt = $this->db->getConnection()->prepare($sql);
-        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':category_id', $id);
         $stmt->execute();
 
         return $stmt->fetchAll();

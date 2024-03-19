@@ -23,6 +23,7 @@ class PostController
             $userId = $_SESSION['id_user'];
 
             return $this->postModel->sendLike($postId, $userId);
+            exit();
         }
     }
 
@@ -33,6 +34,7 @@ class PostController
             $userId = $_SESSION['id_user'];
 
             return $this->postModel->deleteLike($postId, $userId);
+            exit();
         }
     }
 

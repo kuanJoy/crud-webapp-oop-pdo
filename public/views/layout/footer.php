@@ -1,3 +1,4 @@
+</main>
 <footer class="footer">
     <div class="footer__content container">
         <a href="/" class="footer__logo">
@@ -19,11 +20,8 @@
             </a>
         </div>
     </div>
-
     <div class="footer__line"></div>
-
-
-
+    <a target="blank" href="https://github.com/kuanJoy" class="footer__down">© 2024 kuanJoy</a>
 </footer>
 <script src="https://cdn.ckeditor.com/ckeditor5/41.2.0/classic/ckeditor.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
