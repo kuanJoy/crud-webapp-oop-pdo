@@ -451,7 +451,7 @@ class Post
 
     public function getUserForEdit($id)
     {
-        $sql = "SELECT * FROM users WHERE users.id = :id";
+        $sql = "SELECT users.id, users.username, users.role FROM users WHERE users.id = :id";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -491,6 +491,7 @@ class Post
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':role', $role);
             $stmt->execute();
+            $this->db->getConnection()->exec('SET FOREIGN_KEY_CHECKS=1');
         } catch (PDOException $e) {
             $this->db->getConnection()->rollBack();
             echo "Error: " . $e->getMessage();

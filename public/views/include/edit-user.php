@@ -14,7 +14,7 @@
             </svg>
         </h3>
     </div>
-    <form method="post" class="create-post" action="/admin" style="margin-top: 2rem;">
+    <form method="post" class="create-post" style="margin-top: 2rem;">
         <?php if (!empty($errors)) : ?>
             <ul class="auth__errors">
                 <?php foreach ($errors as $error) : ?>
@@ -23,11 +23,14 @@
             </ul>
         <?php endif; ?>
         <div class="input-box" style="font-size: 13px;">
-            <span class="input-box__span">Роль: </span>
-            <input type="radio" name="catStatus" value="активен" <?= $value['status'] == 'активен' ? 'checked' : '' ?>> Активен
-            <input style="margin-left: 0.5rem;" type="radio" name="catStatus" value="скрыт" <?= $value['status'] == 'скрыт' ? 'checked' : '' ?>> Скрыт
+            <span class="input-box__span">Пользователь <?= $value['username'] ?></span>
         </div>
-        <input type="hidden" name="catId" value="<?= $value['id'] ?>">
-        <button type="submit" name="updateCat" class="auth__btn">Редактировать</button>
+        <for class="input-box" style="font-size: 13px;">
+            <span class="input-box__span">Роль: </span>
+            <input type="radio" name="role" value="модератор" <?= $value['role'] == 'модератор' ? 'checked' : '' ?>> модератор
+            <input style="margin-left: 0.5rem;" type="radio" name="role" value="читатель" <?= $value['role'] == 'читатель' ? 'checked' : '' ?>> читатель
+        </for>
+        <input type="hidden" name="id" value="<?= $value['id'] ?>">
+        <button type="submit" name="updateUser" class="auth__btn">Редактировать</button>
     </form>
 </div>

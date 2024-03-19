@@ -14,7 +14,7 @@
             </svg>
         </h3>
     </div>
-    <form method="post" class="create-post" action="/admin" style="margin-top: 2rem;">
+    <form method="post" class="create-post" style="margin-top: 2rem;">
         <?php if (!empty($errors)) : ?>
             <ul class="auth__errors">
                 <?php foreach ($errors as $error) : ?>

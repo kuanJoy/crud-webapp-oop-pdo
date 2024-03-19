@@ -398,6 +398,7 @@ class PostController
                 }
 
                 if (empty($errors)) {
+                    header("Location: /admin");
                     return $this->postModel->updateCat($id, $name, $status);
                 } else {
                     return $errors;
@@ -413,14 +414,15 @@ class PostController
             if (isset($_POST['updateUser'])) {
                 $errors = [];
 
-                $id = basename($_SERVER['REQUEST_URI']);
-                $role = $_POST['userRole'];
+                $id = $_POST['id'];
+                $role = $_POST['role'];
 
                 if (empty($role)) {
-                    $errors["status"] = "Выберите роль";
+                    $errors["role"] = "Выберите роль";
                 }
 
                 if (empty($errors)) {
+                    header("Location: /admin");
                     return $this->postModel->updateUser($id, $role);
                 } else {
                     return $errors;
