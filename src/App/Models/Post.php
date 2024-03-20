@@ -482,7 +482,7 @@ class Post
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT * FROM categories";
+        $sql = "SELECT * FROM categories ORDER BY categories.name ASC";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
