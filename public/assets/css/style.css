@@ -401,7 +401,6 @@ li {
   padding-top: 2.5rem;
   position: relative;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
   gap: 11px;
   max-width: 59rem;
