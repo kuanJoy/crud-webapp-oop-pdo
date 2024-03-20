@@ -23,10 +23,10 @@ USE `bigidea`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(255) NOT NULL AUTO_INCREMENT,
   `name` varchar(70) NOT NULL,
-  `status` enum('активен','скрыт') DEFAULT NULL,
+  `status` enum('активен','скрыт','удален') DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_name` (`name`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 
 -- Экспортируемые данные не выделены.
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `hashtags` (
   `name` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `unique_name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 -- Экспортируемые данные не выделены.
 
