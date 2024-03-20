@@ -79,7 +79,7 @@ class Verification
         $mail->Host = 'mail.bigidea.edu.kg'; // Specify main and backup SMTP servers
         $mail->Port = 465; // TCP port to connect to
         $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
-        $mail->Password = 'gasagyjaz228LOVE'; // SMTP password
+        $mail->Password = ''; // SMTP password
         $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
 
         $mail->SMTPOptions = array(

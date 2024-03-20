@@ -9,7 +9,7 @@ const swiper = new Swiper(".mySwiper", {
   speed: 800,
 });
 
-// CKEDITOR
+// TinyMC
 tinymce.init({
   selector: "textarea",
   plugins:
@@ -64,3 +64,4 @@ function showConfirmation() {
   var confirmed = confirm("Подтвердите удаление!");
   return confirmed;
 }
+

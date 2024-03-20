@@ -21,7 +21,7 @@ $mail->SMTPOptions = array(
 );
 $mail->isHTML(true); // Set email format to HTML
 $mail->Username = 'bigidea.edu.kg@bigidea.edu.kg'; // SMTP username
-$mail->Password = 'gasagyjaz228LOVE'; // SMTP password
+$mail->Password = ''; // SMTP password
 
 $mail->setFrom('bigidea.edu.kg@bigidea.edu.kg');
 $mail->addAddress($email);

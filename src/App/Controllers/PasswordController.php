@@ -20,27 +20,30 @@ class PasswordController
     public function sendLink()
     {
         if (isset($_POST['sendLink'])) {
-            $email = $_POST['email'];
-            $user = $this->password->findUserByEmail($email);
+            if (!isset($_SESSION['cooldown_time']) || $_SESSION['cooldown_time'] < time()) {
+                $email = $_POST['email'];
+                $user = $this->password->findUserByEmail($email);
 
-            if ($user) {
-                $token = bin2hex(random_bytes(16));
-                $token_hash = hash("sha256", $token);
-                $expire = date("Y-m-d H:i:s", strtotime("+12 hours"));
+                if ($user) {
+                    $token = bin2hex(random_bytes(16));
+                    $token_hash = hash("sha256", $token);
+                    $expire = date("Y-m-d H:i:s", strtotime("+12 hours"));
 
-                if ($this->password->updateResetToken($email, $token_hash, $expire)) {
-                    // Отправить письмо с ссылкой
-                    // $this->sendEmail($email, $token);
-                    // Ваш код для отправки письма
-                    return ['success' => "На $email отправлено письмо для восстановления!"];
+                    if ($this->password->updateResetToken($email, $token_hash, $expire)) {
+                        $_SESSION['cooldown_time'] = time() + 120;
+                        return ['success' => "На $email отправлено письмо для восстановления!"];
+                    } else {
+                        return ['error' => "Ошибка при обновлении токена в базе данных"];
+                    }
                 } else {
-                    return ['error' => "Ошибка при обновлении токена в базе данных"];
+                    return ['error' => "Пользователь с таким email не найден"];
                 }
             } else {
-                return ['error' => "Пользователь с таким email не найден"];
+                return ['error' => "Подождите 2 минуты перед отправкой новой ссылки"];
             }
         }
     }
+
 
     public function checkToken()
     {
@@ -50,8 +53,6 @@ class PasswordController
 
             if ($user) {
                 if (strtotime($user['reset_token_expires_at']) <= time()) {
-                    // Срок ссылки истёк
-                    // Ваша логика
                     return ['error' => "Срок ссылки истёк"];
                 } else {
                     return ['success' => true];

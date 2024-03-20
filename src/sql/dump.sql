@@ -31,10 +31,6 @@ INSERT INTO `categories` (`id`, `name`, `status`) VALUES
 
 -- Дамп данных таблицы bigidea.comments: ~0 rows (приблизительно)
 
--- Дамп данных таблицы bigidea.hashtags: ~1 rows (приблизительно)
-INSERT INTO `hashtags` (`id`, `name`) VALUES
-	(51, '');
-
 -- Дамп данных таблицы bigidea.posts: ~0 rows (приблизительно)
 
 -- Дамп данных таблицы bigidea.post_hashtags: ~0 rows (приблизительно)
