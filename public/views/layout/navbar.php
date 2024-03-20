@@ -12,6 +12,11 @@ $categories = $post->getCategoriesForNavbar();
 
 <div class="header-bg">
     <header class="header container">
+        <a href="/" class="home">
+            <svg class="icon-big">
+                <use href="/public/assets/images/svg/sprites.svg#home" />
+            </svg>
+        </a>
         <a href="/" class="logo">
             Big.Идея</a>
         <div class="hamburger">
