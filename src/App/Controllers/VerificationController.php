@@ -57,7 +57,12 @@ class VerificationController
     public function sendToken()
     {
         if (isset($_POST['sendToken'])) {
-            return $this->verification->sendToken();
+            if (!isset($_SESSION['last_token_send']) || (time() - $_SESSION['last_token_send']) > 120) {
+                $_SESSION['last_token_send'] = time();
+                return $this->verification->sendToken();
+            } else {
+                return ['error' => "Подождите 2 минуты перед отправкой нового токена"];
+            }
         }
     }
 }
