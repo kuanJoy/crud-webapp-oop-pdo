@@ -12,7 +12,8 @@ $categories = $post->getCategoriesForNavbar();
 
 <div class="header-bg">
     <header class="header container">
-        <a href="/" class="logo">Big.Идея</a>
+        <a href="/" class="logo">
+            Big.Идея</a>
         <div class="hamburger">
             <nav class="nav">
                 <li class="nav-item dropdown">

@@ -20,6 +20,21 @@
             <?php endforeach; ?>
         </ul>
     <?php endif; ?>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; justify-content: space-between; align-items: center">
+        <div class="post__box">
+            <span class="input-box__span">Категория: </span>
+            <div class="input-box" style="border: none; width: 100%; border-top: 2px solid #e3e5ed; border-radius: 0">
+                <select name="categoryId" class="form__select" onfocus='this.size=5;' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                    <option size=6 selected value="0">Выберите категорию: </option>
+                    <?php foreach ($categories as $category) : ?>
+                        <?php if ($category['status'] != 'удален') : ?>
+                            <option value="<?= $category['id'] ?>"> <?= $category['name'] ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
     <div class="input-box">
         <span class="input-box__span">Заголовок: </span>
         <input class="box__input" name="title" type="text">

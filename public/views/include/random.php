@@ -11,7 +11,7 @@ $randomPosts = $post->getRandomPosts();
     <h3 class="random__title">Случайные статьи <svg class="icon i-category">
             <use href="/public/assets/images/svg/sprites.svg#random" />
         </svg></h3>
-    <div class="random__rows" style="margin-top: 2rem; overflow-y: auto">
+    <div class="random__rows" style="margin-top: 2rem; overflow-y: auto; max-height: 17.5rem;">
         <?php foreach ($randomPosts as $post) : ?>
             <div class="random__card">
                 <img src=" /public/<?= $post['pic'] ?>" alt="">

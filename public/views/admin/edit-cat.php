@@ -9,7 +9,7 @@
         </a>
         <h3 class="random__title" style="margin: 0 auto; padding-right: 2rem">
             Редактирование категории
-            <svg class="icon i-category">
+            <svg class="icon-big">
                 <use href="/public/assets/images/svg/sprites.svg#category" />
             </svg>
         </h3>
@@ -30,6 +30,7 @@
             <span class="input-box__span">Статус: </span>
             <input type="radio" name="catStatus" value="активен" <?= $value['status'] == 'активен' ? 'checked' : '' ?>> Активен
             <input style="margin-left: 0.5rem;" type="radio" name="catStatus" value="скрыт" <?= $value['status'] == 'скрыт' ? 'checked' : '' ?>> Скрыт
+            <input style="margin-left: 0.5rem;" type="radio" name="catStatus" value="удален" <?= $value['status'] == 'удален' ? 'checked' : '' ?>> Удален
         </div>
         <input type="hidden" name="catId" value="<?= $value['id'] ?>">
         <button type="submit" name="updateCat" class="auth__btn">Редактировать</button>

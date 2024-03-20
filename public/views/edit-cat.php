@@ -14,6 +14,6 @@ if ($value = $post->getCatForEdit()) {
 include __DIR__ . "/layout/header.php";
 include __DIR__ . "/layout/navbar.php";
 if (!empty($value)) {
-    include __DIR__ . "/include/edit-cat.php";
+    include __DIR__ . "/admin/edit-cat.php";
 }
 include __DIR__ . "/layout/footer.php";
