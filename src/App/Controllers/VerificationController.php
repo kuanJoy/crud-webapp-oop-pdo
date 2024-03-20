@@ -61,7 +61,7 @@ class VerificationController
                 $_SESSION['last_token_send'] = time();
                 return $this->verification->sendToken();
             } else {
-                return ['error' => "Подождите 2 минуты перед отправкой нового токена"];
+                return ['error' => "Подождите 2 минуты перед отправкой нового пароля"];
             }
         }
     }

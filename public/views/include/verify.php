@@ -19,6 +19,11 @@
                 <?= $error_sendToken['success'] ?>
             </h3>
         <? endif; ?>
+        <?php if (isset($error_sendToken['error'])) : ?>
+            <h3 class="auth__title">
+                <?= $error_sendToken['error'] ?>
+            </h3>
+        <? endif; ?>
         <div class="auth__input-box">
             <svg class="auth__icon">
                 <use href="public/assets/images/svg/sprites.svg#key" />
