@@ -31,7 +31,7 @@
         <div class="category-hashtags">
             <span class="post__attribute"><?= $onePost['post']['category_name'] ?></span>
             <?php foreach ($onePost['hashtags'] as $hashtag) : ?>
-                <?php if (!empty($onePost['name'])) : ?>
+                <?php if (!empty($hashtag['name'])) : ?>
                     <a href="/hashtag/<?= $hashtag['name'] ?>" class="post__attribute">#<?= $hashtag['name'] ?></a>
                 <?php endif; ?>
             <?php endforeach; ?>
