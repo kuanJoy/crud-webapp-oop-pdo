@@ -235,6 +235,8 @@ main {
 .header-bg {
   background-color: #f0f2fa;
   color: #222222;
+  position: fixed;
+  z-index: 9999;
 }
 
 .header {
