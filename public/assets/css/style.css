@@ -408,6 +408,9 @@ li {
 }
 
 @media screen and (max-width: 460px) {
+  .header {
+    gap: 0.2rem;
+  }
   .logo {
     display: none;
   }
@@ -416,12 +419,10 @@ li {
   }
   .nav {
     gap: 0rem;
+    justify-content: space-evenly;
   }
 }
 @media screen and (max-width: 610px) {
-  .post__banner {
-    height: 13rem;
-  }
   .banner__card {
     padding: 1rem 0 1rem 1rem;
   }
@@ -785,6 +786,7 @@ li {
 @media screen and (max-width: 600px) {
   .post__banner {
     width: 95%;
+    height: 13rem;
   }
   .post__container {
     width: 95%;
