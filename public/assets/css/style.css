@@ -811,6 +811,7 @@ li {
   white-space: nowrap;
   flex-grow: 1;
   min-width: 0;
+  max-width: 50%;
 }
 
 .category-name-more {
@@ -845,6 +846,11 @@ li {
   fill: #4b6ed6;
 }
 
+@media screen and (max-width: 600px) {
+  .popular__category {
+    max-width: 100%;
+  }
+}
 .random-container {
   max-width: 59rem;
   margin: 0 auto;

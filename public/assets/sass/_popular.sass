@@ -15,6 +15,7 @@
     white-space: nowrap
     flex-grow: 1
     min-width: 0
+    max-width: 50%
 
 .category-name-more
     display: flex
@@ -43,3 +44,7 @@
     &:hover
         color: $blue
         fill: $blue
+
+@media screen and (max-width: 600px)
+    .popular__category
+        max-width: 100%
