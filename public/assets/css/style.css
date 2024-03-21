@@ -337,6 +337,11 @@ li {
   list-style-type: none;
 }
 
+@media screen and (max-width: 601px) {
+  .nav__link {
+    padding: 0;
+  }
+}
 .banner {
   overflow: hidden;
   padding: 2rem 0rem;
@@ -413,7 +418,7 @@ li {
     gap: 0rem;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 610px) {
   .post__banner {
     height: 13rem;
   }
