@@ -69,8 +69,8 @@ class PostController
 
             if (empty($description)) {
                 $errors["description"] = "Описание не может быть пустым";
-            } elseif ((!preg_match('/^.{3,255}$/u', $description))) {
-                $errors["description"] = "Длина описания от 3 до 255 символов";
+            } elseif ((!preg_match('/^.{3,1000}$/u', $description))) {
+                $errors["description"] = "Длина описания от 3 до 1000 символов";
             } else {
                 $description = trim($description);
             }
@@ -150,8 +150,8 @@ class PostController
 
             if (empty($description)) {
                 $errors["description"] = "Описание не может быть пустым";
-            } elseif (!preg_match('/^.{3,255}$/u', $description)) {
-                $errors["description"] = "Длина описания от 3 до 255 символов";
+            } elseif (!preg_match('/^.{3,1000}$/u', $description)) {
+                $errors["description"] = "Длина описания от 3 до 1000 символов";
             } else {
                 $description = trim($description);
             }
