@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1:3310
--- Время создания: Мар 21 2024 г., 20:40
+-- Время создания: Мар 21 2024 г., 21:24
 -- Версия сервера: 5.7.29
 -- Версия PHP: 5.6.40-0+deb8u7
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- База данных: `bigidea`
 --
+CREATE DATABASE IF NOT EXISTS `bigidea` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `bigidea`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Структура таблицы `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
 `id` int(255) NOT NULL,
   `name` varchar(70) NOT NULL,
@@ -55,6 +58,7 @@ INSERT INTO `categories` (`id`, `name`, `status`) VALUES
 -- Структура таблицы `comments`
 --
 
+DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
 `id` int(255) NOT NULL,
   `post_id` int(255) DEFAULT '0',
@@ -69,6 +73,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
 -- Структура таблицы `hashtags`
 --
 
+DROP TABLE IF EXISTS `hashtags`;
 CREATE TABLE IF NOT EXISTS `hashtags` (
 `id` int(250) NOT NULL,
   `name` varchar(100) DEFAULT NULL
@@ -92,6 +97,7 @@ INSERT INTO `hashtags` (`id`, `name`) VALUES
 -- Структура таблицы `posts`
 --
 
+DROP TABLE IF EXISTS `posts`;
 CREATE TABLE IF NOT EXISTS `posts` (
 `id` int(255) NOT NULL,
   `title` varchar(70) DEFAULT NULL,
@@ -120,6 +126,7 @@ INSERT INTO `posts` (`id`, `title`, `description`, `content`, `status`, `categor
 -- Структура таблицы `post_hashtags`
 --
 
+DROP TABLE IF EXISTS `post_hashtags`;
 CREATE TABLE IF NOT EXISTS `post_hashtags` (
   `post_id` int(255) DEFAULT NULL,
   `hashtag_id` int(255) DEFAULT NULL
@@ -143,6 +150,7 @@ INSERT INTO `post_hashtags` (`post_id`, `hashtag_id`) VALUES
 -- Структура таблицы `post_likes`
 --
 
+DROP TABLE IF EXISTS `post_likes`;
 CREATE TABLE IF NOT EXISTS `post_likes` (
   `post_id` int(255) DEFAULT '0',
   `user_id` int(255) DEFAULT '0'
@@ -155,6 +163,7 @@ CREATE TABLE IF NOT EXISTS `post_likes` (
 INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
 (1, 10),
 (2, 10),
+(2, 12),
 (3, 10);
 
 -- --------------------------------------------------------
@@ -163,6 +172,7 @@ INSERT INTO `post_likes` (`post_id`, `user_id`) VALUES
 -- Структура таблицы `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
 `id` int(255) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
@@ -176,12 +186,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `token` varchar(50) DEFAULT NULL,
   `reset_token_hash` varchar(64) DEFAULT NULL,
   `reset_token_expires_at` datetime DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Дамп данных таблицы `users`
 --
 
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `remember_token`, `password_reset_at`, `created_at`, `verified`, `token`, `reset_token_hash`, `reset_token_expires_at`) VALUES
+(10, 'test', 'test@test,com', 'test', 'админ', NULL, NULL, '2024-03-20 13:25:28', 'true', '76864', NULL, NULL),
+
+
+--
 -- Индексы сохранённых таблиц
 --
 
@@ -255,7 +270,7 @@ MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
