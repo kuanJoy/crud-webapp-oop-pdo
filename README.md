@@ -8,16 +8,16 @@ My CRUD web-application created using the OOP approach.
 
 ### Features
 
-- Advanced sign-up / log-in (PHPmailer - auth token, reset password by link)
+- Advanced sign-up / log-in (sending authtoken and resetting password by link through email)
 - Advanced post customizing
-- and other
+- Admin panel
 
 ### Learned / Practiced
 
 - OOP, PDO, composer, MVC
 - Hosting (buying domain, Filezila (FTP), Email-domain)
 - SQL Queries
-- Sending Email
+- Sending Email (PHP Mailer)
 
 ### Notes
 
