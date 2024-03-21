@@ -892,9 +892,33 @@ li {
     margin-right: 1rem;
   }
 }
-@media screen and (max-width: 412px) {
-  .random__rows {
-    justify-content: center;
+.random__rows_mobile {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 1rem;
+  margin-top: 2rem;
+  overflow-y: inherit;
+  max-height: 17.5rem;
+}
+.random__rows_mobile::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+.random__rows_mobile::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+.random__rows_mobile::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.3, rgb(122, 153, 217)), color-stop(0.4, rgb(122, 153, 217)), color-stop(0.5, rgb(122, 153, 217)));
+}
+
+@media screen and (max-width: 500px) {
+  .random__rows_mobile {
+    max-height: 37rem;
+    overflow-y: scroll;
   }
 }
 .random__card:hover {
