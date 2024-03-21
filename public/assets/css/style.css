@@ -850,6 +850,9 @@ li {
   .popular__category {
     max-width: 100%;
   }
+  .category-name-more {
+    gap: 0.5rem;
+  }
 }
 .random-container {
   max-width: 59rem;
