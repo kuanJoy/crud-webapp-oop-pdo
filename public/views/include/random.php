@@ -11,9 +11,9 @@ $randomPosts = $post->getRandomPosts();
     <h3 class="random__title">Случайные статьи <svg class="icon i-category">
             <use href="/public/assets/images/svg/sprites.svg#random" />
         </svg></h3>
-    <div class="random__rows" style="margin-top: 2rem; overflow-y: inherit; max-height: 17.5rem;">
+    <div class="random__rows_mobile">
         <?php foreach ($randomPosts as $post) : ?>
-            <div class="random__card">
+            <div class=" random__card">
                 <img src=" /public/<?= $post['pic'] ?>" alt="">
                 <div class="r_card__content" style="background-color: #f0f2fa;">
                     <h3 class="r_card__title"><?= $post['title'] ?></h3>
