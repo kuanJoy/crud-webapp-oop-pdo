@@ -1,5 +1,5 @@
 <?php
-session_set_cookie_params(72000000);
+ini_set('session.gc_maxlifetime', 90 * 24 * 60 * 60);
 session_start();
 
 require_once __DIR__ . "/../vendor/autoload.php";
