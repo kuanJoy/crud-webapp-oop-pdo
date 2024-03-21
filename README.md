@@ -14,11 +14,11 @@ My CRUD web-application created using the OOP approach.
 
 ### Learned / Practiced
 
-- OOP, PDO, composer, MVC (but without View, MainController)
+- OOP, PDO, composer, MVC
 - Hosting (buying domain, Filezila (FTP), Email-domain)
 - SQL Queries
 - Sending Email
 
 ### Notes
 
-- Please note that this project may NOT meet good practices or standards for appropriate development, as it was made for practice purposes.
+- Please note that this project may NOT meet good practices for MVC development (Other Models, but user/categories models are stored within the post model, violating the SRP; no distinct View or MainController), as it was made for practice purposes.
