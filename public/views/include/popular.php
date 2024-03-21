@@ -39,7 +39,7 @@
 <h3 class="category__name" style="margin-top: 2rem">Топ авторов</h3>
 <div class="popular">
     <?php foreach ($topUsers as $user) : ?>
-        <div class="popular__category">
+        <div class="popular__category" style="max-width: 50%; width: 49%">
             <div class="category-name-more">
                 <h3 class="category__name">
                     <?= $user['username'] ?>
