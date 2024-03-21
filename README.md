@@ -21,4 +21,4 @@ My CRUD web-application created using the OOP approach.
 
 ### Notes
 
-- Please note that this project may NOT meet good practices for MVC development (Other Models, but user/categories models are stored within the post model, violating the SRP; no distinct View or MainController), as it was made for practice purposes.
+- Please note that this project may NOT meet good practices for MVC development (All models, except user/categorie/hashtag models are stored within the post model, violating the SRP; no distinct View or MainController), as it was made for practice purposes.
