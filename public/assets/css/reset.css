@@ -111,3 +111,9 @@ label {
 legend {
     display: block;
 }
+
+td,
+th {
+    font-weight: 400;
+    font-size: clamp(0.5rem, 0.3542rem + 0.7778vw, 0.81rem);
+}
