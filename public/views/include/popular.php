@@ -39,14 +39,16 @@
 <h3 class="category__name" style="margin-top: 2rem">Топ авторов</h3>
 <div class="popular">
     <?php foreach ($topUsers as $user) : ?>
-        <div class="popular__category" style="width: 50%">
+        <div class="popular__category">
             <div class="category-name-more">
-                <h3 class="category__name">
+                <h3 class="category__name" style="max-width: 35%; overflow:hidden">
                     <?= $user['username'] ?>
+                </h3>
+                <div style="display: flex; align-items:center; justify-content: center">
                     <svg class="icon i-category">
                         <use href="/public/assets/images/svg/sprites.svg#like"></use>
                     </svg><b><?= $user['total_likes'] ?></b>
-                </h3>
+                </div>
                 <a href="/favourite/<?= $user['id'] ?>" style="background-color: #e2e5f6; padding: 0.3125rem 0.625rem;
     border-radius: 0.5rem;">
                     избранное
