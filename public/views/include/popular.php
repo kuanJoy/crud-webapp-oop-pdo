@@ -35,3 +35,30 @@
         </div>
     <?php endforeach; ?>
 </div>
+
+<h3 class="category__name" style="margin-top: 2rem">Топ авторов</h3>
+<div class="popular">
+    <?php foreach ($topUsers as $user) : ?>
+        <div class="popular__category">
+            <div class="category-name-more">
+                <h3 class="category__name">
+                    <?= $user['username'] ?>
+                    <svg class="icon i-category">
+                        <use href="/public/assets/images/svg/sprites.svg#like"></use>
+                    </svg><b><?= $user['total_likes'] ?></b>
+                </h3>
+                <a href="/favourite/<?= $user['id'] ?>" style="background-color: #e2e5f6; padding: 0.3125rem 0.625rem;
+    border-radius: 0.5rem;">
+                    избранное
+                    <svg class="icon i-category">
+                        <use href="/public/assets/images/svg/sprites.svg#favourite" />
+                    </svg></a>
+                <a href="/user/<?= $user['id'] ?>" style="background-color: #e2e5f6; padding: 0.3125rem 0.625rem; border-radius: 0.5rem;">
+                    публикации
+                    <svg class="icon i-category">
+                        <use href="/public/assets/images/svg/sprites.svg#posts" />
+                    </svg></a>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>

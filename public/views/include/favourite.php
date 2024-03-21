@@ -27,12 +27,23 @@
             <?php endforeach; ?>
         </div>
     <?php else : ?>
-        <div style="display: flex; align-items: center;">
-            <p style="min-width: 150px; color: red;">Избранное пусто</p>
-            <a class="dropdown-item" href="/popular" style="margin: 0 auto; padding-right: 2rem">
-                <svg class="icon i-category">
-                    <use href="/public/assets/images/svg/sprites.svg#posts" />
-                </svg>Пополнить список</a></li>
+        <div style="text-align: center">
+            <a style="display: flex;" href="/popular">
+                <button type="submit">
+                    <svg class="auth__icon">
+                        <use href="/public/assets/images/svg/sprites.svg#back"></use>
+                    </svg>назад
+                </button>
+            </a>
+            <p style="color: red; margin-bottom: 1rem">Список избранного пуст</p>
+            <?php if (isset($_SESSION['id_user'])) : ?>
+                <?php if ($_SESSION['id_user'] == basename($_SERVER['REQUEST_URI'])) : ?>
+                    <a class="dropdown-item" style="justify-content: center" href="/popular" style="margin: 0 auto; padding-right: 2rem">
+                        <svg class="icon i-category">
+                            <use href="/public/assets/images/svg/sprites.svg#posts" />
+                        </svg>Пополнить список</a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>

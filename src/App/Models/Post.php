@@ -569,4 +569,22 @@ class Post
             return false;
         }
     }
+
+    // GET TOP USERS FOR POPULAR
+    public function getTopUsers()
+    {
+        try {
+            $sql = "SELECT u.id, u.username, COUNT(pl.post_id) AS total_likes
+                    FROM users u
+                    LEFT JOIN post_likes pl ON u.id = pl.user_id
+                    GROUP BY u.id, u.username
+                    ORDER BY total_likes DESC
+                    LIMIT 10";
+            return $this->db->getConnection()->query($sql)->fetchAll();
+        } catch (PDOException $e) {
+            $this->db->getConnection()->rollBack();
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
 }

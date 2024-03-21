@@ -408,6 +408,12 @@ class PostController
             }
         }
     }
+
+    // GET TOP USERS FOR POPULAR
+    public function getTopUsers()
+    {
+        return $this->postModel->getTopUsers();
+    }
 }
     // protected function handleBannerUpload($file)
     // {

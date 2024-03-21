@@ -26,12 +26,23 @@
             <?php endforeach; ?>
         </div>
     <?php else : ?>
-        <div style="display: flex; align-items: center;">
-            <p style="min-width: 150px; color: red;">Список пуст</p>
-            <a class="dropdown-item" href="/create-post" style="margin: 0 auto; padding-right: 2rem">
-                <svg class="icon i-category">
-                    <use href="/public/assets/images/svg/sprites.svg#add" />
-                </svg>Добавить статью</a></li>
+        <div style="text-align: center">
+            <a style="display: flex;" href="/popular">
+                <button type="submit">
+                    <svg class="auth__icon">
+                        <use href="/public/assets/images/svg/sprites.svg#back"></use>
+                    </svg>назад
+                </button>
+            </a>
+            <p style="color: red; margin-bottom: 1rem">Список публикаций пуст</p>
+            <?php if (isset($_SESSION['id_user'])) : ?>
+                <?php if ($_SESSION['id_user'] == basename($_SERVER['REQUEST_URI'])) : ?>
+                    <a class="dropdown-item" style="justify-content: center" href="/create-post" style="margin: 0 auto; padding-right: 2rem">
+                        <svg class="icon i-category">
+                            <use href="/public/assets/images/svg/sprites.svg#add" />
+                        </svg>Добавить статью</a>
+                <?php endif; ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
