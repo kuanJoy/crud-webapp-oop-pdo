@@ -574,14 +574,13 @@ class Post
     public function getTopUsers()
     {
         try {
-            $sql = "SELECT u.id, u.username,
-                        COUNT(DISTINCT p.id) AS total_posts,
-                        COUNT(pl.post_id) AS total_likes
-                    FROM users u
-                    LEFT JOIN posts p ON u.id = p.user_id
-                    LEFT JOIN post_likes pl ON u.id = pl.user_id
-                    GROUP BY u.id, u.username
-                    ORDER BY total_likes DESC
+            $sql = "SELECT u.id, u.username, 
+                        (SELECT COUNT(*) FROM posts WHERE user_id = u.id) AS total_posts,
+                        (SELECT COUNT(*) FROM post_likes WHERE user_id = u.id) AS total_likes
+                    FROM 
+                        users u
+                    ORDER BY 
+                        total_likes DESC
                     LIMIT 10;";
             return $this->db->getConnection()->query($sql)->fetchAll();
         } catch (PDOException $e) {

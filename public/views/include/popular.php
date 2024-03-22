@@ -38,7 +38,6 @@
 
 <h3 class="category__name" style="margin-top: 2rem">Топ авторов</h3>
 <div class="popular">
-    <?php var_dump($topUsers) ?>
     <?php foreach ($topUsers as $user) : ?>
         <div class="popular__category">
             <div class="category-name-more" style="justify-content: center;">
