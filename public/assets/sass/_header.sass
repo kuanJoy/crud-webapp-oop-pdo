@@ -1,4 +1,7 @@
 .logo
+    display: flex
+    align-items: center
+    justify-content: center
     user-select: none
     transition: 0.3s all
     &:hover
@@ -15,7 +18,7 @@
     display: flex
     gap: 1rem
     justify-content: space-between
-    padding: .25rem
+    padding: .45rem
     align-items: center
     font-size: $fz13
     &-act
@@ -34,11 +37,6 @@
         border-color: $input-bg
         &:focus-within
             border-color: $blue
-.hamburger
-    display: flex
-    align-items: center
-    justify-content: space-between
-    width: 100%
 .nav
     display: flex
     gap: 0.5rem
@@ -49,6 +47,7 @@
         border-radius: .5rem
         color: $dark
         transition: .15s
+        gap: 0.3rem
         &:hover
             background-color: $hover-grey
             fill: $blue
@@ -90,3 +89,63 @@ li
 @media screen and (max-width: 601px)
     .nav__link
         padding: 0.3rem
+
+.nav-collapse
+    display: flex
+    align-items: center
+    z-index: 1
+    justify-content: space-between
+    z-index: 9999
+    width: 100%
+
+.hamburger--slider
+    display: none
+
+.header-act-mobile
+    display: none
+.home
+    display: none
+    z-index: 99999
+.home-ico
+    max-height: 30px
+    max-width: 30px
+
+@media screen and (max-width: 700px)
+    .home
+        display: flex
+    .logo
+        display: none
+    .header-act
+        display: flex
+        flex-direction: column
+        gap: 0.5rem
+    .hamburger--slider
+        display: block
+        z-index: 9999
+    .nav
+        flex-direction: column
+        gap: 0
+        margin-top: 1.2rem
+    .nav__link
+        margin-bottom: 1rem
+        gap: 0.7rem
+    .nav-collapse
+        position: absolute
+        transition: 0.6s all
+        background-color: #f0f2fa
+        max-width: 60%
+        top: 0
+        left: -100%
+        height: 100vh
+        flex-direction: column
+        align-items: flex-start
+        padding: 2rem 0rem 0rem 0.5rem
+        box-shadow: 0px 0px 3px 0px rgba(110, 110, 125, 0.1), 0 2px 2px 0 rgba(110, 110, 125, 0.1), 0 1px 5px 0 rgba(110, 110, 125, 0.1)
+    .header-act-mobile
+        display: flex
+        flex-direction: column
+        align-items: flex-start
+    .header-act
+        display: none
+    .is-active
+        left: 0

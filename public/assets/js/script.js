@@ -9,6 +9,15 @@ const swiper = new Swiper(".mySwiper", {
   speed: 800,
 });
 
+
+// ========================= Hamburger =========================
+const hamburger = document.querySelector(".hamburger--slider");
+const navCollapse = document.querySelector(".nav-collapse");
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("is-active");
+  navCollapse.classList.toggle("is-active");
+});
+
 // TinyMC
 tinymce.init({
   selector: "textarea",
