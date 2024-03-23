@@ -906,6 +906,7 @@ li {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+  width: 100%;
 }
 
 .category__name {
