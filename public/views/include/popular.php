@@ -19,7 +19,7 @@
 
 <div class="popular container col-hash">
     <?php foreach ($hashtagsCount as $hashtag) : ?>
-        <div class="popular__category">
+        <a class="popular__category">
             <div class="category-name-more" style="justify-content: center">
                 <h3 class=" category__name">
                     <svg class="icon i-category">
@@ -27,7 +27,7 @@
                     </svg> <?= $hashtag['hashtag'] ?> - <b><?= $hashtag['count'] ?></b>
                 </h3>
             </div>
-        </div>
+        </a>
     <?php endforeach; ?>
 </div>
 
