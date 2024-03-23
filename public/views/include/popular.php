@@ -21,10 +21,10 @@
     <?php foreach ($hashtagsCount as $hashtag) : ?>
         <a href="/hashtag/<?= $hashtag['hashtag'] ?>" class="popular__category">
             <div class="category-name-more" style="justify-content: center">
-                <h3 class=" category__name">
-                    <svg class="icon i-category">
+                <h3 class="category__name">
+                    <svg class="icon i-category" style="margin-top: 0;">
                         <use href="/public/assets/images/svg/sprites.svg#hashtag"></use>
-                    </svg> <?= $hashtag['hashtag'] ?> - <b><?= $hashtag['count'] ?></b>
+                    </svg> <?= $hashtag['hashtag'] ?> - <span style="font-weight: 500;"><?= $hashtag['count'] ?></span>
                 </h3>
             </div>
         </a>
