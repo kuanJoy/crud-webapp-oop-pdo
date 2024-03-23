@@ -17,7 +17,7 @@
     <?php endforeach; ?>
 </div>
 
-<div class="popular container">
+<div class="popular container col-hash">
     <?php foreach ($hashtagsCount as $hashtag) : ?>
         <div class="popular__category">
             <div class="category-name-more">
@@ -26,11 +26,6 @@
                         <use href="/public/assets/images/svg/sprites.svg#hashtag"></use>
                     </svg> <?= $hashtag['hashtag'] ?> - <b><?= $hashtag['count'] ?></b>
                 </h3>
-                <a href="/hashtag/<?= $hashtag['hashtag'] ?>">
-                    Смотреть все
-                    <svg class="icon i-category">
-                        <use href="/public/assets/images/svg/sprites.svg#more" />
-                    </svg></a>
             </div>
         </div>
     <?php endforeach; ?>
@@ -40,7 +35,7 @@
 <div class="popular container">
     <?php foreach ($topUsers as $user) : ?>
         <div class="popular__category">
-            <div class="category-name-more" style="justify-content: center;">
+            <div class="category-name-more" style="justify-content: center;flex-direction: column; ">
                 <div style="display: flex; align-items: center; gap: 0.5rem">
                     <h3 class=" category__name">
                         <?= $user['username'] ?>

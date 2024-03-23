@@ -42,8 +42,15 @@
         color: $blue
         fill: $blue
 
+.col-hash
+    grid-template-columns: repeat(4, 1fr)
+
 @media screen and (max-width: 600px)
+    .popular
+        grid-template-columns: 1fr
     .popular__category
         max-width: 100%
     .category-name-more
         gap: 0.5rem
+    .col-hash
+        grid-template-columns: repeat(2, 1fr)
