@@ -1,4 +1,4 @@
-<div class="popular">
+<div class="popular container">
     <?php foreach ($categoriesCount as $category) : ?>
         <div class="popular__category">
             <div class="category-name-more">
@@ -17,7 +17,7 @@
     <?php endforeach; ?>
 </div>
 
-<div class="popular">
+<div class="popular container">
     <?php foreach ($hashtagsCount as $hashtag) : ?>
         <div class="popular__category">
             <div class="category-name-more">
@@ -36,8 +36,8 @@
     <?php endforeach; ?>
 </div>
 
-<h3 class="category__name" style="margin-top: 2rem">Топ авторов</h3>
-<div class="popular">
+<h3 class="category__name container" style="margin-top: 2rem">Топ авторов</h3>
+<div class="popular container">
     <?php foreach ($topUsers as $user) : ?>
         <div class="popular__category">
             <div class="category-name-more" style="justify-content: center;">

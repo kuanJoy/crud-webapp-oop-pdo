@@ -1,5 +1,6 @@
 <?php
-ini_set('session.gc_maxlifetime', 90 * 24 * 60 * 60);
+session_set_cookie_params(2592000);
+ini_set('session.gc_maxlifetime', 2592000);
 session_start([
     'cookie_lifetime' => 2592000,
     'gc_maxlifetime' => 2592000,

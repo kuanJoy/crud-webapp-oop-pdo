@@ -17,7 +17,6 @@
         align-items: center
     &__banner
         margin: 0 auto
-        width: 75%
         height: 19rem
         border-radius: 10px
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1)
@@ -29,9 +28,7 @@
         justify-content: space-between
         align-items: center
         gap: 0.8rem
-        width: 75%
         margin: 0 auto
-        padding-bottom: 1.1rem
     &__attribute
         text-transform: lowercase
         font-size: $fz13
@@ -50,7 +47,6 @@
         min-width: 0
     &__container
         margin: 0 auto
-        width: 75%
         padding: 0.8rem 0rem
         border-radius: .5rem
         border: 1px solid #e3e5ed
@@ -66,16 +62,15 @@
         font-size: $fz13
         font-family: system-ui
     &__btns
-        border-top: 1px solid #e3e5ed
-        padding: 0.8rem 0.8rem 0rem 0.8rem
         display: flex
         flex-wrap: wrap
         gap: 1rem
     &__back
-        max-width: 59rem
-        width: 75%
-        margin: 0 auto
-
+        display: flex
+        min-width: 5rem
+        align-items: center
+        justify-content: center
+        gap: 0.5rem
 .category-hashtags
     display: flex
     display: flex
@@ -95,6 +90,9 @@
     align-items: center
     justify-content: center
     gap: 0.2rem
+.post__back_btns
+    display: flex
+    justify-content: space-between
 
 .btn-post
     display: flex
@@ -131,3 +129,5 @@
         height: 13rem
     .post__container
         width: 95%
+    .post__back_btns
+        justify-content: space-evenly

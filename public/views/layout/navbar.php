@@ -71,7 +71,7 @@ $categories = $post->getCategoriesForNavbar();
                                 </svg>Админка
                             </a>
                         <?php endif; ?>
-                        <form method="post" action="/" style="position: absolute; bottom: 0px;">
+                        <form method="post" action="/" style="position: absolute; bottom: 50px;">
                             <button type="submit" name="logout" class="nav__link">
                                 <svg class="auth__icon mt1">
                                     <use href="/public/assets/images/svg/sprites.svg#exit" />
