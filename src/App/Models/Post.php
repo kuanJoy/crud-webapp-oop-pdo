@@ -457,7 +457,7 @@ class Post
                 GROUP BY h.id
                 HAVING hashtag != ''
                 ORDER BY count DESC
-                LIMIT 5;";
+                LIMIT 16;";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->execute();
 

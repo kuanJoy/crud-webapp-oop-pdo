@@ -897,6 +897,8 @@ li {
   padding: 10px;
   border-radius: 10px;
   width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .category-name-more {
