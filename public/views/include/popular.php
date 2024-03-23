@@ -19,7 +19,7 @@
 
 <div class="popular container col-hash">
     <?php foreach ($hashtagsCount as $hashtag) : ?>
-        <div class="popular__category">
+        <div class="popular__category" style="justify-content: center">
             <div class="category-name-more">
                 <h3 class="category__name">
                     <svg class="icon i-category">
