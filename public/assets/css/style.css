@@ -18,6 +18,26 @@
   src: url("../fonts/Aeroport-bold.otf");
   font-weight: 700;
 }
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Roboto/Roboto-Light.ttf");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Nunito/Nunito-Regular.ttf");
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Nunito/Nunito-Medium.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("../fonts/Nunito/Nunito-Bold.ttf");
+  font-weight: 700;
+}
 .icon {
   display: flex;
   align-items: center;
@@ -225,7 +245,7 @@ a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  font-family: Aeroport, sans-serif;
+  font-family: Nunito, sans-serif;
 }
 
 main {
@@ -774,7 +794,6 @@ li {
   text-align: justify;
   word-wrap: break-word;
   font-size: clamp(0.7rem, 0.3542rem + 0.7778vw, 0.8rem);
-  font-family: system-ui;
 }
 .post__btns {
   display: flex;
