@@ -1,26 +1,28 @@
 .popular
     font-size: $fz13
     padding-top: 2rem
-    display: flex
-    gap: 1rem
-    flex-wrap: wrap
+    gap: 1.1rem
+    // flex-wrap: wrap
+    display: grid
+    grid-template-columns: repeat(3, 1fr)
 
 .popular__category
     background-color: $grey
     padding: 10px
     border-radius: 10px
-    flex-shrink: 1
-    white-space: nowrap
-    flex-grow: 1
-    min-width: 0
-    max-width: 50%
+    // white-space: nowrap
+    // flex-shrink: 1
+    // flex-grow: 1
+    // min-width: 0
+    // max-width: 50%
+    width: 100%
 
 .category-name-more
     display: flex
     justify-content: space-between
     align-items: center
     flex-wrap: wrap
-    gap: 2rem
+    gap: 0.5rem
 
 .category__name
     display: flex
