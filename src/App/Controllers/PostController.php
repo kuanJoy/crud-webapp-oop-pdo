@@ -46,9 +46,9 @@ class PostController
         $errors = [];
         if (isset($_POST['createPost'])) {
             if ($_SESSION['role'] !== 'админ') {
-                $status = '2';
+                $status = 'активен';
             } else {
-                $status = '1';
+                $status = 'скрыт';
             }
 
             $title = $_POST['title'];
