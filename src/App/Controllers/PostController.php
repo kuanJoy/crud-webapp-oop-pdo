@@ -303,9 +303,9 @@ class PostController
             }
 
             if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == "модератор") {
-                $status = '2';
-            } else {
                 $status = '1';
+            } else {
+                $status = '2';
             }
 
             if (empty($errors)) {
