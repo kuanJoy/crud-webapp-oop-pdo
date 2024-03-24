@@ -488,7 +488,7 @@ class Post
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT * FROM categories WHERE categories.status = 'активен' ORDER BY categories.name ASC";
+        $sql = "SELECT * FROM categories ORDER BY categories.name ASC";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 

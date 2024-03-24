@@ -33,7 +33,9 @@ $categories = $post->getCategoriesForNavbar();
                     </a>
                     <ul class="dropdown-menu">
                         <?php foreach ($categories as $category) : ?>
-                            <li><a class="dropdown-item" href="/category/<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
+                            <?php if ($category['status'] == 'активен') : ?>
+                                <li><a class="dropdown-item" href="/category/<?= $category['id'] ?>"><?= $category['name'] ?></a></li>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </ul>
                 </li>

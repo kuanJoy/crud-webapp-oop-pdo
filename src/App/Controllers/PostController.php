@@ -303,9 +303,9 @@ class PostController
             }
 
             if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == "модератор") {
-                $status = '1';
+                $status = 'активен';
             } else {
-                $status = '2';
+                $status = 'скрыт';
             }
 
             if (empty($errors)) {
