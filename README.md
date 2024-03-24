@@ -10,7 +10,7 @@ My CRUD web-application created using the OOP approach.
 
 - Advanced sign-up / log-in (sending authtoken and resetting password by link through email)
 - Advanced post customizing
-- Admin panel
+- Admin panel (CMS)
 
 ### Learned / Practiced
 
