@@ -795,6 +795,8 @@ li {
   text-align: justify;
   word-wrap: break-word;
   font-size: clamp(0.7rem, 0.3542rem + 0.7778vw, 0.8rem);
+  max-width: 59rem;
+  width: 100%;
 }
 .post__btns {
   display: flex;

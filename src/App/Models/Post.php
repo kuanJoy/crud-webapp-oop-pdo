@@ -233,6 +233,8 @@ class Post
                     post_likes pl ON p.id = pl.post_id
                 LEFT JOIN 
                     users u ON p.user_id = u.id
+                WHERE 
+                    p.status = 'активен'  -- Добавлено условие на статус активен
                 GROUP BY 
                     p.id
                 ORDER BY 
@@ -452,37 +454,41 @@ class Post
     public function getHashtagsCount()
     {
         $sql = "SELECT h.name AS hashtag, COUNT(ph.post_id) AS count
-                FROM hashtags h
-                LEFT JOIN post_hashtags ph ON h.id = ph.hashtag_id
-                GROUP BY h.id
-                HAVING hashtag != ''
-                ORDER BY count DESC
-                LIMIT 16;";
+            FROM hashtags h
+            LEFT JOIN post_hashtags ph ON h.id = ph.hashtag_id
+            LEFT JOIN posts p ON ph.post_id = p.id
+            WHERE p.status = 'активен'
+            GROUP BY h.id
+            HAVING hashtag != ''
+            ORDER BY count DESC
+            LIMIT 16;";
         $stmt = $this->db->getConnection()->prepare($sql);
         $stmt->execute();
 
         return $stmt->fetchAll();
     }
 
+
     public function getHashtagsForMain()
     {
         $sql = "SELECT hashtags.id, hashtags.name, COUNT(post_likes.post_id) AS likes_count
-                FROM hashtags
-                LEFT JOIN post_hashtags ON hashtags.id = post_hashtags.hashtag_id
-                LEFT JOIN posts ON post_hashtags.post_id = posts.id
-                LEFT JOIN post_likes ON posts.id = post_likes.post_id
-                WHERE hashtags.name IS NOT NULL AND hashtags.name != ''
-                GROUP BY hashtags.id
-                ORDER BY likes_count DESC
-                LIMIT 20";
+            FROM hashtags
+            LEFT JOIN post_hashtags ON hashtags.id = post_hashtags.hashtag_id
+            LEFT JOIN posts ON post_hashtags.post_id = posts.id
+            LEFT JOIN post_likes ON posts.id = post_likes.post_id
+            WHERE posts.status = 'активен' AND hashtags.name IS NOT NULL AND hashtags.name != ''
+            GROUP BY hashtags.id
+            ORDER BY likes_count DESC
+            LIMIT 20";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
+
 
     // =================== КАТЕГОРИИ / CATEGORIES ===================
 
     public function getCategoriesForNavbar()
     {
-        $sql = "SELECT * FROM categories ORDER BY categories.name ASC";
+        $sql = "SELECT * FROM categories WHERE categories.status = 'активен' ORDER BY categories.name ASC";
         return $this->db->getConnection()->query($sql)->fetchAll();
     }
 
