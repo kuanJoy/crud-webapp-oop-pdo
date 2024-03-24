@@ -783,6 +783,7 @@ li {
   padding: 0.8rem 0rem;
   border-radius: 0.5rem;
   border: 1px solid #e3e5ed;
+  width: 100%;
 }
 .post__title {
   font-size: clamp(1rem, 0.3542rem + 0.7778vw, 2rem);
