@@ -163,7 +163,20 @@ class PostController
             }
 
             if (empty($errors)) {
-                $pic = $_POST['pic'];
+                if ($_FILES['newPic']['error'] === 0) {
+                    $newBannerPath = $this->handleBannerUpload($_FILES['newPic']);
+                    $currentBannerPath = $_POST['pic'];
+
+                    if ($newBannerPath !== false) {
+                        $pic = $newBannerPath;
+                        if (file_exists($currentBannerPath)) {
+                            unlink($currentBannerPath);
+                        }
+                    }
+                } else {
+                    $pic = $_POST['pic'];
+                }
+
                 $createdTime = date('Y-m-d H:i:s');
 
                 $postId = $_POST['postId'];
@@ -414,33 +427,34 @@ class PostController
     {
         return $this->postModel->getTopUsers();
     }
+
+    protected function handleBannerUpload($file)
+    {
+        if (!empty($file)) {
+            $img_name = $file['name'];
+            $tmp_name = $file['tmp_name'];
+            $img_size = $file['size'];
+
+            if ($img_size > 2000000) {
+                return false;
+            }
+
+            $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+            $img_ex_to_lc = strtolower($img_ex);
+            $allowed_ex = ['jpg', 'jpeg', 'png'];
+
+            if (!in_array($img_ex_to_lc, $allowed_ex)) {
+                return false; // Недопустимое расширение файла
+            }
+
+            $new_img_name = uniqid() . "." . $img_ex_to_lc;
+            $img_upload_path = './assets/images/upload/' . $new_img_name;
+
+            if (move_uploaded_file($tmp_name, $img_upload_path)) {
+                return $img_upload_path;
+            } else {
+                return "Ошибка при перемещении файла";
+            }
+        }
+    }
 }
-    // protected function handleBannerUpload($file)
-    // {
-    //     if (!empty($file)) {
-    //         $img_name = $file['name'];
-    //         $tmp_name = $file['tmp_name'];
-    //         $img_size = $file['size'];
-
-    //         if ($img_size > 2000000) {
-    //             return false;
-    //         }
-
-    //         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-    //         $img_ex_to_lc = strtolower($img_ex);
-    //         $allowed_ex = ['jpg', 'jpeg', 'png'];
-
-    //         if (!in_array($img_ex_to_lc, $allowed_ex)) {
-    //             return false; // Недопустимое расширение файла
-    //         }
-
-    //         $new_img_name = uniqid() . "." . $img_ex_to_lc;
-    //         $img_upload_path = './assets/images/upload/' . $new_img_name;
-
-    //         if (move_uploaded_file($tmp_name, $img_upload_path)) {
-    //             return $img_upload_path;
-    //         } else {
-    //             return "Ошибка при перемещении файла";
-    //         }
-    //     }
-    // }

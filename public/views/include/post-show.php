@@ -33,7 +33,7 @@
     </div>
     <div class="post__btns container">
         <?php if (isset($_SESSION['id_user'])) : ?>
-            <?php if ($_SESSION['id_user'] == $onePost['post']['user_id']) : ?>
+            <?php if ($_SESSION['role'] == 'админ' || $_SESSION['role'] == 'модератор' || ($_SESSION['id_user'] == $onePost['post']['user_id'])) : ?>
                 <!-- Редактирование и удаление поста -->
                 <div class="attribute__likes" method="get">
                     <a href="/edit/<?= $onePost['likes']['id'] ?>" class="btn-post">
