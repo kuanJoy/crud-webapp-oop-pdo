@@ -84,7 +84,7 @@
                 </a>
             <?php endif; ?>
         <?php endif; ?>
-        <?php if ($_SESSION['role'] == "читатель" && $_SESSION['id_user'] !== $onePost['post']['user_id']) : ?>
+        <?php if ($_SESSION['role'] == "читатель" || $_SESSION['id_user'] !== $onePost['post']['user_id']) : ?>
             <form action="/post/<?= $onePost['likes']['id'] ?>" class="attribute__likes" method="post">
                 <input type="hidden" name="postId" value="<?= $onePost['likes']['id']  ?>">
                 <?php if ($onePost['like_on_post'] == 'not-liked') : ?>
