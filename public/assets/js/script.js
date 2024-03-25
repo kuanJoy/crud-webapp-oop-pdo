@@ -19,30 +19,11 @@ hamburger.addEventListener("click", () => {
 });
 
 // TinyMC
-// tinymce.init({
-//   selector: "textarea",
-//   plugins:
-//     "anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss",
-//   toolbar:
-//     "undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat",
-//   tinycomments_mode: "embedded",
-//   tinycomments_author: "Author name",
-//   mergetags_list: [
-//     { value: "First.Name", title: "First Name" },
-//     { value: "Email", title: "Email" },
-//   ],
-//   ai_request: (request, respondWith) =>
-//     respondWith.string(() =>
-//       Promise.reject("See docs to implement AI Assistant")
-//     ),
-// });
-
 tinymce.init({
   selector: "textarea",
   plugins: "anchor autolink charmap codesample emoticons image link lists media searchreplace table textcolor visualblocks wordcount linkchecker",
-  toolbar: "fontselect fontsizeselect undo redo | formatselect | bold italic underline strikethrough | link image media | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | emoticons charmap | removeformat | forecolor backcolor",
+  toolbar: "fontsize fontselect fontsizeselect undo redo | formatselect | bold italic underline strikethrough | link image media | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | emoticons charmap | removeformat | forecolor backcolor",
   menubar: false,
-  fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
   textcolor_map: [
     "000000", "Black",
     "993300", "Burnt orange",
@@ -83,8 +64,12 @@ tinymce.init({
     "CCFFFF", "Pale cyan",
     "99CCFF", "Light sky blue",
     "CC99FF", "Plum"
-  ]
+  ],
+  theme_advanced_font_sizes: "10px,12px,14px,16px,24px",
+  font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt'
+
 });
+
 
 // ADD INPUTS FOR HASHTAG
 function addHashtagInput() {
